@@ -24,7 +24,7 @@ Most terms come from the book "Circuit Simulation - Farid N. Najm - 2010".
 * SideVector - right hand side vector of the system of equations.
 * matrix - MNA matrix of the system of equations.
 
-Third party framewokds used:
+Third party frameworks used:
 * JUNG - Java Universal Network/Graph Framework - stores circuit graph and displays it.
 * matrix-toolkits-java - Java linear algebra library - matrix and vector optimized storage and operations.
 * Guice - dependency injection.
