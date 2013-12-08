@@ -6,8 +6,8 @@ Educational circuit simulation prototype.
 I'm writing simplest circuit simulator for educational purposes by "Circuit Simulation - Farid N. Najm - 2010" book using Java. Project is in active progress.
 
 For now there is:
-) code to compose MNA system from some basic elements.
-) and code displaying sample circuit.
+* code to compose MNA system from some basic elements.
+* and code displaying sample circuit.
 
 Project can be used:
 ) As an example of JUNG framework usage
