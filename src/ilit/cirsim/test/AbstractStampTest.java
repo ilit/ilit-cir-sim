@@ -1,5 +1,6 @@
 package ilit.cirsim.test;
 
+import ilit.cirsim.simulator.StampInjector;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 import org.testng.annotations.AfterMethod;
@@ -9,7 +10,6 @@ import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.circuit.elements.util.UniqueIDManager;
-import ilit.cirsim.simulator.Analysis;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 
@@ -18,7 +18,7 @@ import ilit.cirsim.simulator.MnaEquationsSystem;
  * ) matrix and side vector instantiation
  * ) stamp usage
  */
-public class AbstractAnalysisTest
+public class AbstractStampTest
 {
     protected FlexCompRowMatrix matrix;
     protected SparseVector sideVector;
@@ -51,7 +51,8 @@ public class AbstractAnalysisTest
         MnaEquationsSystem system = new MnaEquationsSystem(circuit);
         matrix = system.getMatrix();
         sideVector = system.getSideVector();
-        Analysis analysis = new Analysis(circuit, system);
+        StampInjector stampInjector = new StampInjector(circuit, system);
+        stampInjector.placeStamps();
     }
 
     protected void initComponent(Component component, Node node1, Node node2)

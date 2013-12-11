@@ -6,7 +6,7 @@ import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.VoltageSource;
 
-public class VoltageSourceStampTest extends SingleStampTest
+public class VoltageSourceStampTest extends AbstractSingleStampTest
 {
     private static int CURRENT_INDEX = 0;
     private static int NODE1_INDEX = 1; /** plus */

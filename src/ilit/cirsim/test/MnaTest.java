@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 /**
  * Test Modified Nodal Analysis matrix population with many element stamps
  */
-public class MnaTest extends AbstractAnalysisTest
+public class MnaTest extends AbstractStampTest
 {
     private static double VOLTAGE = 100.0d;
     private static double RESISTANCE = 100.0d;

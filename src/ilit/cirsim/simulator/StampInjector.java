@@ -9,25 +9,27 @@ import ilit.cirsim.simulator.stamps.IStampStrategy;
 import java.util.Collection;
 
 @Singleton
-public class Analysis
+public class StampInjector
 {
     /** Holds circuit topology\composition */
     private CircuitProxy circuit;
-
-    MnaEquationsSystem equations;
+    private MnaEquationsSystem equations;
 
     @Inject
-    public Analysis(CircuitProxy circuit, MnaEquationsSystem equations)
+    public StampInjector(CircuitProxy circuit, MnaEquationsSystem equations)
     {
         this.circuit = circuit;
         this.equations = equations;
+    }
 
-        /**
-         * Places all component stamps into matrix.
-         *
-         * The contribution of every element to the matrix equation is described by means
-         * of a template, which is called an element stamp.
-         */
+    /**
+     * Places all component stamps into matrix.
+     *
+     * The contribution of every element to the matrix equation is described by means
+     * of a template, which is called an element stamp.
+     */
+    public void placeStamps()
+    {
         placeGroupedStamps();
     }
 

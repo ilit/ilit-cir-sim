@@ -6,7 +6,7 @@ import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
 
-public class ResistorStampTest extends SingleStampTest
+public class ResistorStampTest extends AbstractSingleStampTest
 {
     private static double RESISTANCE = 100.0d;
     private static double CONDUCTANCE = 1 / RESISTANCE;
