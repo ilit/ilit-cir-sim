@@ -20,21 +20,21 @@ public class EquationsSolver
     {
         CompRowMatrix A = (CompRowMatrix)equations.getMatrix().copy();
         SparseVector b = equations.getSideVector();
-        DenseVector x = equations.getXVector();
+        //DenseVector x = equations.getXVector();
 
-        IterativeSolver solver = new BiCGstab(x);
+        //IterativeSolver solver = new BiCGstab(x);
 
         /** Create a Cholesky preconditioner */
         Preconditioner M = new ICC(A);
 
         /** Set up the preconditioner, and attach it */
         M.setMatrix(A);
-        solver.setPreconditioner(M);
+        //solver.setPreconditioner(M);
 
         /** Add a convergence monitor */
-        solver.getIterationMonitor().setIterationReporter(new OutputIterationReporter());
+        //solver.getIterationMonitor().setIterationReporter(new OutputIterationReporter());
 
-        /** Start the solver, and check for problems */
+        /** Start the solver, and check for problems
         try
         {
             solver.solve(A, b, x);
@@ -43,5 +43,6 @@ public class EquationsSolver
         {
             System.err.println("Iterative solver failed to converge");
         }
+        */
     }
 }
