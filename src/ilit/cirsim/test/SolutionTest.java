@@ -44,7 +44,7 @@ public class SolutionTest
         initComponent(new VoltageSource(VOLTAGE), node, gr);
         initComponent(new Load(RESISTANCE), node, gr);
 
-        initAnalysis();
+        placeStamps();
         */
     }
 }

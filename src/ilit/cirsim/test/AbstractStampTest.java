@@ -46,7 +46,7 @@ public class AbstractStampTest
         circuit = new CircuitProxy(circuitGraph);
     }
 
-    protected void initAnalysis()
+    protected void placeStamps()
     {
         MnaEquationsSystem system = new MnaEquationsSystem(circuit);
         matrix = system.getMatrix();
