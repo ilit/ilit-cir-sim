@@ -16,7 +16,7 @@ public class MnaTest extends AbstractStampTest
     private static double RESISTANCE = 100.0d;
 
     @Test()
-    public void dcVoltageTest()
+    public void groundedDcVoltageAndResistorTest()
     {
         /**
          * TODO here
