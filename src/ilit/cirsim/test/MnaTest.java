@@ -31,6 +31,20 @@ public class MnaTest extends AbstractStampTest
 
         placeStamps();
 
-        Assert.assertEquals(matrix.numColumns(), 3);
+        Assert.assertEquals(matrix.numColumns(), 2);
+        Assert.assertEquals(sideVector.size(), 2);
+
+        Assert.assertEquals(sideVector.get(0), 0d);
+        Assert.assertEquals(sideVector.get(1), VOLTAGE);
+
+        Assert.assertEquals(matrix.get(0, 0), 1 / RESISTANCE);
+        Assert.assertEquals(matrix.get(1, 0), 1d);
+        Assert.assertEquals(matrix.get(0, 1), 1d);
+        Assert.assertEquals(matrix.get(1, 1), 0d);
+
+        /**
+         * 0.01 1 |   0
+         *    1 0 | 100
+         */
     }
 }
