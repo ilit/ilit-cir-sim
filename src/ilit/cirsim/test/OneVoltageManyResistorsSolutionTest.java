@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  *
  */
-public class SolutionTest extends AbstractStampTest
+public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
 {
     private static int ROUNDING_SCALE = 5;
 
