@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  *
  */
-public class ThreeVoltagesManyResistorsSolutionTest2 extends AbstractStampTest
+public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
 {
     private static int ROUNDING_SCALE = 5;
     private static double RESISTANCE = 100.0d;
