@@ -45,16 +45,18 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
                  * Resistor Left; Resistor Right; Resistor middle; Resistor grounded
                  * Source Voltage Left Right and Middle; Source Evaluated Currents;
                  *
-                 *  V1, V2, V3,     I1,        I2,      I3
+                 *  V1, V2, V3,     I1,        I2,      I3      node 8 voltage
                  */
-                {   5d, 5d, 5d, -0.07809d, -0.05216d, -0.04259d},
+                {   5d, 5d, 5d, -0.07809d, -0.05216d, -0.04259d, 1.35802d},
+                {   5d, 6d, 7d, -0.08786d, -0.05907d, -0.05338d, 1.10957d},
         };
     }
 
     @Test(dataProvider = "testValues")
     public void groundedDcVoltageAndResistorTest(
             double v1val, double v2val, double v3val,
-            double i1, double i2, double i3
+            double i1, double i2, double i3,
+            double n8v
             )
     {
         initCircuit();
@@ -127,6 +129,12 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
         Assert.assertEquals(sourceCurrent1, i1);
         Assert.assertEquals(sourceCurrent2, i2);
         Assert.assertEquals(sourceCurrent3, i3);
+
+        int node8Id = nodes.get(8).getId();
+        int node8Index = IdToMatrixIndexRelations.instance.getIndex(node8Id);
+        double node8Voltage = Precision.round(X.get(node8Index), ROUNDING_SCALE);
+
+        Assert.assertEquals(node8Voltage, n8v);
     }
 
     private void initResistor(int res, int n1, int n2)
