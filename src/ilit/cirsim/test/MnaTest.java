@@ -18,9 +18,6 @@ public class MnaTest extends AbstractStampTest
     @Test()
     public void groundedDcVoltageAndResistorTest()
     {
-        /**
-         * TODO here
-         */
         initCircuit();
 
         Node node = new Node();

@@ -23,6 +23,7 @@ public class AbstractStampTest
     protected FlexCompRowMatrix matrix;
     protected SparseVector sideVector;
     protected CircuitProxy circuit;
+    protected MnaEquationsSystem equations;
 
     @BeforeMethod
     public void setUp() throws Exception
@@ -48,10 +49,10 @@ public class AbstractStampTest
 
     protected void placeStamps()
     {
-        MnaEquationsSystem system = new MnaEquationsSystem(circuit);
-        matrix = system.getMatrix();
-        sideVector = system.getSideVector();
-        StampInjector stampInjector = new StampInjector(circuit, system);
+        equations = new MnaEquationsSystem(circuit);
+        matrix = equations.getMatrix();
+        sideVector = equations.getSideVector();
+        StampInjector stampInjector = new StampInjector(circuit, equations);
         stampInjector.placeStamps();
     }
 

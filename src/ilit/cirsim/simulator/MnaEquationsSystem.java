@@ -2,6 +2,7 @@ package ilit.cirsim.simulator;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import no.uib.cipr.matrix.DenseVector;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 import ilit.cirsim.circuit.CircuitProxy;
@@ -22,7 +23,8 @@ public class MnaEquationsSystem
      * (sparsity pattern is unknown).
      */
     private FlexCompRowMatrix matrix; /** Modified Nodal Analysis matrix */
-    private SparseVector sideVector; /** Right Hand Side */
+    private SparseVector sideVector;  /** Right Hand Side */
+    private DenseVector xVector;      /** X */
 
     @Inject
     public MnaEquationsSystem(CircuitProxy circuit)
@@ -42,11 +44,17 @@ public class MnaEquationsSystem
         return sideVector;
     }
 
+    public DenseVector getXVector()
+    {
+        return xVector;
+    }
+
     private void createEmptySystem()
     {
         int initialMatrixSize = defineMatrixSize();
         matrix = new FlexCompRowMatrix(initialMatrixSize, initialMatrixSize);
         sideVector = new SparseVector(initialMatrixSize);
+        xVector = new DenseVector(initialMatrixSize);
     }
 
     private int defineMatrixSize()
