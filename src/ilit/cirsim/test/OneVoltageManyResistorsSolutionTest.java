@@ -17,9 +17,8 @@ import org.testng.annotations.Test;
 /**
  *
  */
-public class SolutionTest extends AbstractStampTest
+public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
 {
-    private static double VOLTAGE = 100.0d;
     private static int ROUNDING_SCALE = 5;
 
     private EquationsSolver solver;
