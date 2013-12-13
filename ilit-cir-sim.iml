@@ -19,6 +19,7 @@
     <orderEntry type="library" name="guice-assistedinject-4.0-beta" level="project" />
     <orderEntry type="library" name="collections-generic-4.01" level="project" />
     <orderEntry type="library" name="com.googlecode.matrix-toolkits-java:mtj:1.0.1" level="project" />
+    <orderEntry type="library" name="commons-math3-3.2" level="project" />
   </component>
 </module>
 

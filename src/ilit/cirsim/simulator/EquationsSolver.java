@@ -39,7 +39,9 @@ public class EquationsSolver
         solver.setPreconditioner(M);
 
         /** Add a convergence monitor */
-        solver.getIterationMonitor().setIterationReporter(new OutputIterationReporter());
+        IterationMonitor monitor = new DefaultIterationMonitor();
+        solver.setIterationMonitor(monitor);
+        //solver.getIterationMonitor().setIterationReporter(new OutputIterationReporter());
 
         /** Start the solver, and check for problems */
         try
