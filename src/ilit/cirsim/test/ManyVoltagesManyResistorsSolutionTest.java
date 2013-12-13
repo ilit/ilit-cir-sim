@@ -40,6 +40,8 @@ public class ManyVoltagesManyResistorsSolutionTest extends AbstractStampTest
                  *  Ra,   Rb,   Rc,   Rd    Re  VL, VM,  CurrentL, CurrentM
                  */
                 { 100d, 100d, 100d, 100d, 100d, 5d, 5d,  -0.0125d, -0.0125d},
+                { 100d, 100d, 900d, 100d, 100d, 5d, 5d,  -0.01562d, -0.00313d},
+                { 100d, 100d, 900d, 100d, 100d, 5d, 25d, -0.00938d, -0.02188d}
         };
     }
 
