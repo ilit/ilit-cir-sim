@@ -41,7 +41,6 @@ public class EquationsSolver
         /** Add a convergence monitor */
         IterationMonitor monitor = new DefaultIterationMonitor();
         solver.setIterationMonitor(monitor);
-        //solver.getIterationMonitor().setIterationReporter(new OutputIterationReporter());
 
         /** Start the solver, and check for problems */
         try

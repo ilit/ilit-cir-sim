@@ -36,19 +36,22 @@ public class SolutionTest extends AbstractStampTest
         return new Object[][] {
                 /**
                  * Resistor Left; Resistor Right; Resistor middle;
-                 * Resulting Current;
+                 * Source Voltage; Source Evaluated Current;
                  *
-                 * RL1 RL2 Rmid RR1 RR2 Current
+                 * RL1,  RL2, Rmid,  RR1,  RR2, Voltage, Current
                  */
-                { 100d, 100d, 30d, 100d, 300d, -0.79032d },
-                { 100d, 100d, 30d, 100d, 300d, -0.79032d }
+                { 100d, 100d,  30d, 100d, 300d,  100d, -0.79032d },
+                { 100d, 100d, 100d, 100d, 100d,    5d,    -0.05d },
+                {  50d, 100d, 100d, 100d, 100d,    5d, -0.05909d },
+                {  50d, 150d,   1d, 100d, 100d,    5d, -0.05353d },
+                {  50d, 150d,   1d, 100d, 100d,  500d, -5.35311d }
         };
     }
 
     @Test(dataProvider = "testValues")
     public void groundedDcVoltageAndResistorTest(
             double rl1, double rl2, double rm, double rr1, double rr2,
-            double current
+            double voltage, double current
     )
     {
         initCircuit();
@@ -59,7 +62,7 @@ public class SolutionTest extends AbstractStampTest
         Resistor resMid = new Load(rm);
         Resistor resR1 = new Load(rr1);
         Resistor resR2 = new Load(rr2);
-        VoltageSource voltageSource= new VoltageSource(VOLTAGE);
+        VoltageSource voltageSource= new VoltageSource(voltage);
 
         Ground gr = new Ground();
         Node vPlus = new Node();
