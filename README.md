@@ -6,9 +6,12 @@ Educational circuit simulation prototype.
 I'm writing simplest circuit simulator for educational purposes by "Circuit Simulation - Farid N. Najm - 2010" book using Java. Project is in active progress.
 
 For now program:
-* Composes MNA equations system from some basic elements.
+* Generates random simple circuit consisting of resistors(loads) and some voltage source.
+    Wires are resistors too with resistance of 1 Ohm.
+* Composes MNA equations system from this circuit.
 * Solves the system with iterative method.
-* Displays sample random generated circuit absolutely not related to simulation.
+* Displays generated circuit onscreen by JUNG visualization function.
+* Outputs all sources currents as a circuit solution to debug console
 
 Project can be used:
 * As an example of JUNG framework usage
