@@ -26,8 +26,8 @@ import java.awt.geom.Line2D;
 @Singleton
 public class GraphVisualization
 {
-    private static final int LAYOUT_WIDTH = 800;
-    private static final int LAYOUT_HEIGHT = 800;
+    private static final int LAYOUT_WIDTH = 1100;
+    private static final int LAYOUT_HEIGHT = 900;
 
     private RenderContext<Node, Component> renderContext;
     private CircuitGraph circuitGraph;
@@ -64,7 +64,21 @@ public class GraphVisualization
         disableLabelRotation();
 
         setNodeLabelContent();
+        setNodeLabelFont();
         smallNode();
+    }
+
+    private void setNodeLabelFont()
+    {
+        Transformer<Node,Font> fontTransformer =
+        new Transformer<Node, Font>()
+        {
+            public Font transform(Node node)
+            {
+                return new Font("Verdana", Font.PLAIN, 8);
+            }
+        };
+        renderContext.setVertexFontTransformer(fontTransformer);
     }
 
     private void setNodeLabelContent()
@@ -74,7 +88,7 @@ public class GraphVisualization
                 {
                     public String transform(Node node)
                     {
-                        return "id" + node.getId();
+                        return "" + node.getId();
                     }
                 };
         renderContext.setVertexLabelTransformer(nodeStringTransformer);
@@ -152,7 +166,7 @@ public class GraphVisualization
                 {
                     public String transform(Component component)
                     {
-                        String content = "id" + component.getId();
+                        String content = "" + component.getId();
                         content += " " + component.getView().getGraphLabel();
                         return content;
                     }
@@ -167,7 +181,7 @@ public class GraphVisualization
                 {
                     public Font transform(Component component)
                     {
-                        return new Font("Verdana", Font.BOLD, 16);
+                        return new Font("Verdana", Font.BOLD, 10);
                     }
                 };
         renderContext.setEdgeFontTransformer(fontTransformer);

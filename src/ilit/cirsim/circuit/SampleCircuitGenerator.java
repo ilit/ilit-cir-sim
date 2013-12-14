@@ -1,74 +1,99 @@
 package ilit.cirsim.circuit;
 
-import edu.uci.ics.jung.graph.util.Pair;
-import ilit.cirsim.circuit.elements.Load;
-import ilit.cirsim.circuit.elements.Node;
-import ilit.cirsim.circuit.elements.VoltageSource;
-import ilit.cirsim.circuit.elements.Wire;
+import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Component;
+import org.apache.commons.math3.random.MersenneTwister;
+import org.apache.commons.math3.util.Precision;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 public class SampleCircuitGenerator
 {
-    public static final int RESISTORS_COUNT = 3;
+    public static final int VSOURCES_AMOUNT = 3;
+
+    public static final int MAX_VOLTAGE = 50;
+    public static final int MAX_RESISTANCE = 500;
+
+    public static final int GRID_SIZE = 4; /** In amount of nodes at grid side */
+    public static final int ROUND_SCALE = 3;
 
     private CircuitProxy circuit;
+
+    private MersenneTwister randomizer = new MersenneTwister();
+    private Node[][] nodeMatrix = new Node[GRID_SIZE][GRID_SIZE];
+    private ArrayList<Component> componentsList = new ArrayList<>();
+
 
     public void generateSampleGraph(CircuitProxy circuit)
     {
         this.circuit = circuit;
 
-        List<Pair<Node>> devices = new ArrayList<Pair<Node>>();
-
-        devices.add(createGenerator());
-        createResistorsArray(devices);
-
-        connectParallel(devices);
+        fillNodesMatrix();
+        generateComponentsList();
+        connectComponentsByGridTopology();
+        attachGroundToCorners();
     }
 
-    private void connectParallel(List<Pair<Node>> devices)
+    private void attachGroundToCorners()
     {
-        for (int i = 0; i < devices.size() - 1; i++)
+        //insertComponent(new Load(10), nodeMatrix[0][0], new Ground());
+        //insertComponent(new Load(10), nodeMatrix[GRID_SIZE - 1][GRID_SIZE - 1], new Ground());
+    }
+
+    private void connectComponentsByGridTopology()
+    {
+        /** Place components horizontally */
+        for (int i = 0; i < GRID_SIZE; i++)
+            for (int j = 0; j < GRID_SIZE - 1; j++)
+                placeWiredComponent(nodeMatrix[i][j], nodeMatrix[i][j + 1]);
+
+        /** Place components vertically */
+        for (int i = 0; i < GRID_SIZE - 1; i++)
+            for (int j = 0; j < GRID_SIZE; j++)
+                placeWiredComponent(nodeMatrix[i][j], nodeMatrix[i + 1][j]);
+    }
+
+    private void placeWiredComponent(Node node1, Node node2)
+    {
+        node1 = appendWire(node1);
+        node2 = appendWire(node2);
+        Component component;
+        try
         {
-            Pair<Node> attachment = devices.get(i);
-            Pair<Node> receiver = devices.get(i + 1);
-
-            connectByWire(attachment, receiver);
+            component = componentsList.remove(0);
         }
-    }
-
-    private void connectByWire(Pair<Node> attachment, Pair<Node> receiver)
-    {
-        Wire wire1 = new Wire(1);
-        Wire wire2 = new Wire(1);
-        insertComponent(wire1, attachment.getFirst(), receiver.getFirst());
-        insertComponent(wire2, attachment.getSecond(), receiver.getSecond());
-    }
-
-    private Pair<Node> createGenerator()
-    {
-        return createWiredComponent(new VoltageSource(1.0, 120));
-    }
-
-    private void createResistorsArray(Collection<Pair<Node>> devices)
-    {
-        for (int i = 0; i < RESISTORS_COUNT; i++)
+        catch (IndexOutOfBoundsException e)
         {
-            devices.add(createWiredComponent(new Load(140 + i)));
+            throw new Error("Not enough components");
         }
+        insertComponent(component, node1, node2);
     }
 
-    private Pair<Node> createWiredComponent(Component component)
+    private void generateComponentsList()
     {
-        Pair<Node> resistorNodes = insertComponent(component);
+        int numberOfComponents = GRID_SIZE * (GRID_SIZE - 1) * 2;
+        for (int i = 0; i < numberOfComponents; i++)
+        {
+            if (i < VSOURCES_AMOUNT) /** Some sources */
+                componentsList.add(new VoltageSource(getNewPropValue(MAX_VOLTAGE)));
+            else  /** And the rest are resistors */
+                componentsList.add(new Load(getNewPropValue(MAX_RESISTANCE)));
+        }
 
-        Node wireEnd1 = appendWire(resistorNodes.getFirst());
-        Node wireEnd2 = appendWire(resistorNodes.getSecond());
+        Collections.shuffle(componentsList);
+    }
 
-        return new Pair<Node>(wireEnd1, wireEnd2);
+    private double getNewPropValue(int maxValue)
+    {
+        return randomizer.nextInt(maxValue) + Precision.round(randomizer.nextDouble(), ROUND_SCALE);
+    }
+
+    private void fillNodesMatrix()
+    {
+        for (int i = 0; i < GRID_SIZE; i++)
+            for (int j = 0; j < GRID_SIZE; j++)
+                nodeMatrix[i][j] = new Node();
     }
 
     private Node appendWire(Node subjectNode)
@@ -78,17 +103,6 @@ public class SampleCircuitGenerator
         insertComponent(wire, subjectNode, wireNode);
 
         return wireNode;
-    }
-
-
-    private Pair<Node> insertComponent(Component component)
-    {
-        Node node1 = new Node();
-        Node node2 = new Node();
-
-        insertComponent(component, node1, node2);
-
-        return new Pair<Node>(node1, node2);
     }
 
     private void insertComponent(Component component, Node node1, Node node2)
