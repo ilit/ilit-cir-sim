@@ -15,7 +15,7 @@ public class SampleCircuitGenerator
     public static final int MAX_VOLTAGE = 50;
     public static final int MAX_RESISTANCE = 500;
 
-    public static final int GRID_SIZE = 4; /** In amount of nodes at grid side */
+    public static final int GRID_SIZE = 3; /** In amount of nodes at grid side */
     public static final int ROUND_SCALE = 3;
 
     private CircuitProxy circuit;

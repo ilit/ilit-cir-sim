@@ -172,8 +172,7 @@ public class GraphVisualization
                 {
                     public String transform(Component component)
                     {
-                        String content = "" + component.getId();
-                        content += " " + component.getView().getGraphLabel();
+                        String content = component.getView().getGraphLabel();
                         return content;
                     }
                 };
@@ -187,7 +186,7 @@ public class GraphVisualization
                 {
                     public Font transform(Component component)
                     {
-                        return new Font("Verdana", Font.BOLD, 10);
+                        return new Font("Verdana", Font.BOLD, 13);
                     }
                 };
         renderContext.setEdgeFontTransformer(fontTransformer);

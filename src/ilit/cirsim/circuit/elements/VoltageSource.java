@@ -21,6 +21,8 @@ public class VoltageSource extends Component
     public double amplitude;
     public double frequency;
 
+    private VoltageSourceView view;
+
     /** DC constructor */
     public VoltageSource(double V)
     {
@@ -46,12 +48,12 @@ public class VoltageSource extends Component
 
     private void commonConstructor()
     {
-
+        view = new VoltageSourceView(this);
     }
 
     public IGraphRenderable getView()
     {
-        return VoltageSourceView.instance;
+        return view;
     }
 
     public double getDcVoltage()

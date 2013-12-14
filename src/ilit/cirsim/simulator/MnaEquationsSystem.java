@@ -30,8 +30,14 @@ public class MnaEquationsSystem
     public MnaEquationsSystem(CircuitProxy circuit)
     {
         this.circuit = circuit;
+    }
 
-        createEmptySystem();
+    public void createEmptySystem()
+    {
+        int initialMatrixSize = defineMatrixSize();
+        matrix = new FlexCompRowMatrix(initialMatrixSize, initialMatrixSize);
+        sideVector = new SparseVector(initialMatrixSize);
+        xVector = new DenseVector(initialMatrixSize);
     }
 
     public FlexCompRowMatrix getMatrix()
@@ -47,14 +53,6 @@ public class MnaEquationsSystem
     public DenseVector getXVector()
     {
         return xVector;
-    }
-
-    private void createEmptySystem()
-    {
-        int initialMatrixSize = defineMatrixSize();
-        matrix = new FlexCompRowMatrix(initialMatrixSize, initialMatrixSize);
-        sideVector = new SparseVector(initialMatrixSize);
-        xVector = new DenseVector(initialMatrixSize);
     }
 
     private int defineMatrixSize()

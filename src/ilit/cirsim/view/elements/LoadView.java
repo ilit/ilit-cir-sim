@@ -17,7 +17,7 @@ public class LoadView implements IGraphRenderable
     @Override
     public String getGraphLabel()
     {
-        return "" + resistor.getResistance();
+        return "" + resistor.getResistance() + " Ohm";
     }
 
     @Override
