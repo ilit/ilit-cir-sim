@@ -75,6 +75,9 @@ public class GraphVisualization
         {
             public Font transform(Node node)
             {
+                if (node.isGround())
+                    return new Font("Symbola", Font.PLAIN, 30);
+
                 return new Font("Verdana", Font.PLAIN, 8);
             }
         };
@@ -88,6 +91,9 @@ public class GraphVisualization
                 {
                     public String transform(Node node)
                     {
+                        if (node.isGround())
+                            return "⏚grd";
+
                         return "" + node.getId();
                     }
                 };

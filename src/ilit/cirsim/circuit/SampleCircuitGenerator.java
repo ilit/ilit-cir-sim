@@ -37,8 +37,8 @@ public class SampleCircuitGenerator
 
     private void attachGroundToCorners()
     {
-        //insertComponent(new Load(10), nodeMatrix[0][0], new Ground());
-        //insertComponent(new Load(10), nodeMatrix[GRID_SIZE - 1][GRID_SIZE - 1], new Ground());
+        insertComponent(new Wire(1), nodeMatrix[0][0], new Ground());
+        insertComponent(new Wire(1), nodeMatrix[GRID_SIZE - 1][GRID_SIZE - 1], new Ground());
     }
 
     private void connectComponentsByGridTopology()
