@@ -13,6 +13,8 @@ For now program:
 * Displays generated circuit onscreen by JUNG visualization function.
 * Outputs all sources currents as a circuit solution to debug console
 
+![mult](http://i965.photobucket.com/albums/ae139/ilitvinov/sample1_zpsbe648fd6.png)
+
 Project can be used:
 * As an example of JUNG framework usage
 * To learn circuit simulation code flow with object oriented approach.

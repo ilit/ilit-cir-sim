@@ -26,8 +26,8 @@ import java.awt.geom.Line2D;
 @Singleton
 public class GraphVisualization
 {
-    private static final int LAYOUT_WIDTH = 1100;
-    private static final int LAYOUT_HEIGHT = 900;
+    private static final int LAYOUT_WIDTH = 550;
+    private static final int LAYOUT_HEIGHT = 550;
 
     private RenderContext<Node, Component> renderContext;
     private CircuitGraph circuitGraph;
