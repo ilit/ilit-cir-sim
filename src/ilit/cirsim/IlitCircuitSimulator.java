@@ -48,4 +48,10 @@ public class IlitCircuitSimulator
         }
         System.out.println("");
     }
+
+    /**
+     * Possible optimizations:
+     * 1) Matrix reordering for sparsity. (?)
+     * 2) Alternative groups of component stamps to provide more diagonal matrix. (?)
+     */
 }
