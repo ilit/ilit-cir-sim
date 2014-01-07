@@ -1,9 +1,6 @@
-package ilit.cirsim.test.voltagesource;
+package ilit.cirsim.test.currentsource;
 
-import ilit.cirsim.circuit.elements.Ground;
-import ilit.cirsim.circuit.elements.Load;
-import ilit.cirsim.circuit.elements.Node;
-import ilit.cirsim.circuit.elements.VoltageSource;
+import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.EquationsSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
@@ -15,7 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
+public class TwoCurrentsManyResistorsSolutionTest extends AbstractStampTest
 {
     private static int ROUNDING_SCALE = 5;
 
@@ -33,21 +30,22 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
         return new Object[][] {
                 /**
                  * Resistor Left; Resistor Right; Resistor middle; Resistor grounded
-                 * Source Voltage Left Right and Middle; Source Evaluated Currents;
+                 * Current Voltage Left Right and Middle
                  *
-                 *  Ra,   Rb,   Rc,   Rd    Re  VL, VM,  CurrentL, CurrentM
+                 *  Ra,   Rb,   Rc,   Rd    Re  CL, CM, Node5V
                  */
-                { 100d, 100d, 100d, 100d, 100d, 5d, 5d,  -0.0125d, -0.0125d},
-                { 100d, 100d, 900d, 100d, 100d, 5d, 5d,  -0.01562d, -0.00313d},
-                { 100d, 100d, 900d, 100d, 100d, 5d, 25d, -0.00938d, -0.02188d}
+                { 100d, 100d, 100d, 100d, 100d, 1d, 1d,  100d},
+                { 100d, 100d, 100d, 100d, 100d, 1d, 2d,  100d},
+                {1000d,1000d, 100d, 100d, 100d, 1d, 2d,  100d},
+                {1000d,1000d, 100d, 100d,1000d, 1d, 2d, 1000d},
         };
     }
 
     @Test(dataProvider = "testValues")
     public void groundedDcVoltageAndResistorTest(
             double ra, double rb, double rc, double rd, double re,
-            double vl, double vm,
-            double cl, double cm
+            double leftCurrent, double middleCurrent,
+            double node5voltageCheck
     )
     {
         initCircuit();
@@ -58,8 +56,8 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
         Resistor Rc = new Load(rc);
         Resistor Rd = new Load(rd);
         Resistor Re = new Load(re);
-        VoltageSource VSL = new VoltageSource(vl);
-        VoltageSource VSM = new VoltageSource(vm);
+        CurrentSource leftISource = new CurrentSource(leftCurrent);
+        CurrentSource midISource = new CurrentSource(middleCurrent);
 
         Node node1 = new Node();
         Node node2 = new Node();
@@ -70,7 +68,7 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
 
         /** Describe topology
          *
-         *   3<(V)-4
+         *   3<(I)-4
          *   |     |
          *   Rb    Rc
          *   |     |
@@ -78,12 +76,12 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
          *   |
          *   Ra
          *   1
-         *  (V)
+         *  (I)
          *
          */
 
-        initComponent(VSL, node1, g);
-        initComponent(VSM, node3, node4); /** Directional. Positive is on the left */
+        initComponent(leftISource, node1, g);
+        initComponent(midISource, node3, node4); /** Directional. Positive is on the left */
 
         initComponent(Ra, node1, node2);
         initComponent(Rb, node2, node3);
@@ -98,15 +96,10 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
         solver = new EquationsSolver(equations);
         solver.solve();
 
-        int vlId = VSL.getId();
-        int vmId = VSM.getId();
-        int vli = IdToMatrixIndexRelations.instance.getIndex(vlId);
-        int vmi = IdToMatrixIndexRelations.instance.getIndex(vmId);
+        int node5index = IdToMatrixIndexRelations.instance.getIndex(node5);
         DenseVector X = equations.getXVector();
-        double sourceCurrentLeft  = Precision.round(X.get(vli), ROUNDING_SCALE);
-        double sourceCurrentMid   = Precision.round(X.get(vmi), ROUNDING_SCALE);
+        double node5voltage = Precision.round(X.get(node5index), ROUNDING_SCALE);
 
-        Assert.assertEquals(sourceCurrentLeft, cl);
-        Assert.assertEquals(sourceCurrentMid, cm);
+        Assert.assertEquals(node5voltage, node5voltageCheck);
     }
 }

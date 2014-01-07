@@ -17,9 +17,6 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-/**
- *
- */
 public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
 {
     private static int ROUNDING_SCALE = 5;

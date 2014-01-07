@@ -1,5 +1,7 @@
 package ilit.cirsim.simulator;
 
+import ilit.cirsim.circuit.elements.Node;
+import ilit.cirsim.circuit.elements.base.Component;
 import org.apache.commons.collections15.bidimap.DualHashBidiMap;
 
 /**
@@ -30,11 +32,22 @@ public class IdToMatrixIndexRelations
 
     public int getIndex(int id)
     {
+        // TODO private
         Integer index = indexVariableRelations.getKey(id);
         if (index == null)
             index = createNewIndexAssociatedWithId(id);
 
         return index;
+    }
+
+    public int getIndex(Node node)
+    {
+        return getIndex(node.getId());
+    }
+
+    public int getIndex(Component component)
+    {
+        return getIndex(component.getId());
     }
 
     private int createNewIndexAssociatedWithId(int id)
