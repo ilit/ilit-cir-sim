@@ -86,7 +86,7 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
         solver = new EquationsSolver(equations);
         solver.solve();
 
-        int iPlusIndex = IdToMatrixIndexRelations.instance.getIndex(iPlus.getId());
+        int iPlusIndex = IdToMatrixIndexRelations.instance.getIndex(iPlus);
         double sourceVoltage = X.get(iPlusIndex);
         double approxSourceVoltage = Precision.round(sourceVoltage, ROUNDING_SCALE);
 

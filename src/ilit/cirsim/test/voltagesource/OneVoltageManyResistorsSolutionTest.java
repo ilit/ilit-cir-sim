@@ -92,8 +92,7 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
         solver = new EquationsSolver(equations);
         solver.solve();
 
-        int vId = voltageSource.getId();
-        int vIndex = IdToMatrixIndexRelations.instance.getIndex(vId);
+        int vIndex = IdToMatrixIndexRelations.instance.getIndex(voltageSource);
         double sourceCurrent = X.get(vIndex);
         double approxSourceCurrent = Precision.round(sourceCurrent, ROUNDING_SCALE);
 

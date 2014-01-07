@@ -98,10 +98,8 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
         solver = new EquationsSolver(equations);
         solver.solve();
 
-        int vlId = VSL.getId();
-        int vmId = VSM.getId();
-        int vli = IdToMatrixIndexRelations.instance.getIndex(vlId);
-        int vmi = IdToMatrixIndexRelations.instance.getIndex(vmId);
+        int vli = IdToMatrixIndexRelations.instance.getIndex(VSL);
+        int vmi = IdToMatrixIndexRelations.instance.getIndex(VSM);
         DenseVector X = equations.getXVector();
         double sourceCurrentLeft  = Precision.round(X.get(vli), ROUNDING_SCALE);
         double sourceCurrentMid   = Precision.round(X.get(vmi), ROUNDING_SCALE);

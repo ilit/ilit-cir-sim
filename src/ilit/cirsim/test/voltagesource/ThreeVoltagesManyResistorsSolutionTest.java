@@ -115,9 +115,9 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
         solver = new EquationsSolver(equations);
         solver.solve();
 
-        int v1i = IdToMatrixIndexRelations.instance.getIndex(v1.getId());
-        int v2i = IdToMatrixIndexRelations.instance.getIndex(v2.getId());
-        int v3i = IdToMatrixIndexRelations.instance.getIndex(v3.getId());
+        int v1i = IdToMatrixIndexRelations.instance.getIndex(v1);
+        int v2i = IdToMatrixIndexRelations.instance.getIndex(v2);
+        int v3i = IdToMatrixIndexRelations.instance.getIndex(v3);
         DenseVector X = equations.getXVector();
         double sourceCurrent1 = Precision.round(X.get(v1i), ROUNDING_SCALE);
         double sourceCurrent2 = Precision.round(X.get(v2i), ROUNDING_SCALE);

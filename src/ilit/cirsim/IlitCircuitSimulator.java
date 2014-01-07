@@ -41,7 +41,7 @@ public class IlitCircuitSimulator
         System.out.println("");
         for (Component source : sources)
         {
-            int index = IdToMatrixIndexRelations.instance.getIndex(source.getId());
+            int index = IdToMatrixIndexRelations.instance.getIndex(source);
             double current = equations.getXVector().get(index);
 
             System.out.println("Current of " + source.getId() + " is " + current);

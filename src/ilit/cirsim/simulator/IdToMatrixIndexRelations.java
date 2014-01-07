@@ -30,16 +30,6 @@ public class IdToMatrixIndexRelations
         indexVariableRelations = new DualHashBidiMap<>();
     }
 
-    public int getIndex(int id)
-    {
-        // TODO private
-        Integer index = indexVariableRelations.getKey(id);
-        if (index == null)
-            index = createNewIndexAssociatedWithId(id);
-
-        return index;
-    }
-
     public int getIndex(Node node)
     {
         return getIndex(node.getId());
@@ -48,6 +38,15 @@ public class IdToMatrixIndexRelations
     public int getIndex(Component component)
     {
         return getIndex(component.getId());
+    }
+
+    public int getIndex(int id)
+    {
+        Integer index = indexVariableRelations.getKey(id);
+        if (index == null)
+            index = createNewIndexAssociatedWithId(id);
+
+        return index;
     }
 
     private int createNewIndexAssociatedWithId(int id)

@@ -113,8 +113,7 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
 
         DenseVector X = equations.getXVector();
 
-        int node8Id = nodes.get(8).getId();
-        int node8Index = IdToMatrixIndexRelations.instance.getIndex(node8Id);
+        int node8Index = IdToMatrixIndexRelations.instance.getIndex(nodes.get(8));
         double node8Voltage = Precision.round(X.get(node8Index), ROUNDING_SCALE);
 
         Assert.assertEquals(node8Voltage, node8voltage);
