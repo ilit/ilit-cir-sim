@@ -40,9 +40,8 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
                  * Source Voltage Left Right and Middle; Source Evaluated Currents;
                  *
                  *  I1, I2, I3, node 8 voltage
-                 *  TODO
                  */
-                //{   1d, 1d, 1d, 1.35802d},
+                {   3d, 2d, 1d, -100d},
         };
     }
 
@@ -92,9 +91,9 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
          *
          */
 
-        initComponent(i1, nodes.get(2), g); /** Directional. Positive is on the left */
-        initComponent(i2, nodes.get(7), nodes.get(4));
-        initComponent(i3, nodes.get(11), nodes.get(9));
+        initComponent(i1, g, nodes.get(2)); /** Directional. Positive is on the left */
+        initComponent(i2, nodes.get(4), nodes.get(7));
+        initComponent(i3, nodes.get(9), nodes.get(11));
 
         initResistor(0x0, 1, 2); initResistor(0x1, 2, 3);
         initResistor(0x2, 1, 4); initResistor(0x3, 2, 5); initResistor(0x4, 3, 6);

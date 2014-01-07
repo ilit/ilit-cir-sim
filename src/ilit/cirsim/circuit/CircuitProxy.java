@@ -34,15 +34,15 @@ public class CircuitProxy
         this.circuitGraph = circuitGraph.graph;
     }
 
-    public void insertComponent(Component component, Node node1, Node node2, boolean directional)
+    public void insertComponent(Component component, Node anode, Node cathode, boolean directional)
     {
         /** Tie nodes to this component */
-        component.node1 = node1;
-        component.node2 = node2;
+        component.anode = anode;
+        component.cathode = cathode;
 
         /** Save non-ground nodes map */
-        saveNotGroundedNode(node1);
-        saveNotGroundedNode(node2);
+        saveNotGroundedNode(anode);
+        saveNotGroundedNode(cathode);
 
         if (component.isGroupOne())
             componentsGroupOne.put(component.getId(), component);
@@ -54,9 +54,9 @@ public class CircuitProxy
          * Used only to display.
          */
         if (directional)
-            circuitGraph.addEdge(component, node1, node2, EdgeType.DIRECTED);
+            circuitGraph.addEdge(component, anode, cathode, EdgeType.DIRECTED);
         else
-            circuitGraph.addEdge(component, node1, node2, EdgeType.UNDIRECTED);
+            circuitGraph.addEdge(component, anode, cathode, EdgeType.UNDIRECTED);
     }
 
     public int bearingNodesAmount() /** non-ground */

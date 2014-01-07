@@ -20,12 +20,12 @@ public class VoltageSourceStamp extends AbstractStamp
         VoltageSource voltageSource = (VoltageSource)component;
         double voltage = voltageSource.getDcVoltage();
 
-        int node1Id = voltageSource.node1.getId();
-        int node2Id = voltageSource.node2.getId();
+        int node1Id = voltageSource.anode.getId();
+        int node2Id = voltageSource.cathode.getId();
         int componentsCurrentIndex = allocateMatrixIndex(voltageSource.getId());
 
         /** Nodes stamping */
-        if (voltageSource.node1.isGround())
+        if (voltageSource.anode.isGround())
         {
             /**
              * MNA[nplus][current] += 1.0;
@@ -34,7 +34,7 @@ public class VoltageSourceStamp extends AbstractStamp
              */
             groundedStamp(node2Id, componentsCurrentIndex, -1.0d);
         }
-        else if (voltageSource.node2.isGround())
+        else if (voltageSource.cathode.isGround())
         {
             groundedStamp(node1Id, componentsCurrentIndex, 1.0d);
         }

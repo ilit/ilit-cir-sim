@@ -6,8 +6,16 @@ import ilit.cirsim.circuit.elements.util.UniqueIDManager;
 public abstract class Component implements
         IRenderable, IIdentifiable, IStampable, IMnaGroup
 {
-    public Node node1;
-    public Node node2;
+    /**
+     * In a device which consumes power, the cathode is negative,
+     * and in a device which provides power, the cathode is positive.
+     */
+    public Node cathode;
+    /**
+     * In a device which consumes power, the anode is positive,
+     * and in a device which provides power, the anode is negative.
+     */
+    public Node anode;
 
     protected int id;
 
@@ -24,10 +32,5 @@ public abstract class Component implements
     public int getId()
     {
         return id;
-    }
-
-    public boolean isGrounded()
-    {
-        return node1.isGround() || node2.isGround();
     }
 }

@@ -57,8 +57,8 @@ public class AbstractStampTest
         stampInjector.placeStamps();
     }
 
-    protected void initComponent(Component component, Node node1, Node node2)
+    protected void initComponent(Component component, Node anode, Node cathode)
     {
-        circuit.insertComponent(component, node1, node2, false);
+        circuit.insertComponent(component, anode, cathode, false);
     }
 }
