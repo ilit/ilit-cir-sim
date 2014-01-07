@@ -50,6 +50,7 @@ public class AbstractStampTest
     protected void placeStamps()
     {
         equations = new MnaEquationsSystem(circuit);
+        equations.createEmptySystem();
         matrix = equations.getMatrix();
         sideVector = equations.getSideVector();
         StampInjector stampInjector = new StampInjector(circuit, equations);

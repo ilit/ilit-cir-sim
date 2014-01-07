@@ -42,21 +42,33 @@ public class MnaEquationsSystem
 
     public FlexCompRowMatrix getMatrix()
     {
+        if (matrix == null)
+            throw new Error("equationsSystem.getMatrix() == null");
+
         return matrix;
     }
 
     public SparseVector getSideVector()
     {
+        if (matrix == null)
+            throw new Error("equationsSystem.getSideVector() == null");
+
         return sideVector;
     }
 
     public DenseVector getXVector()
     {
+        if (matrix == null)
+            throw new Error("equationsSystem.getXVector() == null");
+
         return xVector;
     }
 
     private int defineMatrixSize()
     {
+        if (circuit == null)
+            throw new Error("equationsSystem.defineMatrixSize(): circuit == null");
+
         /**
          * All elements whose currents are to be eliminated
          * will be referred to as being in group 1,

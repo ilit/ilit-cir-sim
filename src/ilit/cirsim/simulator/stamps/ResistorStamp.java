@@ -12,6 +12,9 @@ public class ResistorStamp extends AbstractStamp
     public void setStamp(MnaEquationsSystem equationsSystem, Component component)
     {
         FlexCompRowMatrix matrix = equationsSystem.getMatrix();
+        if (matrix == null)
+           throw new Error("equationsSystem.getMatrix() == null");
+
         Resistor resistor = (Resistor)component;
 
         double conductance = 1 / resistor.getResistance();
