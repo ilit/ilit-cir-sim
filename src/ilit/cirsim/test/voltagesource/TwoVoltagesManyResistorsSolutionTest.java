@@ -1,4 +1,4 @@
-package ilit.cirsim.test;
+package ilit.cirsim.test.voltagesource;
 
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;
@@ -7,6 +7,7 @@ import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.EquationsSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
+import ilit.cirsim.test.AbstractStampTest;
 import no.uib.cipr.matrix.DenseVector;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;

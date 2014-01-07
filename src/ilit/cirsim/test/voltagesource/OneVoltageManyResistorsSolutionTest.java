@@ -1,9 +1,13 @@
-package ilit.cirsim.test;
+package ilit.cirsim.test.voltagesource;
 
-import ilit.cirsim.circuit.elements.*;
+import ilit.cirsim.circuit.elements.Ground;
+import ilit.cirsim.circuit.elements.Load;
+import ilit.cirsim.circuit.elements.Node;
+import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.EquationsSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
+import ilit.cirsim.test.AbstractStampTest;
 import no.uib.cipr.matrix.DenseVector;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
@@ -14,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  *
  */
-public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
+public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
 {
     private static int ROUNDING_SCALE = 5;
 
@@ -34,18 +38,20 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
                  * Resistor Left; Resistor Right; Resistor middle;
                  * Source Voltage; Source Evaluated Current;
                  *
-                 * RL1,  RL2, Rmid,  RR1,  RR2, Current, Voltage at source
+                 * RL1,  RL2, Rmid,  RR1,  RR2, Voltage, Current
                  */
-                { 100d, 100d,  30d, 100d, 300d,  1d, 126.53061d },
-                { 100d, 100d, 100d, 100d, 100d,  1d, 100d },
-                { 100d, 100d, 100d, 100d, 100d,  2d, 200d },
+                { 100d, 100d,  30d, 100d, 300d,  100d, -0.79032d },
+                { 100d, 100d, 100d, 100d, 100d,    5d,    -0.05d },
+                {  50d, 100d, 100d, 100d, 100d,    5d, -0.05909d },
+                {  50d, 150d,   1d, 100d, 100d,    5d, -0.05353d },
+                {  50d, 150d,   1d, 100d, 100d,  500d, -5.35311d }
         };
     }
 
     @Test(dataProvider = "testValues")
     public void groundedDcVoltageAndResistorTest(
             double rl1, double rl2, double rm, double rr1, double rr2,
-            double current, double checkVoltage
+            double voltage, double current
     )
     {
         initCircuit();
@@ -56,18 +62,18 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
         Resistor resMid = new Load(rm);
         Resistor resR1 = new Load(rr1);
         Resistor resR2 = new Load(rr2);
-        CurrentSource currentSource = new CurrentSource(current);
+        VoltageSource voltageSource= new VoltageSource(voltage);
 
         Ground gr = new Ground();
-        Node iPlus = new Node();
+        Node vPlus = new Node();
         Node nodeL = new Node();
         Node nodeR = new Node();
 
         /** Describe topology */
-        initComponent(currentSource, iPlus, gr);
+        initComponent(voltageSource, vPlus, gr);
 
-        initComponent(resL1, iPlus, nodeL);
-        initComponent(resR1, iPlus, nodeR);
+        initComponent(resL1, vPlus, nodeL);
+        initComponent(resR1, vPlus, nodeR);
 
         initComponent(resL2, nodeL, gr);
         initComponent(resR2, nodeR, gr);
@@ -79,19 +85,21 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
 
 
         DenseVector X = equations.getXVector();
-        Assert.assertEquals(X.size(), 3);
+        Assert.assertEquals(X.size(), 4);
         Assert.assertEquals(X.get(0), 0d);
         Assert.assertEquals(X.get(1), 0d);
         Assert.assertEquals(X.get(2), 0d);
+        Assert.assertEquals(X.get(3), 0d);
 
         /** Solve */
         solver = new EquationsSolver(equations);
         solver.solve();
 
-        int iPlusIndex = IdToMatrixIndexRelations.instance.getIndex(iPlus.getId());
-        double sourceVoltage = X.get(iPlusIndex);
-        double approxSourceVoltage = Precision.round(sourceVoltage, ROUNDING_SCALE);
+        int vId = voltageSource.getId();
+        int vIndex = IdToMatrixIndexRelations.instance.getIndex(vId);
+        double sourceCurrent = X.get(vIndex);
+        double approxSourceCurrent = Precision.round(sourceCurrent, ROUNDING_SCALE);
 
-        Assert.assertEquals(approxSourceVoltage, checkVoltage);
+        Assert.assertEquals(approxSourceCurrent, current);
     }
 }
