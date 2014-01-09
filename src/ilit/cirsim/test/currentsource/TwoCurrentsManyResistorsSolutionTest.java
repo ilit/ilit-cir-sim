@@ -34,10 +34,10 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractStampTest
                  *
                  *  Ra,   Rb,   Rc,   Rd    Re  CL, CM, Node5V
                  */
-                { 100d, 100d, 100d, 100d, 100d, 1d, 1d,  100d},
-                { 100d, 100d, 100d, 100d, 100d, 1d, 2d,  100d},
-                {1000d,1000d, 100d, 100d, 100d, 1d, 2d,  100d},
-                {1000d,1000d, 100d, 100d,1000d, 1d, 2d, 1000d},
+                { 100d, 100d, 100d, 100d, 100d, 1d, 1d, -100d},
+                { 100d, 100d, 100d, 100d, 100d, 1d, 2d, -100d},
+                {1000d,1000d, 100d, 100d, 100d, 1d, 2d, -100d},
+                {1000d,1000d, 100d, 100d,1000d, 1d, 2d,-1000d},
         };
     }
 
@@ -80,8 +80,8 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractStampTest
          *
          */
 
-        initComponent(leftISource, node1, g);
-        initComponent(midISource, node3, node4); /** Directional. Positive is on the left */
+        initComponent(leftISource, g, node1);
+        initComponent(midISource, node4, node3);
 
         initComponent(Ra, node1, node2);
         initComponent(Rb, node2, node3);

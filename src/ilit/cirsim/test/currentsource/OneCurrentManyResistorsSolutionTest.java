@@ -34,9 +34,9 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
                  *
                  * RL1,  RL2, Rmid,  RR1,  RR2, Current, Voltage at source
                  */
-                { 100d, 100d,  30d, 100d, 300d,  1d, 126.53061d },
-                { 100d, 100d, 100d, 100d, 100d,  1d, 100d },
-                { 100d, 100d, 100d, 100d, 100d,  2d, 200d },
+                { 100d, 100d,  30d, 100d, 300d,  1d, -126.53061d },
+                { 100d, 100d, 100d, 100d, 100d,  1d, -100d },
+                { 100d, 100d, 100d, 100d, 100d,  2d, -200d },
         };
     }
 
@@ -57,15 +57,15 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
         CurrentSource currentSource = new CurrentSource(current);
 
         Ground gr = new Ground();
-        Node iPlus = new Node();
+        Node sourceCathode = new Node();
         Node nodeL = new Node();
         Node nodeR = new Node();
 
         /** Describe topology */
-        initComponent(currentSource, iPlus, gr);
+        initComponent(currentSource, gr, sourceCathode);
 
-        initComponent(resL1, iPlus, nodeL);
-        initComponent(resR1, iPlus, nodeR);
+        initComponent(resL1, sourceCathode, nodeL);
+        initComponent(resR1, sourceCathode, nodeR);
 
         initComponent(resL2, nodeL, gr);
         initComponent(resR2, nodeR, gr);
@@ -86,7 +86,7 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
         solver = new EquationsSolver(equations);
         solver.solve();
 
-        int iPlusIndex = IdToMatrixIndexRelations.instance.getIndex(iPlus);
+        int iPlusIndex = IdToMatrixIndexRelations.instance.getIndex(sourceCathode);
         double sourceVoltage = X.get(iPlusIndex);
         double approxSourceVoltage = Precision.round(sourceVoltage, ROUNDING_SCALE);
 

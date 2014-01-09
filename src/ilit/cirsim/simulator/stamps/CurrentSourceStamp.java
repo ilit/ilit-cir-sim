@@ -1,6 +1,7 @@
 package ilit.cirsim.simulator.stamps;
 
 import ilit.cirsim.circuit.elements.CurrentSource;
+import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
@@ -25,37 +26,34 @@ public class CurrentSourceStamp extends AbstractStamp
         CurrentSource currentSource = (CurrentSource)component;
         double current = currentSource.getCurrent();
 
-        int nodePlus = currentSource.cathode.getId();
-        int nodeMinus = currentSource.anode.getId();
-
         /** Nodes stamping */
         if (currentSource.anode.isGround())
         {
             /** RHS[nplus] -= ElemValue[ElemIndex]; */
-            groundedStamp(nodePlus, -current, sideVector);
+            groundedStamp(currentSource.cathode, -current, sideVector);
         }
         else if (currentSource.cathode.isGround())
         {
             /** RHS[nminus] += ElemValue[ElemIndex]; */
-            groundedStamp(nodeMinus, current, sideVector);
+            groundedStamp(currentSource.anode, current, sideVector);
         }
         else
         {
-            int nodeMinusIndex = allocateMatrixIndex(nodeMinus);
-            int nodePlusIndex = allocateMatrixIndex(nodePlus);
+            int anodeIndex = allocateMatrixIndex(currentSource.anode);
+            int cathodeIndex = allocateMatrixIndex(currentSource.cathode);
 
             /**
              * RHS[nplus] -= ElemValue[ElemIndex];
              * RHS[nminus] += ElemValue[ElemIndex];
              */
-            sideVector.add(nodePlusIndex, -current);
-            sideVector.add(nodeMinusIndex, current);
+            sideVector.add(cathodeIndex, -current);
+            sideVector.add(anodeIndex, current);
         }
     }
 
-    private void groundedStamp(int liveNodeId, double val, SparseVector sideVector)
+    private void groundedStamp(Node node, double val, SparseVector sideVector)
     {
-        int liveNodeIndex = allocateMatrixIndex(liveNodeId);
+        int liveNodeIndex = allocateMatrixIndex(node);
 
         sideVector.add(liveNodeIndex, val);
     }
