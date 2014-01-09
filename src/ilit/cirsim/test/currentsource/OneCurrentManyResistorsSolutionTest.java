@@ -34,9 +34,9 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
                  *
                  * RL1,  RL2, Rmid,  RR1,  RR2, Current, Voltage at source
                  */
-                { 100d, 100d,  30d, 100d, 300d,  1d, 126.53061d },
-                { 100d, 100d, 100d, 100d, 100d,  1d, 100d },
-                { 100d, 100d, 100d, 100d, 100d,  2d, 200d },
+                { 100d, 100d,  30d, 100d, 300d,  -1d, 126.53061d },
+                { 100d, 100d, 100d, 100d, 100d,  -1d, 100d },
+                { 100d, 100d, 100d, 100d, 100d,  -2d, 200d },
         };
     }
 

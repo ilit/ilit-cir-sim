@@ -30,12 +30,12 @@ public class CurrentSourceStamp extends AbstractStamp
         if (currentSource.anode.isGround())
         {
             /** RHS[nplus] -= ElemValue[ElemIndex]; */
-            groundedStamp(currentSource.cathode, current, sideVector);
+            groundedStamp(currentSource.cathode, -current, sideVector);
         }
         else if (currentSource.cathode.isGround())
         {
             /** RHS[nminus] += ElemValue[ElemIndex]; */
-            groundedStamp(currentSource.anode, -current, sideVector);
+            groundedStamp(currentSource.anode, current, sideVector);
         }
         else
         {
@@ -46,8 +46,8 @@ public class CurrentSourceStamp extends AbstractStamp
              * RHS[nplus] -= ElemValue[ElemIndex];
              * RHS[nminus] += ElemValue[ElemIndex];
              */
-            sideVector.add(cathodeIndex, current);
-            sideVector.add(anodeIndex, -current);
+            sideVector.add(cathodeIndex, -current);
+            sideVector.add(anodeIndex, current);
         }
     }
 

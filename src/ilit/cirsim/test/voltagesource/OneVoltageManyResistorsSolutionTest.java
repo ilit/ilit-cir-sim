@@ -44,6 +44,10 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
                 {  50d, 150d,   1d, 100d, 100d,  500d, -5.35311d }
         };
     }
+    /**
+     * Simulation reference current direction is from + to -.
+     * So normal current is negative.
+     */
 
     @Test(dataProvider = "testValues")
     public void groundedDcVoltageAndResistorTest(
@@ -59,18 +63,18 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
         Resistor resMid = new Load(rm);
         Resistor resR1 = new Load(rr1);
         Resistor resR2 = new Load(rr2);
-        VoltageSource voltageSource= new VoltageSource(voltage);
+        VoltageSource voltageSource = new VoltageSource(voltage);
 
         Ground gr = new Ground();
-        Node vPlus = new Node();
+        Node sourceCathode = new Node();
         Node nodeL = new Node();
         Node nodeR = new Node();
 
         /** Describe topology */
-        initComponent(voltageSource, vPlus, gr);
+        initComponent(voltageSource, gr, sourceCathode);
 
-        initComponent(resL1, vPlus, nodeL);
-        initComponent(resR1, vPlus, nodeR);
+        initComponent(resL1, sourceCathode, nodeL);
+        initComponent(resR1, sourceCathode, nodeR);
 
         initComponent(resL2, nodeL, gr);
         initComponent(resR2, nodeR, gr);

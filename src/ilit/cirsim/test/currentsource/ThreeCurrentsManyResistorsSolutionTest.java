@@ -41,9 +41,13 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
                  *
                  *  I1, I2, I3, node 8 voltage
                  */
-                {   3d, 2d, 1d, 100d},
+                {  -3d,-2d,-1d, 100d},
         };
     }
+    /**
+     * Simulation reference current direction is from + to -.
+     * So normal current is negative.
+     */
 
     @Test(dataProvider = "testValues")
     public void groundedDcVoltageAndResistorTest(

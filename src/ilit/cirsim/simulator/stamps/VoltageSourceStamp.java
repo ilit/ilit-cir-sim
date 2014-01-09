@@ -20,8 +20,8 @@ public class VoltageSourceStamp extends AbstractStamp
         VoltageSource voltageSource = (VoltageSource)component;
         double voltage = voltageSource.getDcVoltage();
 
-        int node1Id = voltageSource.anode.getId();
-        int node2Id = voltageSource.cathode.getId();
+        int anode = voltageSource.anode.getId();
+        int cathode = voltageSource.cathode.getId();
         int componentsCurrentIndex = allocateMatrixIndex(voltageSource);
 
         /** Nodes stamping */
@@ -32,16 +32,16 @@ public class VoltageSourceStamp extends AbstractStamp
              * MNA[current][nplus] += 1.0;
              * RHS[current] += ElemValue;
              */
-            groundedStamp(node2Id, componentsCurrentIndex, -1.0d);
+            groundedStamp(cathode, componentsCurrentIndex, -1.0d);
         }
         else if (voltageSource.cathode.isGround())
         {
-            groundedStamp(node1Id, componentsCurrentIndex, 1.0d);
+            groundedStamp(anode, componentsCurrentIndex, 1.0d);
         }
         else
         {
-            int node1Index = allocateMatrixIndex(node1Id);
-            int node2Index = allocateMatrixIndex(node2Id);
+            int anodeIndex = allocateMatrixIndex(anode);
+            int cathodeIndex = allocateMatrixIndex(cathode);
 
             /**
              * MNA[nplus][current] += 1.0;
@@ -50,8 +50,8 @@ public class VoltageSourceStamp extends AbstractStamp
              * MNA[current][nminus] -= 1.0;
              * RHS[current] += ElemValue;
              */
-            nodeStamp(node1Index, componentsCurrentIndex, 1.0d);
-            nodeStamp(node2Index, componentsCurrentIndex, -1.0d);
+            nodeStamp(anodeIndex, componentsCurrentIndex, 1.0d);
+            nodeStamp(cathodeIndex, componentsCurrentIndex, -1.0d);
         }
 
         /** Side vector stamping */
