@@ -1,5 +1,6 @@
 package ilit.cirsim.simulator.stamps;
 
+import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
@@ -20,8 +21,6 @@ public class VoltageSourceStamp extends AbstractStamp
         VoltageSource voltageSource = (VoltageSource)component;
         double voltage = voltageSource.getDcVoltage();
 
-        int anode = voltageSource.anode.getId();
-        int cathode = voltageSource.cathode.getId();
         int componentsCurrentIndex = allocateMatrixIndex(voltageSource);
 
         /** Nodes stamping */
@@ -32,16 +31,16 @@ public class VoltageSourceStamp extends AbstractStamp
              * MNA[current][nplus] += 1.0;
              * RHS[current] += ElemValue;
              */
-            groundedStamp(cathode, componentsCurrentIndex, 1.0d);
+            groundedStamp(voltageSource.cathode, componentsCurrentIndex, 1.0d);
         }
         else if (voltageSource.cathode.isGround())
         {
-            groundedStamp(anode, componentsCurrentIndex, -1.0d);
+            groundedStamp(voltageSource.anode, componentsCurrentIndex, -1.0d);
         }
         else
         {
-            int cathodeIndex = allocateMatrixIndex(cathode);
-            int anodeIndex = allocateMatrixIndex(anode);
+            int cathodeIndex = allocateMatrixIndex(voltageSource.cathode);
+            int anodeIndex = allocateMatrixIndex(voltageSource.anode);
 
             /**
              * MNA[nplus][current] += 1.0;
@@ -58,9 +57,9 @@ public class VoltageSourceStamp extends AbstractStamp
         sideVector.add(componentsCurrentIndex, voltage);
     }
 
-    private void groundedStamp(int liveNodeId, int componentsCurrentIndex, double val)
+    private void groundedStamp(Node liveNode, int componentsCurrentIndex, double val)
     {
-        int liveNodeIndex = allocateMatrixIndex(liveNodeId);
+        int liveNodeIndex = allocateMatrixIndex(liveNode);
 
         nodeStamp(liveNodeIndex, componentsCurrentIndex, val);
     }

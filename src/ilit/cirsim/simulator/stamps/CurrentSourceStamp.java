@@ -51,9 +51,9 @@ public class CurrentSourceStamp extends AbstractStamp
         }
     }
 
-    private void groundedStamp(Node node, double val, SparseVector sideVector)
+    private void groundedStamp(Node liveNode, double val, SparseVector sideVector)
     {
-        int liveNodeIndex = allocateMatrixIndex(node);
+        int liveNodeIndex = allocateMatrixIndex(liveNode);
 
         sideVector.add(liveNodeIndex, val);
     }

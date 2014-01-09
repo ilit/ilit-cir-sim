@@ -8,7 +8,6 @@ public abstract class AbstractStamp implements IStampStrategy
 {
     protected int allocateMatrixIndex(int id)
     {
-        // TODO replace usages
         return IdToMatrixIndexRelations.instance.getIndex(id);
     }
 
