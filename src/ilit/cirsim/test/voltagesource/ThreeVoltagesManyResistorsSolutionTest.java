@@ -96,7 +96,7 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
          *
          */
 
-        initComponent(v1, g, nodes.get(2)); /** Directional. Positive is on the left */
+        initComponent(v1, g, nodes.get(2));
         initComponent(v2, nodes.get(4), nodes.get(7));
         initComponent(v3, nodes.get(9), nodes.get(11));
 

@@ -69,21 +69,21 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
         Ground g = new Ground();
 
         /** Describe topology
-         *
-         *   3<(V)-4
+         *    +
+         *   3-(V)-4
          *   |     |
          *   Rb    Rc
          *   |     |
          *   2--Rd-5--Re-g
          *   |
          *   Ra
-         *   1
+         *   1 +
          *  (V)
          *
          */
 
-        initComponent(VSL, node1, g);
-        initComponent(VSM, node3, node4); /** Directional. Positive is on the left */
+        initComponent(VSL, g, node1);
+        initComponent(VSM, node4, node3);
 
         initComponent(Ra, node1, node2);
         initComponent(Rb, node2, node3);
