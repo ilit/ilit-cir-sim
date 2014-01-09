@@ -96,9 +96,9 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
          *
          */
 
-        initComponent(v1, nodes.get(2), g); /** Directional. Positive is on the left */
-        initComponent(v2, nodes.get(7), nodes.get(4));
-        initComponent(v3, nodes.get(11), nodes.get(9));
+        initComponent(v1, g, nodes.get(2)); /** Directional. Positive is on the left */
+        initComponent(v2, nodes.get(4), nodes.get(7));
+        initComponent(v3, nodes.get(9), nodes.get(11));
 
         initResistor(0x0, 1, 2); initResistor(0x1, 2, 3);
         initResistor(0x2, 1, 4); initResistor(0x3, 2, 5); initResistor(0x4, 3, 6);

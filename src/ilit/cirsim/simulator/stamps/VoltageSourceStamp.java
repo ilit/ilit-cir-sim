@@ -32,16 +32,16 @@ public class VoltageSourceStamp extends AbstractStamp
              * MNA[current][nplus] += 1.0;
              * RHS[current] += ElemValue;
              */
-            groundedStamp(cathode, componentsCurrentIndex, -1.0d);
+            groundedStamp(cathode, componentsCurrentIndex, 1.0d);
         }
         else if (voltageSource.cathode.isGround())
         {
-            groundedStamp(anode, componentsCurrentIndex, 1.0d);
+            groundedStamp(anode, componentsCurrentIndex, -1.0d);
         }
         else
         {
-            int anodeIndex = allocateMatrixIndex(anode);
             int cathodeIndex = allocateMatrixIndex(cathode);
+            int anodeIndex = allocateMatrixIndex(anode);
 
             /**
              * MNA[nplus][current] += 1.0;
@@ -50,11 +50,11 @@ public class VoltageSourceStamp extends AbstractStamp
              * MNA[current][nminus] -= 1.0;
              * RHS[current] += ElemValue;
              */
-            nodeStamp(anodeIndex, componentsCurrentIndex, 1.0d);
-            nodeStamp(cathodeIndex, componentsCurrentIndex, -1.0d);
+            nodeStamp(cathodeIndex, componentsCurrentIndex, 1.0d);
+            nodeStamp(anodeIndex, componentsCurrentIndex, -1.0d);
         }
 
-        /** Side vector stamping */
+        /** Side vector stamping - RHS */
         sideVector.add(componentsCurrentIndex, voltage);
     }
 

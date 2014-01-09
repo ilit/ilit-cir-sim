@@ -9,8 +9,8 @@ import ilit.cirsim.circuit.elements.VoltageSource;
 public class VoltageSourceStampTest extends AbstractSingleStampTest
 {
     private static int CURRENT_INDEX = 0;
-    private static int NODE1_INDEX = 1; /** plus */
-    private static int NODE2_INDEX = 2; /** minus */
+    private static int CATHODE_INDEX = 1; /** plus */
+    private static int ANODE_INDEX = 2; /** minus */
     private static double VOLTAGE = 100.0d;
 
     @Test()
@@ -22,16 +22,16 @@ public class VoltageSourceStampTest extends AbstractSingleStampTest
 
         Assert.assertEquals(sideVector.get(CURRENT_INDEX), VOLTAGE);
 
-        Assert.assertEquals(matrix.get(NODE1_INDEX, NODE1_INDEX), 0d);
-        Assert.assertEquals(matrix.get(NODE1_INDEX, NODE2_INDEX), 0d);
-        Assert.assertEquals(matrix.get(NODE2_INDEX, NODE1_INDEX), 0d);
-        Assert.assertEquals(matrix.get(NODE2_INDEX, NODE2_INDEX), 0d);
+        Assert.assertEquals(matrix.get(CATHODE_INDEX, CATHODE_INDEX), 0d);
+        Assert.assertEquals(matrix.get(CATHODE_INDEX, ANODE_INDEX), 0d);
+        Assert.assertEquals(matrix.get(ANODE_INDEX, CATHODE_INDEX), 0d);
+        Assert.assertEquals(matrix.get(ANODE_INDEX, ANODE_INDEX), 0d);
 
-        Assert.assertEquals(matrix.get(CURRENT_INDEX, NODE1_INDEX), 1.0d);
-        Assert.assertEquals(matrix.get(NODE1_INDEX, CURRENT_INDEX), 1.0d);
+        Assert.assertEquals(matrix.get(CURRENT_INDEX, CATHODE_INDEX), 1.0d);
+        Assert.assertEquals(matrix.get(CATHODE_INDEX, CURRENT_INDEX), 1.0d);
 
-        Assert.assertEquals(matrix.get(CURRENT_INDEX, NODE2_INDEX), -1.0d);
-        Assert.assertEquals(matrix.get(NODE2_INDEX, CURRENT_INDEX), -1.0d);
+        Assert.assertEquals(matrix.get(CURRENT_INDEX, ANODE_INDEX), -1.0d);
+        Assert.assertEquals(matrix.get(ANODE_INDEX, CURRENT_INDEX), -1.0d);
     }
 
     @Test()
@@ -44,10 +44,10 @@ public class VoltageSourceStampTest extends AbstractSingleStampTest
         Assert.assertEquals(sideVector.get(CURRENT_INDEX), VOLTAGE);
 
         /** Untouched */
-        Assert.assertEquals(matrix.get(NODE1_INDEX, NODE1_INDEX), 0d);
+        Assert.assertEquals(matrix.get(CATHODE_INDEX, CATHODE_INDEX), 0d);
 
-        Assert.assertEquals(matrix.get(CURRENT_INDEX, NODE1_INDEX), -1.0d);
-        Assert.assertEquals(matrix.get(NODE1_INDEX, CURRENT_INDEX), -1.0d);
+        Assert.assertEquals(matrix.get(CURRENT_INDEX, CATHODE_INDEX), 1.0d);
+        Assert.assertEquals(matrix.get(CATHODE_INDEX, CURRENT_INDEX), 1.0d);
     }
 
     @Test()
@@ -60,9 +60,9 @@ public class VoltageSourceStampTest extends AbstractSingleStampTest
         Assert.assertEquals(sideVector.get(CURRENT_INDEX), VOLTAGE);
 
         /** Untouched */
-        Assert.assertEquals(matrix.get(NODE1_INDEX, NODE1_INDEX), 0d);
+        Assert.assertEquals(matrix.get(CATHODE_INDEX, CATHODE_INDEX), 0d);
 
-        Assert.assertEquals(matrix.get(CURRENT_INDEX, NODE1_INDEX), 1.0d);
-        Assert.assertEquals(matrix.get(NODE1_INDEX, CURRENT_INDEX), 1.0d);
+        Assert.assertEquals(matrix.get(CURRENT_INDEX, CATHODE_INDEX), -1.0d);
+        Assert.assertEquals(matrix.get(CATHODE_INDEX, CURRENT_INDEX), -1.0d);
     }
 }
