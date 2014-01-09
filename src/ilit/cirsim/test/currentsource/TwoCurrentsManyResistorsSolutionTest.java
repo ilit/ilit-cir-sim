@@ -42,7 +42,7 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractStampTest
     }
     /**
      * Simulation reference current direction is from + to -.
-     * So normal current is negative.
+     * So normal positive current is negative in the X vector.
      */
 
     @Test(dataProvider = "testValues")
