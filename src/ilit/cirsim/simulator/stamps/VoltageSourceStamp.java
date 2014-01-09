@@ -22,7 +22,7 @@ public class VoltageSourceStamp extends AbstractStamp
 
         int node1Id = voltageSource.anode.getId();
         int node2Id = voltageSource.cathode.getId();
-        int componentsCurrentIndex = allocateMatrixIndex(voltageSource.getId());
+        int componentsCurrentIndex = allocateMatrixIndex(voltageSource);
 
         /** Nodes stamping */
         if (voltageSource.anode.isGround())
