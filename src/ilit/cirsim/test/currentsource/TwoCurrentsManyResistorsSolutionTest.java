@@ -34,10 +34,10 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractStampTest
                  *
                  *  Ra,   Rb,   Rc,   Rd    Re  CL, CM, Node5V
                  */
-                { 100d, 100d, 100d, 100d, 100d, 1d, 1d, -100d},
-                { 100d, 100d, 100d, 100d, 100d, 1d, 2d, -100d},
-                {1000d,1000d, 100d, 100d, 100d, 1d, 2d, -100d},
-                {1000d,1000d, 100d, 100d,1000d, 1d, 2d,-1000d},
+                { 100d, 100d, 100d, 100d, 100d, 1d, 1d,  100d},
+                { 100d, 100d, 100d, 100d, 100d, 1d, 2d,  100d},
+                {1000d,1000d, 100d, 100d, 100d, 1d, 2d,  100d},
+                {1000d,1000d, 100d, 100d,1000d, 1d, 2d, 1000d},
         };
     }
 

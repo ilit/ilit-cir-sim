@@ -41,7 +41,7 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
                  *
                  *  I1, I2, I3, node 8 voltage
                  */
-                {   3d, 2d, 1d, -100d},
+                {   3d, 2d, 1d, 100d},
         };
     }
 
