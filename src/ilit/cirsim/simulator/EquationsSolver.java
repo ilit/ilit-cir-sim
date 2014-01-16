@@ -10,14 +10,23 @@ import no.uib.cipr.matrix.sparse.*;
 public class EquationsSolver
 {
     private MnaEquationsSystem equations;
+    private StampInjector stampInjector;
 
     @Inject
-    public EquationsSolver(MnaEquationsSystem equations)
+    public EquationsSolver(MnaEquationsSystem equations, StampInjector stampInjector)
     {
         this.equations = equations;
+        this.stampInjector = stampInjector;
     }
 
     public void solve()
+    {
+        equations.createEmptySystem();
+        stampInjector.placeStamps();
+        solveLinearSystem();
+    }
+
+    private void solveLinearSystem()
     {
         CompRowMatrix A = new CompRowMatrix(equations.getMatrix(), true);
         SparseVector b = equations.getSideVector();
@@ -30,7 +39,7 @@ public class EquationsSolver
 
         /**
          * Algebraic multigrid preconditioner. Uses the smoothed aggregation method
-         * described by Vanek, Mandel, and Brezina (1996).
+         * described by Vanek, Mandel and Brezina (1996).
          */
         Preconditioner M = new AMG();
 
