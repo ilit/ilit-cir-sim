@@ -7,12 +7,12 @@ import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.*;
 
 @Singleton
-public class LinearEquationsSolver
+public class LinearSolver
 {
     private final MnaEquationsSystem equations;
 
     @Inject
-    public LinearEquationsSolver(MnaEquationsSystem equations)
+    public LinearSolver(MnaEquationsSystem equations)
     {
         this.equations = equations;
     }

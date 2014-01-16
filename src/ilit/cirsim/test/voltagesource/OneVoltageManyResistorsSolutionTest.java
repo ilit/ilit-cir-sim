@@ -5,7 +5,6 @@ import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.LinearEquationsSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.test.AbstractStampTest;
 import no.uib.cipr.matrix.DenseVector;

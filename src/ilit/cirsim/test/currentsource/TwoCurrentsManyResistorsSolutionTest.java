@@ -2,7 +2,6 @@ package ilit.cirsim.test.currentsource;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.LinearEquationsSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.test.AbstractStampTest;
 import no.uib.cipr.matrix.DenseVector;

@@ -1,6 +1,6 @@
 package ilit.cirsim.test;
 
-import ilit.cirsim.simulator.LinearEquationsSolver;
+import ilit.cirsim.simulator.LinearSolver;
 import ilit.cirsim.simulator.StampInjector;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
@@ -27,7 +27,7 @@ public class AbstractStampTest
     protected SparseVector sideVector;
     protected CircuitProxy circuit;
     protected MnaEquationsSystem equations;
-    private LinearEquationsSolver solver;
+    private LinearSolver solver;
     private StampInjector stampInjector;
 
     @BeforeMethod
@@ -72,7 +72,7 @@ public class AbstractStampTest
 
     protected void solve()
     {
-        solver = new LinearEquationsSolver(equations);
+        solver = new LinearSolver(equations);
         solver.solve();
     }
 }

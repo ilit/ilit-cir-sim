@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.SampleCircuitGenerator;
 import ilit.cirsim.circuit.elements.base.Component;
-import ilit.cirsim.simulator.LinearEquationsSolver;
+import ilit.cirsim.simulator.LinearSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import ilit.cirsim.simulator.StampInjector;
@@ -21,7 +21,7 @@ public class IlitCircuitSimulator
                                 CircuitProxy circuit,
                                 MnaEquationsSystem equations,
                                 StampInjector stampInjector,
-                                LinearEquationsSolver linearEquationsSolver)
+                                LinearSolver linearEquationsSolver)
     {
         /** Code below is used only for visualization for now */
         new SampleCircuitGenerator().generateSampleGraph(circuit);
