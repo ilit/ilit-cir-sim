@@ -27,8 +27,15 @@ public class IlitCircuitSimulator
         new SampleCircuitGenerator().generateSampleGraph(circuit);
         equations.createEmptySystem();
 
-        stampInjector.placeStamps();
-        linearEquationsSolver.solve();
+        if (!circuit.isCircuitNonlinear())
+        {
+            stampInjector.placeStamps();
+            linearEquationsSolver.solve();
+        }
+        else
+        {
+            // nonlinear solve
+        }
 
         graphGui.show();
 

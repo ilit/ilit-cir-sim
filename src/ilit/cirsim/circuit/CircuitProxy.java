@@ -83,10 +83,13 @@ public class CircuitProxy
     public boolean isCircuitNonlinear()
     {
         for (Component component : getG1Components())
-        {
             if (component.isNonlinear())
                 return true;
-        }
+
+        for (Component component : getG2Components())
+            if (component.isNonlinear())
+                return true;
+
         return false;
     }
 }
