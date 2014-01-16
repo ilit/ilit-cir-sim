@@ -19,13 +19,10 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
 {
     private static final int ROUNDING_SCALE = 5;
 
-    private LinearEquationsSolver solver;
-
     @AfterMethod
     public void tearDown() throws Exception
     {
         super.tearDown();
-        solver = null;
     }
 
     @DataProvider(name = "testValues")

@@ -22,8 +22,6 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
     private static final int ROUNDING_SCALE = 5;
     private static final double RESISTANCE = 100.0d;
 
-
-    private LinearEquationsSolver solver;
     private ArrayList<Resistor> resistors;
     private ArrayList<Node> nodes;
 
@@ -31,7 +29,6 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
     public void tearDown() throws Exception
     {
         super.tearDown();
-        solver = null;
         resistors = null;
         nodes = null;
     }
