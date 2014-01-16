@@ -15,7 +15,7 @@ import org.apache.commons.collections15.bidimap.DualHashBidiMap;
  */
 public class IdToMatrixIndexRelations
 {
-    public static IdToMatrixIndexRelations instance = new IdToMatrixIndexRelations();
+    public static final IdToMatrixIndexRelations instance = new IdToMatrixIndexRelations();
 
     /**
      * Variable <-> Matrix index relation.

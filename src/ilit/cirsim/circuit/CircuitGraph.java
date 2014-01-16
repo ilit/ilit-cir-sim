@@ -14,5 +14,5 @@ public class CircuitGraph
      * Graph vertex - numbered node.
      * Graph edge - electronic component. Resistive wire or device.
      */
-    public SparseMultigraph<Node, Component> graph = new SparseMultigraph<>();
+    public final SparseMultigraph<Node, Component> graph = new SparseMultigraph<>();
 }

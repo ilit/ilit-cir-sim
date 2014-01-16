@@ -6,7 +6,7 @@ import com.google.inject.Injector;
 /**
  * Just a reference for Guice insertion in arbitrary non-guice class.
  */
-public class GuiceFactory
+class GuiceFactory
 {
     private static final Injector simInjector = Guice.createInjector(new SimModule());
 

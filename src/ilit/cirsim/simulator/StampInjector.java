@@ -12,8 +12,8 @@ import java.util.Collection;
 public class StampInjector
 {
     /** Holds circuit topology\composition */
-    private CircuitProxy circuit;
-    private MnaEquationsSystem equations;
+    private final CircuitProxy circuit;
+    private final MnaEquationsSystem equations;
 
     @Inject
     public StampInjector(CircuitProxy circuit, MnaEquationsSystem equations)

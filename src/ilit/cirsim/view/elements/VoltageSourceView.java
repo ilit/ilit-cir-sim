@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class VoltageSourceView implements IGraphRenderable
 {
-    private VoltageSource voltageSource;
+    private final VoltageSource voltageSource;
 
     public VoltageSourceView(VoltageSource voltageSource)
     {

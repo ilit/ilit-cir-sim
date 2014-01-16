@@ -6,7 +6,7 @@ import ilit.cirsim.view.elements.LoadView;
 
 public class Load extends Resistor
 {
-    private LoadView view;
+    private final LoadView view;
 
     public Load(double resistance)
     {

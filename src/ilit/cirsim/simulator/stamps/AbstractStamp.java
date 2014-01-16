@@ -4,7 +4,7 @@ import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 
-public abstract class AbstractStamp implements IStampStrategy
+abstract class AbstractStamp implements IStampStrategy
 {
     protected int allocateMatrixIndex(int id)
     {

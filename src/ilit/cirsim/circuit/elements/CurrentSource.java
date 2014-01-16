@@ -10,7 +10,7 @@ import ilit.cirsim.view.elements.VoltageSourceView;
 
 public class CurrentSource extends Component
 {
-    private double current;
+    private final double current;
 
     public CurrentSource(double I)
     {

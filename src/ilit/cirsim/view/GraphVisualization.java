@@ -30,7 +30,7 @@ public class GraphVisualization
     private static final int LAYOUT_HEIGHT = 550;
 
     private RenderContext<Node, Component> renderContext;
-    private CircuitGraph circuitGraph;
+    private final CircuitGraph circuitGraph;
 
     @Inject
     public GraphVisualization(CircuitGraph circuitGraph)

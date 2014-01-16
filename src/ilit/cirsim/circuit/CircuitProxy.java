@@ -19,14 +19,14 @@ public class CircuitProxy
     /**
      * Graph is used only for visualization for now.
      */
-    public SparseMultigraph<Node, Component> circuitGraph;
+    private final SparseMultigraph<Node, Component> circuitGraph;
 
     /**
      * Maps are used only for circuit analysis.
      */
-    private HashMap<Integer, Node> bearingNodes = new HashMap<>(); /** Not grounded nodes */
-    private HashMap<Integer, Component> componentsGroupOne = new HashMap<>();
-    private HashMap<Integer, Component> componentsGroupTwo = new HashMap<>();
+    private final HashMap<Integer, Node> bearingNodes = new HashMap<>(); /** Not grounded nodes */
+    private final HashMap<Integer, Component> componentsGroupOne = new HashMap<>();
+    private final HashMap<Integer, Component> componentsGroupTwo = new HashMap<>();
 
     @Inject
     public CircuitProxy(CircuitGraph circuitGraph)

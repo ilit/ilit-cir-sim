@@ -10,19 +10,19 @@ import java.util.Collections;
 
 public class SampleCircuitGenerator
 {
-    public static final int VSOURCES_AMOUNT = 3;
+    private static final int VSOURCES_AMOUNT = 3;
 
-    public static final int MAX_VOLTAGE = 50;
-    public static final int MAX_RESISTANCE = 500;
+    private static final int MAX_VOLTAGE = 50;
+    private static final int MAX_RESISTANCE = 500;
 
-    public static final int GRID_SIZE = 3; /** In amount of nodes at grid side */
-    public static final int ROUND_SCALE = 3;
+    private static final int GRID_SIZE = 3; /** In amount of nodes at grid side */
+    private static final int ROUND_SCALE = 3;
 
     private CircuitProxy circuit;
 
-    private MersenneTwister randomizer = new MersenneTwister();
-    private Node[][] nodeMatrix = new Node[GRID_SIZE][GRID_SIZE];
-    private ArrayList<Component> componentsList = new ArrayList<>();
+    private final MersenneTwister randomizer = new MersenneTwister();
+    private final Node[][] nodeMatrix = new Node[GRID_SIZE][GRID_SIZE];
+    private final ArrayList<Component> componentsList = new ArrayList<>();
 
 
     public void generateSampleGraph(CircuitProxy circuit)

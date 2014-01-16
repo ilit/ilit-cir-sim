@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class CurrentSourceView implements IGraphRenderable
 {
-    private CurrentSource currentSource;
+    private final CurrentSource currentSource;
 
     public CurrentSourceView(CurrentSource currentSource)
     {

@@ -14,9 +14,9 @@ public class CurrentSourceStamp extends AbstractStamp
      * and the anode is negative.
      */
 
-    public static CurrentSourceStamp instance = new CurrentSourceStamp();
+    public static final CurrentSourceStamp instance = new CurrentSourceStamp();
 
-    FlexCompRowMatrix matrix;
+    private FlexCompRowMatrix matrix;
 
     public void setStamp(MnaEquationsSystem equationsSystem, Component component)
     {

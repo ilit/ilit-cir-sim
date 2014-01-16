@@ -8,10 +8,10 @@ import ilit.cirsim.circuit.elements.VoltageSource;
 
 public class VoltageSourceStampTest extends AbstractSingleStampTest
 {
-    private static int CURRENT_INDEX = 0;
-    private static int CATHODE_INDEX = 1; /** plus */
-    private static int ANODE_INDEX = 2; /** minus */
-    private static double VOLTAGE = 100.0d;
+    private static final int CURRENT_INDEX = 0;
+    private static final int CATHODE_INDEX = 1; /** plus */
+    private static final int ANODE_INDEX = 2; /** minus */
+    private static final double VOLTAGE = 100.0d;
 
     @Test()
     public void dcVoltageTest()

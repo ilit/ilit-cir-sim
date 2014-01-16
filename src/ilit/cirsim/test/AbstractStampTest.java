@@ -25,8 +25,8 @@ public class AbstractStampTest
     protected SparseVector sideVector;
     protected CircuitProxy circuit;
     protected MnaEquationsSystem equations;
-    protected LinearEquationsSolver solver;
-    protected StampInjector stampInjector;
+    private LinearEquationsSolver solver;
+    private StampInjector stampInjector;
 
     @BeforeMethod
     public void setUp() throws Exception

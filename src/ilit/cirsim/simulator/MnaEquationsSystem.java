@@ -15,7 +15,7 @@ import ilit.cirsim.circuit.CircuitProxy;
 public class MnaEquationsSystem
 {
     /** Holds circuit topology\composition */
-    private CircuitProxy circuit;
+    private final CircuitProxy circuit;
 
     /**
      * Compressed matrix. Zero values are not stored in memory.

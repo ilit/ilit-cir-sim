@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
 {
-    private static int ROUNDING_SCALE = 5;
+    private static final int ROUNDING_SCALE = 5;
 
     private LinearEquationsSolver solver;
 

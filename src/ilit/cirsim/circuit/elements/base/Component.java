@@ -18,10 +18,10 @@ public abstract class Component implements
      */
     public Node anode;
 
-    protected int id;
+    private final int id;
     protected IGraphRenderable view;
 
-    public Component()
+    protected Component()
     {
         id = UniqueIDManager.instance.getNewID();
     }

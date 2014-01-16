@@ -7,7 +7,7 @@ import ilit.cirsim.circuit.elements.base.Resistor;
 
 public class ResistorStamp extends AbstractStamp
 {
-    public static ResistorStamp instance = new ResistorStamp();
+    public static final ResistorStamp instance = new ResistorStamp();
 
     public void setStamp(MnaEquationsSystem equationsSystem, Component component)
     {

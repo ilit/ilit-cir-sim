@@ -5,9 +5,9 @@ package ilit.cirsim.circuit.elements.util;
  */
 public class UniqueIDManager
 {
-    public static int GROUND_NODE_ID = 0;
+    public static final int GROUND_NODE_ID = 0;
 
-    public static UniqueIDManager instance = new UniqueIDManager();
+    public static final UniqueIDManager instance = new UniqueIDManager();
 
     private int lastUnassignedComponent = 1;
 

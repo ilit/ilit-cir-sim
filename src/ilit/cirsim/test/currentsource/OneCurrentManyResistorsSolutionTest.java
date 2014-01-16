@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
 {
-    private static int ROUNDING_SCALE = 5;
+    private static final int ROUNDING_SCALE = 5;
 
     @AfterMethod
     public void tearDown() throws Exception

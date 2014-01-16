@@ -7,7 +7,7 @@ import ilit.cirsim.view.elements.VoltageSourceView;
 
 public class VoltageSource extends Component
 {
-    private double voltage;
+    private final double voltage;
 
     public VoltageSource(double V)
     {

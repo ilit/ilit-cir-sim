@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class LoadView implements IGraphRenderable
 {
-    private Resistor resistor;
+    private final Resistor resistor;
 
     public LoadView(Resistor resistor)
     {

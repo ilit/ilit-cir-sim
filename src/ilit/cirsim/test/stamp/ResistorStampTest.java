@@ -8,8 +8,8 @@ import ilit.cirsim.circuit.elements.Node;
 
 public class ResistorStampTest extends AbstractSingleStampTest
 {
-    private static double RESISTANCE = 100.0d;
-    private static double CONDUCTANCE = 1 / RESISTANCE;
+    private static final double RESISTANCE = 100.0d;
+    private static final double CONDUCTANCE = 1 / RESISTANCE;
 
     @Test()
     public void resistorTest()

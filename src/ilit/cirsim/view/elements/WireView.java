@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class WireView implements IGraphRenderable
 {
-    public static WireView instance = new WireView();
+    public static final WireView instance = new WireView();
 
     @Override
     public String getGraphLabel()

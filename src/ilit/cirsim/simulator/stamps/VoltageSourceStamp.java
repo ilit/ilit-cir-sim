@@ -9,9 +9,9 @@ import ilit.cirsim.circuit.elements.base.Component;
 
 public class VoltageSourceStamp extends AbstractStamp
 {
-    public static VoltageSourceStamp instance = new VoltageSourceStamp();
+    public static final VoltageSourceStamp instance = new VoltageSourceStamp();
 
-    FlexCompRowMatrix matrix;
+    private FlexCompRowMatrix matrix;
 
     public void setStamp(MnaEquationsSystem equationsSystem, Component component)
     {
