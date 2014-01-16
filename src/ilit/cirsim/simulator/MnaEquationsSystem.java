@@ -50,7 +50,7 @@ public class MnaEquationsSystem
 
     public SparseVector getSideVector()
     {
-        if (matrix == null)
+        if (sideVector == null)
             throw new Error("equationsSystem.getSideVector() == null");
 
         return sideVector;
@@ -58,7 +58,7 @@ public class MnaEquationsSystem
 
     public DenseVector getXVector()
     {
-        if (matrix == null)
+        if (xVector == null)
             throw new Error("equationsSystem.getXVector() == null");
 
         return xVector;
