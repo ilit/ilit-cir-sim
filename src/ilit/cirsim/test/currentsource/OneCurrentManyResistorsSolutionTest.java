@@ -2,7 +2,6 @@ package ilit.cirsim.test.currentsource;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.EquationsSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.test.AbstractStampTest;
 import no.uib.cipr.matrix.DenseVector;
@@ -16,13 +15,10 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
 {
     private static int ROUNDING_SCALE = 5;
 
-    private EquationsSolver solver;
-
     @AfterMethod
     public void tearDown() throws Exception
     {
         super.tearDown();
-        solver = null;
     }
 
     @DataProvider(name = "testValues")
@@ -46,7 +42,7 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
             double current, double checkVoltage
     )
     {
-        initCircuit();
+        initEmptyCircuit();
 
         /** Instantiate all components */
         Resistor resL1 = new Load(rl1);
@@ -83,8 +79,7 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
         Assert.assertEquals(X.get(2), 0d);
 
         /** Solve */
-        solver = new EquationsSolver(equations);
-        solver.solve();
+        solve();
 
         int iPlusIndex = IdToMatrixIndexRelations.instance.getIndex(sourceCathode);
         double sourceVoltage = X.get(iPlusIndex);

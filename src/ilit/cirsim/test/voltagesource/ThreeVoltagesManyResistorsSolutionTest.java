@@ -56,7 +56,7 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
             double n8v
             )
     {
-        initCircuit();
+        initEmptyCircuit();
 
         /** Instantiate all components */
         /** Create resistors */
@@ -112,8 +112,7 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
         placeStamps();
 
         /** Solve */
-        solver = new EquationsSolver(equations);
-        solver.solve();
+        solve();
 
         int v1i = IdToMatrixIndexRelations.instance.getIndex(v1);
         int v2i = IdToMatrixIndexRelations.instance.getIndex(v2);

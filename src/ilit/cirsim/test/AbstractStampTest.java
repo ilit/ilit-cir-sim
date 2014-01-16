@@ -1,5 +1,6 @@
 package ilit.cirsim.test;
 
+import ilit.cirsim.simulator.EquationsSolver;
 import ilit.cirsim.simulator.StampInjector;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
@@ -24,6 +25,8 @@ public class AbstractStampTest
     protected SparseVector sideVector;
     protected CircuitProxy circuit;
     protected MnaEquationsSystem equations;
+    protected EquationsSolver solver;
+    protected StampInjector stampInjector;
 
     @BeforeMethod
     public void setUp() throws Exception
@@ -39,9 +42,12 @@ public class AbstractStampTest
         matrix = null;
         sideVector = null;
         circuit = null;
+        solver = null;
+        equations = null;
+        stampInjector = null;
     }
 
-    protected void initCircuit()
+    protected void initEmptyCircuit()
     {
         CircuitGraph circuitGraph = new CircuitGraph();
         circuit = new CircuitProxy(circuitGraph);
@@ -53,12 +59,18 @@ public class AbstractStampTest
         equations.createEmptySystem();
         matrix = equations.getMatrix();
         sideVector = equations.getSideVector();
-        StampInjector stampInjector = new StampInjector(circuit, equations);
+        stampInjector = new StampInjector(circuit, equations);
         stampInjector.placeStamps();
     }
 
     protected void initComponent(Component component, Node anode, Node cathode)
     {
         circuit.insertComponent(component, anode, cathode, false);
+    }
+
+    protected void solve()
+    {
+        solver = new EquationsSolver(equations);
+        solver.solve();
     }
 }

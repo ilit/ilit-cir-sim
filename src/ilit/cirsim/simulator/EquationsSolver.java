@@ -10,19 +10,15 @@ import no.uib.cipr.matrix.sparse.*;
 public class EquationsSolver
 {
     private MnaEquationsSystem equations;
-    private StampInjector stampInjector;
 
     @Inject
-    public EquationsSolver(MnaEquationsSystem equations, StampInjector stampInjector)
+    public EquationsSolver(MnaEquationsSystem equations)
     {
         this.equations = equations;
-        this.stampInjector = stampInjector;
     }
 
     public void solve()
     {
-        equations.createEmptySystem();
-        stampInjector.placeStamps();
         solveLinearSystem();
     }
 

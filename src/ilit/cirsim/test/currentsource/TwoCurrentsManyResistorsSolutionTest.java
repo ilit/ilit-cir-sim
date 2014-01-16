@@ -52,7 +52,7 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractStampTest
             double node5voltageCheck
     )
     {
-        initCircuit();
+        initEmptyCircuit();
 
         /** Instantiate all components */
         Resistor Ra = new Load(ra);
@@ -97,8 +97,7 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractStampTest
         placeStamps();
 
         /** Solve */
-        solver = new EquationsSolver(equations);
-        solver.solve();
+        solve();
 
         int node5index = IdToMatrixIndexRelations.instance.getIndex(node5);
         DenseVector X = equations.getXVector();

@@ -55,7 +55,7 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
             double voltage, double current
     )
     {
-        initCircuit();
+        initEmptyCircuit();
 
         /** Instantiate all components */
         Resistor resL1 = new Load(rl1);
@@ -93,8 +93,7 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
         Assert.assertEquals(X.get(3), 0d);
 
         /** Solve */
-        solver = new EquationsSolver(equations);
-        solver.solve();
+        solve();
 
         int vIndex = IdToMatrixIndexRelations.instance.getIndex(voltageSource);
         double sourceCurrent = X.get(vIndex);

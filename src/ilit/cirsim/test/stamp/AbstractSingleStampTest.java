@@ -8,7 +8,7 @@ public abstract class AbstractSingleStampTest extends AbstractStampTest
 {
     protected void initComponent(Component component, Node anode, Node cathode)
     {
-        initCircuit();
+        initEmptyCircuit();
         circuit.insertComponent(component, anode, cathode, false);
         placeStamps();
     }

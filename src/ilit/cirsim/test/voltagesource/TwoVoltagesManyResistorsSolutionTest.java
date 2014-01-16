@@ -50,7 +50,7 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
             double cl, double cm
     )
     {
-        initCircuit();
+        initEmptyCircuit();
 
         /** Instantiate all components */
         Resistor Ra = new Load(ra);
@@ -95,8 +95,7 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
         placeStamps();
 
         /** Solve */
-        solver = new EquationsSolver(equations);
-        solver.solve();
+        solve();
 
         int vli = IdToMatrixIndexRelations.instance.getIndex(VSL);
         int vmi = IdToMatrixIndexRelations.instance.getIndex(VSM);

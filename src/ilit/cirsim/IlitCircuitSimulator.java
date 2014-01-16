@@ -20,12 +20,15 @@ public class IlitCircuitSimulator
     public IlitCircuitSimulator(GraphVisualization graphGui,
                                 CircuitProxy circuit,
                                 MnaEquationsSystem equations,
-                                EquationsSolver solver)
+                                StampInjector stampInjector,
+                                EquationsSolver equationsSolver)
     {
         /** Code below is used only for visualization for now */
         new SampleCircuitGenerator().generateSampleGraph(circuit);
+        equations.createEmptySystem();
 
-        solver.solve();
+        stampInjector.placeStamps();
+        equationsSolver.solve();
 
         graphGui.show();
 

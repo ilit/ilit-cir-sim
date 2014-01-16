@@ -55,7 +55,7 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
             double node8voltage
             )
     {
-        initCircuit();
+        initEmptyCircuit();
 
         /** Instantiate all components */
         /** Create resistors */
@@ -111,8 +111,7 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
         placeStamps();
 
         /** Solve */
-        solver = new EquationsSolver(equations);
-        solver.solve();
+        solve();
 
         DenseVector X = equations.getXVector();
 

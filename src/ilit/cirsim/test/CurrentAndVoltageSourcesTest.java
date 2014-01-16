@@ -48,7 +48,7 @@ public class CurrentAndVoltageSourcesTest extends AbstractStampTest
             double R, double I, double V, double checkCurrent
     )
     {
-        initCircuit();
+        initEmptyCircuit();
 
         /** Instantiate all components */
         Resistor resistor = new Load(R);
@@ -67,8 +67,7 @@ public class CurrentAndVoltageSourcesTest extends AbstractStampTest
         placeStamps();
 
         /** Solve */
-        solver = new EquationsSolver(equations);
-        solver.solve();
+        solve();
 
         /** Check */
         int vIndex = IdToMatrixIndexRelations.instance.getIndex(voltageSource);
