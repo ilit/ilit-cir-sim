@@ -28,18 +28,18 @@ public class StampInjector
      * The contribution of every element to the matrix equation is described by means
      * of a template, which is called an element stamp.
      */
-    public void placeStamps()
+    public void placeLinearStamps()
     {
-        placeGroupedStamps();
+        placeLinearGroupedStamps();
     }
 
-    private void placeGroupedStamps()
+    private void placeLinearGroupedStamps()
     {
-        placeStamps(circuit.getG1Components());
-        placeStamps(circuit.getG2Components());
+        placeLinearStamps(circuit.getG1Components());
+        placeLinearStamps(circuit.getG2Components());
     }
 
-    private void placeStamps(Collection<Component> components)
+    private void placeLinearStamps(Collection<Component> components)
     {
         for (Component component : components)
         {

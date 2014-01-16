@@ -104,7 +104,7 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
         initResistor(0xd,10, 0); initResistor(0xe, 11,0);
 
         /** Populate equations system */
-        placeStamps();
+        placeLinearStamps();
 
         /** Solve */
         solve();

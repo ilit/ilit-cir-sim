@@ -76,7 +76,7 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
         initComponent(resMid, nodeR, nodeL);
 
         /** Populate equations system */
-        placeStamps();
+        placeLinearStamps();
 
 
         DenseVector X = equations.getXVector();

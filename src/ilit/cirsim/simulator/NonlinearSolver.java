@@ -20,9 +20,11 @@ public class NonlinearSolver
 
     public void solve()
     {
+        /** Linear stamps should have been placed already */
         /**
-         * set linear stamps
          * set initial candidate solution
+         *     DC sweep is used to overcome convergence problems of initial DC analysis
+         *
          * Newton loop
          * {
          *     refresh nonlinear stamps

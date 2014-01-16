@@ -86,7 +86,7 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
         initComponent(Re, node5, g);
 
         /** Populate equations system */
-        placeStamps();
+        placeLinearStamps();
 
         /** Solve */
         solve();

@@ -68,7 +68,7 @@ public class DiodeCircuitTest extends AbstractStampTest
         initComponent(resistor, diodeCathode, gr);
 
         /** Populate equations system */
-        placeStamps();
+        placeLinearStamps();
 
         /** Solve */
         NonlinearSolver solver = new NonlinearSolver(equations, new LinearSolver(equations));

@@ -29,7 +29,7 @@ public class IlitCircuitSimulator
 
         if (!circuit.isCircuitNonlinear())
         {
-            stampInjector.placeStamps();
+            stampInjector.placeLinearStamps();
             linearEquationsSolver.solve();
         }
         else

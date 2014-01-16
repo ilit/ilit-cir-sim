@@ -55,7 +55,7 @@ public class CurrentAndVoltageSourcesTest extends AbstractStampTest
         initComponent(resistor, gr, sourcesCathode);
 
         /** Populate equations system */
-        placeStamps();
+        placeLinearStamps();
 
         /** Solve */
         solve();

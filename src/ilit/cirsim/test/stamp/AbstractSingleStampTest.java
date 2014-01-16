@@ -10,6 +10,6 @@ public abstract class AbstractSingleStampTest extends AbstractStampTest
     {
         initEmptyCircuit();
         circuit.insertComponent(component, anode, cathode, false);
-        placeStamps();
+        placeLinearStamps();
     }
 }

@@ -55,14 +55,14 @@ public class AbstractStampTest
         circuit = new CircuitProxy(circuitGraph);
     }
 
-    protected void placeStamps()
+    protected void placeLinearStamps()
     {
         equations = new MnaEquationsSystem(circuit);
         equations.createEmptySystem();
         matrix = equations.getMatrix();
         sideVector = equations.getSideVector();
         stampInjector = new StampInjector(circuit, equations);
-        stampInjector.placeStamps();
+        stampInjector.placeLinearStamps();
     }
 
     protected void initComponent(Component component, Node anode, Node cathode)
