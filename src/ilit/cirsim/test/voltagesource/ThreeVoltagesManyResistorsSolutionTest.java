@@ -5,7 +5,7 @@ import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.EquationsSolver;
+import ilit.cirsim.simulator.LinearEquationsSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.test.AbstractStampTest;
 import no.uib.cipr.matrix.DenseVector;
@@ -23,7 +23,7 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
     private static double RESISTANCE = 100.0d;
 
 
-    private EquationsSolver solver;
+    private LinearEquationsSolver solver;
     private ArrayList<Resistor> resistors;
     private ArrayList<Node> nodes;
 

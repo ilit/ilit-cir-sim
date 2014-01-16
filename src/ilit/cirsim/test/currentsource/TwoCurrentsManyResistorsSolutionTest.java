@@ -2,7 +2,7 @@ package ilit.cirsim.test.currentsource;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.EquationsSolver;
+import ilit.cirsim.simulator.LinearEquationsSolver;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.test.AbstractStampTest;
 import no.uib.cipr.matrix.DenseVector;
@@ -16,7 +16,7 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractStampTest
 {
     private static int ROUNDING_SCALE = 5;
 
-    private EquationsSolver solver;
+    private LinearEquationsSolver solver;
 
     @AfterMethod
     public void tearDown() throws Exception

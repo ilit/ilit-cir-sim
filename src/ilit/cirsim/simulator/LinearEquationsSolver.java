@@ -7,22 +7,17 @@ import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.*;
 
 @Singleton
-public class EquationsSolver
+public class LinearEquationsSolver
 {
     private MnaEquationsSystem equations;
 
     @Inject
-    public EquationsSolver(MnaEquationsSystem equations)
+    public LinearEquationsSolver(MnaEquationsSystem equations)
     {
         this.equations = equations;
     }
 
     public void solve()
-    {
-        solveLinearSystem();
-    }
-
-    private void solveLinearSystem()
     {
         CompRowMatrix A = new CompRowMatrix(equations.getMatrix(), true);
         SparseVector b = equations.getSideVector();
