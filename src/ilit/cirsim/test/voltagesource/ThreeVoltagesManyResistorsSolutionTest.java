@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
 {
-    private static final int ROUNDING_SCALE = 5;
     private static final double RESISTANCE = 100.0d;
 
     private ArrayList<Resistor> resistors;

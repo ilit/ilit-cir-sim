@@ -21,6 +21,8 @@ import ilit.cirsim.simulator.MnaEquationsSystem;
  */
 public class AbstractStampTest
 {
+    protected static final int ROUNDING_SCALE = 5;
+
     protected FlexCompRowMatrix matrix;
     protected SparseVector sideVector;
     protected CircuitProxy circuit;

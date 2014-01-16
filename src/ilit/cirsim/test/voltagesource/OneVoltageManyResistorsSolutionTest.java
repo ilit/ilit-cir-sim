@@ -17,8 +17,6 @@ import org.testng.annotations.Test;
 
 public class OneVoltageManyResistorsSolutionTest extends AbstractStampTest
 {
-    private static final int ROUNDING_SCALE = 5;
-
     @AfterMethod
     public void tearDown() throws Exception
     {

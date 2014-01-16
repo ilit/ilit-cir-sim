@@ -10,8 +10,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class CurrentAndVoltageSourcesTest extends AbstractStampTest
+public class DiodeCircuitTest extends AbstractStampTest
 {
+
     @AfterMethod
     public void tearDown() throws Exception
     {
