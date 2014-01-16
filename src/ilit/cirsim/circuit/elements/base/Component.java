@@ -6,6 +6,7 @@ import ilit.cirsim.circuit.elements.util.UniqueIDManager;
 public abstract class Component implements
         IRenderable, IIdentifiable, IStampable, IMnaGroup
 {
+    private static final String ERROR_VIEW_UNDEF = "View undefined";
     /**
      * In a device which consumes power, the cathode is negative,
      * and in a device which provides power, the cathode is positive.
@@ -18,6 +19,7 @@ public abstract class Component implements
     public Node anode;
 
     protected int id;
+    protected IGraphRenderable view;
 
     public Component()
     {
@@ -32,5 +34,13 @@ public abstract class Component implements
     public int getId()
     {
         return id;
+    }
+
+    public IGraphRenderable getView()
+    {
+        if (view == null)
+            throw new Error(ERROR_VIEW_UNDEF);
+
+        return view;
     }
 }

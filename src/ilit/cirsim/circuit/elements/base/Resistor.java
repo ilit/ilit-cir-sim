@@ -10,6 +10,7 @@ public abstract class Resistor extends Component
     public Resistor(double initialResistance)
     {
         super();
+
         resistance = initialResistance;
     }
 
@@ -26,5 +27,10 @@ public abstract class Resistor extends Component
     public boolean isGroupOne()
     {
         return true;
+    }
+
+    public boolean isNonlinear()
+    {
+        return false;
     }
 }

@@ -10,11 +10,8 @@ import ilit.cirsim.view.elements.VoltageSourceView;
 
 public class CurrentSource extends Component
 {
-    public double current;
+    private double current;
 
-    private CurrentSourceView view;
-
-    /** DC constructor */
     public CurrentSource(double I)
     {
         super();
@@ -22,11 +19,6 @@ public class CurrentSource extends Component
         current = I;
 
         view = new CurrentSourceView(this);
-    }
-
-    public IGraphRenderable getView()
-    {
-        return view;
     }
 
     public double getCurrent()
@@ -42,5 +34,10 @@ public class CurrentSource extends Component
     public boolean isGroupOne()
     {
         return true;
+    }
+
+    public boolean isNonlinear()
+    {
+        return false;
     }
 }

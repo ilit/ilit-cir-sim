@@ -79,4 +79,14 @@ public class CircuitProxy
     {
         return componentsGroupTwo.values();
     }
+
+    public boolean isCircuitNonlinear()
+    {
+        for (Component component : getG1Components())
+        {
+            if (component.isNonlinear())
+                return true;
+        }
+        return false;
+    }
 }

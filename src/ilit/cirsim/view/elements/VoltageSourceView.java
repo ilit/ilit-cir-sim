@@ -2,7 +2,6 @@ package ilit.cirsim.view.elements;
 
 import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.IGraphRenderable;
-import ilit.cirsim.circuit.elements.base.Resistor;
 
 import java.awt.*;
 
@@ -18,7 +17,7 @@ public class VoltageSourceView implements IGraphRenderable
     @Override
     public String getGraphLabel()
     {
-        return voltageSource.dcV + "V";
+        return voltageSource.getVoltage() + "V";
     }
 
     @Override

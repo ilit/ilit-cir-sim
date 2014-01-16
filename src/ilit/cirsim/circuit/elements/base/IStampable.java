@@ -10,4 +10,5 @@ import ilit.cirsim.simulator.stamps.IStampStrategy;
 public interface IStampable
 {
     public IStampStrategy getStamp();
+    public boolean isNonlinear();
 }

@@ -19,7 +19,7 @@ public class VoltageSourceStamp extends AbstractStamp
         SparseVector sideVector = equationsSystem.getSideVector();
 
         VoltageSource voltageSource = (VoltageSource)component;
-        double voltage = voltageSource.getDcVoltage();
+        double voltage = voltageSource.getVoltage();
 
         int componentsCurrentIndex = allocateMatrixIndex(voltageSource);
 
