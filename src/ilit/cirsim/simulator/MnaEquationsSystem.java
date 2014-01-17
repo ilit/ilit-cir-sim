@@ -3,6 +3,7 @@ package ilit.cirsim.simulator;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import no.uib.cipr.matrix.DenseVector;
+import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 import ilit.cirsim.circuit.CircuitProxy;
@@ -17,14 +18,13 @@ public class MnaEquationsSystem
     /** Holds circuit topology\composition */
     private final CircuitProxy circuit;
 
-    /**
-     * Compressed matrix. Zero values are not stored in memory.
-     * Flexible - automatically perform internal memory management
-     * (sparsity pattern is unknown).
-     */
-    private FlexCompRowMatrix matrix; /** Modified Nodal Analysis matrix */
-    private SparseVector sideVector;  /** Right Hand Side */
+    private Matrix matrix; /** Modified Nodal Analysis matrix */
+    private SparseVector sideVector; /** And its back up */
     private DenseVector xVector;      /** X */
+
+    /** Back ups to have a clean linear system before each Newton loop iteration */
+    private Matrix matrixBk;
+    private SparseVector sideVectorBk;
 
     @Inject
     public MnaEquationsSystem(CircuitProxy circuit)
@@ -35,12 +35,19 @@ public class MnaEquationsSystem
     public void createEmptySystem()
     {
         int initialMatrixSize = defineMatrixSize();
+
+        /**
+         * Compressed matrix. Zero values are not stored in memory.
+         * Flexible - automatically perform internal memory management
+         * (sparsity pattern is unknown).
+         */
         matrix = new FlexCompRowMatrix(initialMatrixSize, initialMatrixSize);
+
         sideVector = new SparseVector(initialMatrixSize);
         xVector = new DenseVector(initialMatrixSize);
     }
 
-    public FlexCompRowMatrix getMatrix()
+    public Matrix getMatrix()
     {
         if (matrix == null)
             throw new Error("equationsSystem.getMatrix() == null");
@@ -85,5 +92,21 @@ public class MnaEquationsSystem
     private int currentVariables()
     {
         return circuit.getG2Components().size();
+    }
+
+    /**
+     * Used in Newton loop to have a clean system of only
+     * linear elements at each Newton loop iteration start
+     */
+    public void cloneBackUp()
+    {
+        matrixBk = matrix.copy();
+        sideVectorBk = sideVector.copy();
+    }
+
+    public void restoreFromBackUp()
+    {
+        matrix = matrixBk.copy();
+        sideVector = sideVectorBk.copy();
     }
 }

@@ -1,6 +1,7 @@
 package ilit.cirsim.simulator.stamps;
 
 import ilit.cirsim.simulator.MnaEquationsSystem;
+import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.circuit.elements.base.Resistor;
@@ -11,7 +12,7 @@ public class ResistorStamp extends AbstractStamp
 
     public void setStamp(MnaEquationsSystem equationsSystem, Component component)
     {
-        FlexCompRowMatrix matrix = equationsSystem.getMatrix();
+        Matrix matrix = equationsSystem.getMatrix();
         if (matrix == null)
            throw new Error("equationsSystem.getMatrix() == null");
 

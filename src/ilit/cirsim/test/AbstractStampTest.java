@@ -2,6 +2,7 @@ package ilit.cirsim.test;
 
 import ilit.cirsim.simulator.LinearSolver;
 import ilit.cirsim.simulator.StampInjector;
+import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 import org.testng.annotations.AfterMethod;
@@ -23,7 +24,7 @@ public class AbstractStampTest
 {
     protected static final int ROUNDING_SCALE = 5;
 
-    protected FlexCompRowMatrix matrix;
+    protected Matrix matrix;
     protected SparseVector sideVector;
     protected CircuitProxy circuit;
     protected MnaEquationsSystem equations;

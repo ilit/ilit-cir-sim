@@ -2,6 +2,7 @@ package ilit.cirsim.simulator.stamps;
 
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.simulator.MnaEquationsSystem;
+import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 import ilit.cirsim.circuit.elements.VoltageSource;
@@ -11,7 +12,7 @@ public class VoltageSourceStamp extends AbstractStamp
 {
     public static final VoltageSourceStamp instance = new VoltageSourceStamp();
 
-    private FlexCompRowMatrix matrix;
+    private Matrix matrix;
 
     public void setStamp(MnaEquationsSystem equationsSystem, Component component)
     {

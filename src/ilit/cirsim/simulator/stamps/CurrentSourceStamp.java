@@ -4,6 +4,7 @@ import ilit.cirsim.circuit.elements.CurrentSource;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.simulator.MnaEquationsSystem;
+import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 
@@ -16,7 +17,7 @@ public class CurrentSourceStamp extends AbstractStamp
 
     public static final CurrentSourceStamp instance = new CurrentSourceStamp();
 
-    private FlexCompRowMatrix matrix;
+    private Matrix matrix;
 
     public void setStamp(MnaEquationsSystem equationsSystem, Component component)
     {

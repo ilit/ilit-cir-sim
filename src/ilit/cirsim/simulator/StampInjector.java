@@ -43,7 +43,16 @@ public class StampInjector
     {
         for (Component component : components)
         {
+            if (component == null)
+                throw new Error("component == null");
+
             IStampStrategy stamper = component.getStamp();
+
+            if (stamper == null)
+                throw new Error("stamper == null");
+            if (equations == null)
+                throw new Error("equations == null");
+
             stamper.setStamp(equations, component);
         }
     }
