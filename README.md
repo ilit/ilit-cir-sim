@@ -1,9 +1,17 @@
 ilit-cir-sim
 ============
 
-Educational circuit simulation prototype.
+Simple circuit simulation prototype on Java.
 
-I'm writing simplest circuit simulator for educational purposes by "Circuit Simulation - Farid N. Najm - 2010" book using Java. Project is in active progress.
+I'm writing simplest circuit simulator for
+* My own projects.
+* To share educational efforts with community. This can be helpful to anyone learning subject of circuit simulation.
+* To impress my possible employer.
+
+Primary source of theory is "Circuit Simulation - Farid N. Najm - 2010".
+Secondary is "Electronic Circuit and System - Lawrence Pillage".
+
+Project is in active progress.
 
 For now program:
 * Generates random simple circuit consisting of resistors(loads) and some voltage source.
@@ -11,7 +19,9 @@ For now program:
 * Composes MNA equations system from this circuit.
 * Solves the system with iterative method.
 * Displays generated circuit onscreen by JUNG visualization function.
-* Outputs all sources currents as a circuit solution to debug console
+* Outputs all sources currents as a circuit solution to debug console.
+
+Latest code can be not operational due to nonlinear solver early implementation.
 
 ![mult](http://i965.photobucket.com/albums/ae139/ilitvinov/sample1_zpsbe648fd6.png)
 

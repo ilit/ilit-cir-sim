@@ -1,5 +1,6 @@
 package ilit.cirsim.simulator;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 
@@ -11,6 +12,7 @@ public class SolverFacade
     private CircuitProxy circuit;
     private StampInjector stampInjector;
 
+    @Inject
     public SolverFacade(LinearSolver linearEquationsSolver,
                         NonlinearSolver nonlinearSolver,
                         CircuitProxy circuit,
