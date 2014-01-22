@@ -3,7 +3,6 @@ package ilit.cirsim.simulator.stamps;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import no.uib.cipr.matrix.Matrix;
-import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Component;
@@ -22,7 +21,7 @@ public class VoltageSourceStamp extends AbstractStamp
         VoltageSource voltageSource = (VoltageSource)component;
         double voltage = voltageSource.getVoltage();
 
-        int componentsCurrentIndex = allocateMatrixIndex(voltageSource);
+        int componentsCurrentIndex = getIndex(voltageSource);
 
         /** Nodes stamping */
         if (voltageSource.anode.isGround())
@@ -40,8 +39,8 @@ public class VoltageSourceStamp extends AbstractStamp
         }
         else
         {
-            int cathodeIndex = allocateMatrixIndex(voltageSource.cathode);
-            int anodeIndex = allocateMatrixIndex(voltageSource.anode);
+            int cathodeIndex = getIndex(voltageSource.cathode);
+            int anodeIndex = getIndex(voltageSource.anode);
 
             /**
              * MNA[nplus][current] += 1.0;
@@ -60,7 +59,7 @@ public class VoltageSourceStamp extends AbstractStamp
 
     private void groundedStamp(Node liveNode, int componentsCurrentIndex, double val)
     {
-        int liveNodeIndex = allocateMatrixIndex(liveNode);
+        int liveNodeIndex = getIndex(liveNode);
 
         nodeStamp(liveNodeIndex, componentsCurrentIndex, val);
     }

@@ -5,10 +5,7 @@ import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.SampleCircuitGenerator;
 import ilit.cirsim.circuit.elements.base.Component;
-import ilit.cirsim.simulator.LinearSolver;
-import ilit.cirsim.simulator.IdToMatrixIndexRelations;
-import ilit.cirsim.simulator.MnaEquationsSystem;
-import ilit.cirsim.simulator.StampInjector;
+import ilit.cirsim.simulator.*;
 import ilit.cirsim.view.GraphVisualization;
 
 import java.util.Collection;
@@ -20,22 +17,13 @@ public class IlitCircuitSimulator
     public IlitCircuitSimulator(GraphVisualization graphGui,
                                 CircuitProxy circuit,
                                 MnaEquationsSystem equations,
-                                StampInjector stampInjector,
-                                LinearSolver linearEquationsSolver)
+                                SolverFacade solver)
     {
         /** Code below is used only for visualization for now */
         new SampleCircuitGenerator().generateSampleGraph(circuit);
         equations.createEmptySystem();
 
-        if (!circuit.isCircuitNonlinear())
-        {
-            stampInjector.placeLinearStamps();
-            linearEquationsSolver.solve();
-        }
-        else
-        {
-            // nonlinear solve
-        }
+        solver.solve();
 
         graphGui.show();
 

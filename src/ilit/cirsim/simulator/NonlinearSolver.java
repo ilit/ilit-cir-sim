@@ -1,6 +1,7 @@
 package ilit.cirsim.simulator;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.base.Component;
 
@@ -8,8 +9,10 @@ import ilit.cirsim.circuit.elements.base.Component;
  * Nonlinear equations solver.
  * Uses Newton method.
  */
+@Singleton
 public class NonlinearSolver
 {
+    private static final int MAX_NEWTON_ITERS = 500;
     private final MnaEquationsSystem equations;
     private final LinearSolver linearSolver;
     private final CircuitProxy circuit;
@@ -39,12 +42,11 @@ public class NonlinearSolver
         equations.cloneBackUp();
 
         /** Newton loop */
-        boolean converged = false;
-        do
+        for (int iterations = 0; iterations < MAX_NEWTON_ITERS; iterations++)
         {
             /**
              * Apply new linearized stamp of nonlinear elements.
-             * I don't have nonlinear components in group 2.
+             * I don't have nonlinear components in group 2 for now.
              */
             for (Component component : circuit.getG1Components())
             {
@@ -65,6 +67,8 @@ public class NonlinearSolver
 
             // Check norm of step for step damping
             // Check for convergence
+            if (converged())
+                break;
 
             /**
              * System is now populated with obsolete stamps of nonlinear elements.
@@ -72,8 +76,13 @@ public class NonlinearSolver
              * only stamps of linear elements present.
              */
             equations.restoreFromBackUp();
+        }
+    }
 
-        } while (!converged);
+    private boolean converged()
+    {
+
+        return true;
     }
 
     private void setLinearizedStamp(Component component)

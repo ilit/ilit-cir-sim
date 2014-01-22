@@ -42,7 +42,6 @@ public class MnaEquationsSystem
          * (sparsity pattern is unknown).
          */
         matrix = new FlexCompRowMatrix(initialMatrixSize, initialMatrixSize);
-
         sideVector = new SparseVector(initialMatrixSize);
         xVector = new DenseVector(initialMatrixSize);
     }

@@ -5,7 +5,6 @@ import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import no.uib.cipr.matrix.Matrix;
-import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 
 public class CurrentSourceStamp extends AbstractStamp
@@ -40,8 +39,8 @@ public class CurrentSourceStamp extends AbstractStamp
         }
         else
         {
-            int anodeIndex = allocateMatrixIndex(currentSource.anode);
-            int cathodeIndex = allocateMatrixIndex(currentSource.cathode);
+            int anodeIndex = getIndex(currentSource.anode);
+            int cathodeIndex = getIndex(currentSource.cathode);
 
             /**
              * RHS[nplus] -= ElemValue[ElemIndex];
@@ -54,7 +53,7 @@ public class CurrentSourceStamp extends AbstractStamp
 
     private void groundedStamp(Node liveNode, double val, SparseVector sideVector)
     {
-        int liveNodeIndex = allocateMatrixIndex(liveNode);
+        int liveNodeIndex = getIndex(liveNode);
 
         sideVector.add(liveNodeIndex, val);
     }

@@ -6,12 +6,12 @@ import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 
 abstract class AbstractStamp implements IStampStrategy
 {
-    protected int allocateMatrixIndex(Component component)
+    protected int getIndex(Component component)
     {
         return IdToMatrixIndexRelations.instance.getIndex(component);
     }
 
-    protected int allocateMatrixIndex(Node node)
+    protected int getIndex(Node node)
     {
         return IdToMatrixIndexRelations.instance.getIndex(node);
     }

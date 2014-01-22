@@ -2,9 +2,7 @@ package ilit.cirsim.test;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.IdToMatrixIndexRelations;
-import ilit.cirsim.simulator.LinearSolver;
-import ilit.cirsim.simulator.NonlinearSolver;
+import ilit.cirsim.simulator.*;
 import no.uib.cipr.matrix.DenseVector;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
@@ -26,9 +24,7 @@ public class DiodeCircuitTest extends AbstractStampTest
                 /**
                  * RL1, Current, Voltage, ItsCheckCurrent,
                  */
-                { 100d, 5d, -0.04d},
-                { 100d, 5d, -0.03d},
-                { 100d, 5d,  0.01d},
+                { 5d, 5d,  -0.01d},
         };
     }
     /**
@@ -36,7 +32,7 @@ public class DiodeCircuitTest extends AbstractStampTest
      * So normal positive current is negative in the X vector.
      */
 
-    // TODO @Test(dataProvider = "testValues")
+    @Test(dataProvider = "testValues")
     public void diodeTest(
             double R, double V, double checkCurrent
     )
@@ -71,8 +67,22 @@ public class DiodeCircuitTest extends AbstractStampTest
         placeLinearStamps();
 
         /** Solve */
-        NonlinearSolver solver = new NonlinearSolver(equations,
-                new LinearSolver(equations), circuit);
+        if (equations == null)
+            throw new Error("equations == null");
+        if (linearSolver == null)
+            throw new Error("linearSolver == null");
+        if (circuit == null)
+            throw new Error("circuit == null");
+        if (stampInjector == null)
+            throw new Error("stampInjector == null");
+
+        NonlinearSolver nonlinearSolver =
+                new NonlinearSolver(equations, linearSolver, circuit);
+        SolverFacade solver = new SolverFacade(
+                linearSolver,
+                nonlinearSolver,
+                circuit,
+                stampInjector);
         solver.solve();
 
         /** Check */

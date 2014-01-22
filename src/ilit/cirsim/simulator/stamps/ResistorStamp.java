@@ -2,7 +2,6 @@ package ilit.cirsim.simulator.stamps;
 
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import no.uib.cipr.matrix.Matrix;
-import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.circuit.elements.base.Resistor;
 
@@ -22,20 +21,20 @@ public class ResistorStamp extends AbstractStamp
 
         if (resistor.anode.isGround())
         {
-            int i = allocateMatrixIndex(resistor.cathode);
+            int i = getIndex(resistor.cathode);
 
             matrix.add(i, i, conductance);
         }
         else if (resistor.cathode.isGround())
         {
-            int i = allocateMatrixIndex(resistor.anode);
+            int i = getIndex(resistor.anode);
 
             matrix.add(i, i, conductance);
         }
         else
         {
-            int i1 = allocateMatrixIndex(resistor.anode);
-            int i2 = allocateMatrixIndex(resistor.cathode);
+            int i1 = getIndex(resistor.anode);
+            int i2 = getIndex(resistor.cathode);
 
             matrix.add(i1, i1, conductance);
             matrix.add(i2, i1, -conductance);
