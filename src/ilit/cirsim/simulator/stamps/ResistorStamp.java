@@ -19,22 +19,22 @@ public class ResistorStamp extends AbstractStamp
 
         double conductance = 1 / resistor.getResistance();
 
-        if (resistor.anode.isGround())
+        if (component.anode.isGround())
         {
-            int i = getIndex(resistor.cathode);
+            int i = getIndex(component.cathode);
 
             matrix.add(i, i, conductance);
         }
-        else if (resistor.cathode.isGround())
+        else if (component.cathode.isGround())
         {
-            int i = getIndex(resistor.anode);
+            int i = getIndex(component.anode);
 
             matrix.add(i, i, conductance);
         }
         else
         {
-            int i1 = getIndex(resistor.anode);
-            int i2 = getIndex(resistor.cathode);
+            int i1 = getIndex(component.anode);
+            int i2 = getIndex(component.cathode);
 
             matrix.add(i1, i1, conductance);
             matrix.add(i2, i1, -conductance);

@@ -90,7 +90,7 @@ public class MnaEquationsSystem
 
     private int currentVariables()
     {
-        return circuit.getG2Components().size();
+        return circuit.getG2LinearComponents().size();
     }
 
     /**

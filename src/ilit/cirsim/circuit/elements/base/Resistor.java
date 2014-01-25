@@ -5,7 +5,7 @@ import ilit.cirsim.simulator.stamps.ResistorStamp;
 
 public abstract class Resistor extends Component
 {
-    private final double resistance;
+    protected double resistance;
 
     protected Resistor(double initialResistance)
     {

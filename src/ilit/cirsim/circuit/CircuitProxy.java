@@ -25,7 +25,8 @@ public class CircuitProxy
      * Maps are used only for circuit analysis.
      */
     private final HashMap<Integer, Node> bearingNodes = new HashMap<>(); /** Not grounded nodes */
-    private final HashMap<Integer, Component> componentsGroupOne = new HashMap<>();
+    private final HashMap<Integer, Component> linearComponentsGroupOne = new HashMap<>();
+    private final HashMap<Integer, Component> nonlinearComponentsGroupOne = new HashMap<>();
     private final HashMap<Integer, Component> componentsGroupTwo = new HashMap<>();
 
     @Inject
@@ -45,9 +46,16 @@ public class CircuitProxy
         saveNotGroundedNode(cathode);
 
         if (component.isGroupOne())
-            componentsGroupOne.put(component.getId(), component);
+        {
+            if (component.isNonlinear())
+                nonlinearComponentsGroupOne.put(component.getId(), component);
+            else
+                linearComponentsGroupOne.put(component.getId(), component);
+        }
         else
+        {
             componentsGroupTwo.put(component.getId(), component);
+        }
 
         /**
          * Insert into graph.
@@ -70,26 +78,23 @@ public class CircuitProxy
             bearingNodes.put(node.getId(), node);
     }
 
-    public Collection<Component> getG1Components()
+    public Collection<Component> getG1LinearComponents()
     {
-        return componentsGroupOne.values();
+        return linearComponentsGroupOne.values();
     }
 
-    public Collection<Component> getG2Components()
+    public Collection<Component> getG1NonlinearComponents()
+    {
+        return nonlinearComponentsGroupOne.values();
+    }
+
+    public Collection<Component> getG2LinearComponents()
     {
         return componentsGroupTwo.values();
     }
 
     public boolean isCircuitNonlinear()
     {
-        for (Component component : getG1Components())
-            if (component.isNonlinear())
-                return true;
-
-        for (Component component : getG2Components())
-            if (component.isNonlinear())
-                return true;
-
-        return false;
+        return nonlinearComponentsGroupOne.size() > 0;
     }
 }

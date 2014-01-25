@@ -8,18 +8,18 @@ import ilit.cirsim.circuit.CircuitProxy;
 public class SolverFacade
 {
     private LinearSolver linearEquationsSolver;
-    private NonlinearSolver nonlinearSolver;
+    private PiecewiseLinearSolver piecewiseLinearSolver;
     private CircuitProxy circuit;
     private StampInjector stampInjector;
 
     @Inject
     public SolverFacade(LinearSolver linearEquationsSolver,
-                        NonlinearSolver nonlinearSolver,
+                        PiecewiseLinearSolver piecewiseLinearSolver,
                         CircuitProxy circuit,
                         StampInjector stampInjector)
     {
         this.linearEquationsSolver = linearEquationsSolver;
-        this.nonlinearSolver = nonlinearSolver;
+        this.piecewiseLinearSolver = piecewiseLinearSolver;
         this.circuit = circuit;
         this.stampInjector = stampInjector;
     }
@@ -30,7 +30,7 @@ public class SolverFacade
 
         if (circuit.isCircuitNonlinear())
         {
-            nonlinearSolver.solve();
+            piecewiseLinearSolver.solve();
         }
         else
         {

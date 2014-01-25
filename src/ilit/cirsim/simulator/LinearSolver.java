@@ -9,7 +9,7 @@ import no.uib.cipr.matrix.sparse.*;
 @Singleton
 public class LinearSolver
 {
-    private final MnaEquationsSystem equations;
+    protected final MnaEquationsSystem equations;
 
     @Inject
     public LinearSolver(MnaEquationsSystem equations)

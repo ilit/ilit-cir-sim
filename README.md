@@ -26,7 +26,7 @@ Latest code can be not operational due to nonlinear solver early implementation.
 ![mult](http://i965.photobucket.com/albums/ae139/ilitvinov/sample1_zpsbe648fd6.png)
 
 Project can be used:
-* As an example of JUNG framework usage
+* As an example of JUNG framework usage.
 * To learn circuit simulation code flow with object oriented approach.
 
 Glossary:

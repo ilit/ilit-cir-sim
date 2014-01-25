@@ -32,7 +32,7 @@ public class IlitCircuitSimulator
 
     private void outputSolution(CircuitProxy circuit, MnaEquationsSystem equations)
     {
-        Collection<Component> sources = circuit.getG2Components();
+        Collection<Component> sources = circuit.getG2LinearComponents();
         System.out.println("");
         for (Component source : sources)
         {

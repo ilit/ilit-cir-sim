@@ -1,21 +1,15 @@
 package ilit.cirsim.circuit.elements;
 
-import ilit.cirsim.circuit.elements.base.Component;
-import ilit.cirsim.simulator.stamps.DiodeStamp;
-import ilit.cirsim.simulator.stamps.IStampStrategy;
+import ilit.cirsim.circuit.elements.base.Resistor;
 
-public class Diode extends Component
+public class Diode extends Resistor implements Piecewise
 {
-    public static final double IDEALITY_FACTOR_n = 1.0; /** From 1 to 2; 1 - ideal */
-    public static final double THERMAL_VOLTAGE_Vt = 0.02585;
-    public static final double nVt = IDEALITY_FACTOR_n * THERMAL_VOLTAGE_Vt;
     /** Reverse bias saturation current */
-    public static final double I_SATURATION = 1.0;
+    private static final double PROBE_RESISTANCE = 10.0;
 
-    @Override
-    public IStampStrategy getStamp()
+    public Diode()
     {
-        return DiodeStamp.instance;
+        super(PROBE_RESISTANCE);
     }
 
     public boolean isNonlinear()
@@ -23,9 +17,10 @@ public class Diode extends Component
         return true;
     }
 
+    /** Switch linear model to probing model */
     @Override
-    public boolean isGroupOne()
+    public void setProbeStamp()
     {
-        return true;
+        resistance = PROBE_RESISTANCE;
     }
 }

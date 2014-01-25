@@ -76,11 +76,11 @@ public class DiodeCircuitTest extends AbstractStampTest
         if (stampInjector == null)
             throw new Error("stampInjector == null");
 
-        NonlinearSolver nonlinearSolver =
-                new NonlinearSolver(equations, linearSolver, circuit);
+        PiecewiseLinearSolver piecewiseLinearSolver =
+                new PiecewiseLinearSolver(equations, circuit, stampInjector);
         SolverFacade solver = new SolverFacade(
                 linearSolver,
-                nonlinearSolver,
+                piecewiseLinearSolver,
                 circuit,
                 stampInjector);
         solver.solve();

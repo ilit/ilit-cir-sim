@@ -5,7 +5,7 @@ package ilit.cirsim.circuit.elements.base;
  * Group 1 variables are represented in matrix by element
  * effect to nodes and group 2 variables are represented by currents.
  */
-public interface IMnaGroup
+public interface IGroup
 {
     /**
      * Should this concrete component type be represented in matrix
@@ -13,4 +13,6 @@ public interface IMnaGroup
      * or by its current?
      */
     public boolean isGroupOne();
+
+    public boolean isNonlinear();
 }

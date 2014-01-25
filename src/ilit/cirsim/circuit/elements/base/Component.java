@@ -4,7 +4,7 @@ import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.util.UniqueIDManager;
 
 public abstract class Component implements
-        IRenderable, IIdentifiable, IStampable, IMnaGroup
+        IRenderable, IIdentifiable, IStampable, IGroup
 {
     private static final String ERROR_VIEW_UNDEF = "View undefined";
     /**
