@@ -1,17 +1,21 @@
-package ilit.cirsim.test;
+package ilit.cirsim.test.diode;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.*;
+import ilit.cirsim.simulator.PiecewiseLinearSolver;
+import ilit.cirsim.simulator.SolverFacade;
+import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class DiodeCircuitTest extends AbstractSolutionTest
+public class DiodeGridCircuitTest extends AbstractSolutionTest
 {
-    protected static final int ROUNDING_SCALE = 3;
+    private static final int ROUNDING_SCALE = 3;
+    private static final double RESISTANCE = 5;
+    private static final double VOLTAGE = 5;
 
     @AfterMethod
     public void tearDown() throws Exception
@@ -23,10 +27,10 @@ public class DiodeCircuitTest extends AbstractSolutionTest
     public Object[][] pushData() {
         return new Object[][] {
                 /**
-                 * RL1, Current, Voltage, ItsCheckCurrent, Diode is against source
+                 * Check current, Diode is against source
                  */
-                { 5d, 5d,  -1d, false}, /** Diode does not affect forward current */
-                { 5d, 5d,  0d, true},   /** Diode stops backward current */
+                { -1d, false}, /** Diode does not affect forward current */
+                { 0d, true},   /** Diode stops backward current */
         };
     }
     /**
@@ -35,7 +39,7 @@ public class DiodeCircuitTest extends AbstractSolutionTest
      */
 
     @Test(dataProvider = "testValues")
-    public void diodeTest(double R, double V, double checkCurrent, boolean isDiodeAgaintSource)
+    public void diodeTest(double checkCurrent, boolean isDiodeAgainstSource)
     {
         initModules();
 
@@ -53,9 +57,9 @@ public class DiodeCircuitTest extends AbstractSolutionTest
         Assert.assertEquals(0, circuit.getG2LinearComponents().size());
 
         /** Instantiate all components */
-        Resistor resistor = new Load(R);
+        Resistor resistor = new Load(RESISTANCE);
         Diode diode = new Diode();
-        VoltageSource voltageSource = new VoltageSource(V);
+        VoltageSource voltageSource = new VoltageSource(VOLTAGE);
 
         Ground gr = new Ground();
         Node node1 = new Node();
@@ -73,7 +77,7 @@ public class DiodeCircuitTest extends AbstractSolutionTest
          * g--V--1---D---2--R--g
          */
         initComponent(voltageSource, gr, node1);
-        if (isDiodeAgaintSource)
+        if (isDiodeAgainstSource)
             initComponent(diode, node2, node1);
         else
             initComponent(diode, node1, node2);
