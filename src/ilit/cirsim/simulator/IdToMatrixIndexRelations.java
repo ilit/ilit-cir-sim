@@ -16,6 +16,7 @@ import org.apache.commons.collections15.bidimap.DualHashBidiMap;
 public class IdToMatrixIndexRelations
 {
     public static final IdToMatrixIndexRelations instance = new IdToMatrixIndexRelations();
+    private static final String WRONG_COMPONENT_GROUP = "Component in not in second group";
 
     /**
      * Variable <-> Matrix index relation.
@@ -37,6 +38,9 @@ public class IdToMatrixIndexRelations
 
     public int getIndex(Component component)
     {
+        if (component.isGroupOne())
+            throw new Error(WRONG_COMPONENT_GROUP);
+
         return getIndex(component.getId());
     }
 

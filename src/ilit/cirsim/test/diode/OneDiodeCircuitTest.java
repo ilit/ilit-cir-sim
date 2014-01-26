@@ -38,7 +38,7 @@ public class OneDiodeCircuitTest extends AbstractSolutionTest
      */
 
     @Test(dataProvider = "testValues")
-    public void diodeTest(double checkCurrent, boolean isDiodeAgaintSource)
+    public void diodeTest(double checkCurrent, boolean isDiodeAgainstSource)
     {
         initModules();
 
@@ -76,10 +76,10 @@ public class OneDiodeCircuitTest extends AbstractSolutionTest
          * g--V--1---D---2--R--g
          */
         initComponent(voltageSource, gr, node1);
-        if (isDiodeAgaintSource)
-            initComponent(diode, node2, node1);
+        if (isDiodeAgainstSource)
+            initComponent(diode, node2, node1); /** Second test: Block */
         else
-            initComponent(diode, node1, node2);
+            initComponent(diode, node1, node2); /** First test: Normal flow */
         initComponent(resistor, node2, gr);
 
         Assert.assertEquals(1, circuit.getG1NonlinearComponents().size());

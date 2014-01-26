@@ -2,6 +2,7 @@ package ilit.cirsim.test.diode;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
+import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.simulator.PiecewiseLinearSolver;
 import ilit.cirsim.simulator.SolverFacade;
 import ilit.cirsim.test.AbstractSolutionTest;
@@ -13,9 +14,10 @@ import org.testng.annotations.Test;
 
 public class DiodeGridCircuitTest extends AbstractSolutionTest
 {
-    private static final int ROUNDING_SCALE = 3;
-    private static final double RESISTANCE = 5;
-    private static final double VOLTAGE = 5;
+    private static final int ROUNDING_SCALE = 1;
+    private static final double SIDE_RESISTANCE = 100;
+    private static final double BOT_MID_RESISTANCE = 50;
+    private static final double VOLTAGE = 500;
 
     @AfterMethod
     public void tearDown() throws Exception
@@ -27,10 +29,11 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
     public Object[][] pushData() {
         return new Object[][] {
                 /**
-                 * Check current, Diode is against source
+                 * Resistance of top mid resistor, node1 voltage, node2 voltage.
                  */
-                { -1d, false}, /** Diode does not affect forward current */
-                { 0d, true},   /** Diode stops backward current */
+                { 200d, 307.7d, 307.7d }, /** Diodes equalize node 1,2 and 3 voltages */
+                {  50d, 250d, 250d },       /** Diodes stop backward current */
+                {  20d, 249.9d, 142.9d },
         };
     }
     /**
@@ -39,53 +42,67 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
      */
 
     @Test(dataProvider = "testValues")
-    public void diodeTest(double checkCurrent, boolean isDiodeAgainstSource)
+    public void diodeTest(double topMidResistance, double checkNode1V, double checkNode2V)
     {
         initModules();
 
-        if (equations == null)
-            throw new Error("equations == null");
-        if (linearSolver == null)
-            throw new Error("linearSolver == null");
-        if (stampInjector == null)
-            throw new Error("stampInjector == null");
-        if (circuit == null)
-            throw new Error("circuit == null");
-
-        Assert.assertEquals(0, circuit.getG1LinearComponents().size());
-        Assert.assertEquals(0, circuit.getG1NonlinearComponents().size());
-        Assert.assertEquals(0, circuit.getG2LinearComponents().size());
-
         /** Instantiate all components */
-        Resistor resistor = new Load(RESISTANCE);
-        Diode diode = new Diode();
+        Diode Da = new Diode();
+        Diode Db = new Diode();
         VoltageSource voltageSource = new VoltageSource(VOLTAGE);
+        Resistor Ra = new Load(SIDE_RESISTANCE);
+        Resistor Rb = new Load(topMidResistance);
+        Resistor Rc = new Load(SIDE_RESISTANCE);
+
+        Resistor Rd = new Load(SIDE_RESISTANCE);
+        Resistor Re = new Load(BOT_MID_RESISTANCE);
+        Resistor Rf = new Load(SIDE_RESISTANCE);
 
         Ground gr = new Ground();
         Node node1 = new Node();
-        /**
-         * In a diode, cathode is the negative terminal at the pointed end of the arrow symbol,
-         * where current flows out of the device.
-         * Note: electrode naming for diodes is always based on the direction of
-         * the forward current (that of the arrow, in which the current flows "most easily")
-         */
         Node node2 = new Node();
+        Node node3 = new Node();
+        Node node4 = new Node();
 
         /**
          * Topology
-         *   - +    +▶|-
-         * g--V--1---D---2--R--g
+         *
+         * g     g     g
+         * |     |     |
+         * Ra    Rb    Rc
+         * |     |     |
+         * 1--Da-2--Db-3
+         * |     |     |
+         * Rd    Re    Rf
+         *  \    |    /
+         *   \___4___/
+         *       |
+         *       V-g
          */
-        initComponent(voltageSource, gr, node1);
-        if (isDiodeAgainstSource)
-            initComponent(diode, node2, node1);
-        else
-            initComponent(diode, node1, node2);
-        initComponent(resistor, node2, gr);
+        initComponent(Ra, gr, node1);
+        initComponent(Rb, gr, node2);
+        initComponent(Rc, gr, node3);
 
-        Assert.assertEquals(1, circuit.getG1NonlinearComponents().size());
-        Assert.assertEquals(1, circuit.getG1LinearComponents().size());
-        Assert.assertEquals(1, circuit.getG2LinearComponents().size());
+        initComponent(Rd, node1, node4);
+        initComponent(Re, node2, node4);
+        initComponent(Rf, node3, node4);
+
+        initComponent(Da, node2, node1);
+        initComponent(Db, node2, node3);
+
+        //initComponent(Da, node1, node2);
+        //initComponent(Db, node3, node2);
+
+        Assert.assertEquals(0, IdToMatrixIndexRelations.instance.getIndex(node1));
+        Assert.assertEquals(1, IdToMatrixIndexRelations.instance.getIndex(node2));
+        Assert.assertEquals(2, IdToMatrixIndexRelations.instance.getIndex(node3));
+        Assert.assertEquals(3, IdToMatrixIndexRelations.instance.getIndex(node4));
+
+        initComponent(voltageSource, gr, node4);
+
+        Assert.assertEquals(4, IdToMatrixIndexRelations.instance.getIndex(voltageSource));
+
+        Assert.assertEquals(4, IdToMatrixIndexRelations.instance.getIndex(voltageSource));
 
         /** Instantiate solver */
         PiecewiseLinearSolver piecewiseLinearSolver =
@@ -98,17 +115,24 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
                 equations);
         solver.prepareSystem();
 
-        Assert.assertEquals(3, equations.getXVector().size());
-        Assert.assertEquals(3, equations.getSideVector().size());
-        Assert.assertEquals(3, equations.getMatrix().numColumns());
+        int numberOfNodes = 4;
+        int numberOfGroupTwoElms = 1;
+        int expectedSize = numberOfNodes + numberOfGroupTwoElms;
+        Assert.assertEquals(expectedSize, equations.getMatrix().numColumns());
+
+        Assert.assertEquals(2, circuit.getG1NonlinearComponents().size());
+        Assert.assertEquals(6, circuit.getG1LinearComponents().size());
+        Assert.assertEquals(1, circuit.getG2LinearComponents().size());
 
         /** Solve */
         solver.solve();
 
         /** Check */
-        double vSourceCurrent = equations.getSolution(voltageSource);
-        double approxVSourceCurrent = Precision.round(vSourceCurrent, ROUNDING_SCALE);
-
-        Assert.assertEquals(approxVSourceCurrent, checkCurrent);
+        double node1V = equations.getSolution(node1);
+        double node2V = equations.getSolution(node2);
+        node1V = Precision.round(node1V, ROUNDING_SCALE);
+        node2V = Precision.round(node2V, ROUNDING_SCALE);
+        Assert.assertEquals(checkNode1V, node1V);
+        Assert.assertEquals(checkNode2V, node2V);
     }
 }
