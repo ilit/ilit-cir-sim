@@ -1,6 +1,7 @@
 package ilit.cirsim.test.stamp;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;
@@ -11,10 +12,16 @@ public class ResistorStampTest extends AbstractSingleStampTest
     private static final double RESISTANCE = 100.0d;
     private static final double CONDUCTANCE = 1 / RESISTANCE;
 
+    @AfterMethod
+    public void tearDown() throws Exception
+    {
+        super.tearDown();
+    }
+
     @Test()
     public void resistorTest()
     {
-        initComponent(new Load(RESISTANCE), new Node(), new Node());
+        allocateComponent(new Load(RESISTANCE), new Node(), new Node());
 
         Assert.assertEquals(matrix.numColumns(), 2);
         Assert.assertEquals(matrix.get(0, 0), CONDUCTANCE);
@@ -26,7 +33,7 @@ public class ResistorStampTest extends AbstractSingleStampTest
     @Test()
     public void groundedResistorTest()
     {
-        initComponent(new Load(RESISTANCE), new Ground(), new Node());
+        allocateComponent(new Load(RESISTANCE), new Ground(), new Node());
 
         Assert.assertEquals(matrix.numColumns(), 1);
         Assert.assertEquals(matrix.get(0, 0), CONDUCTANCE);
@@ -35,7 +42,7 @@ public class ResistorStampTest extends AbstractSingleStampTest
     @Test()
     public void groundedResistorTest2()
     {
-        initComponent(new Load(RESISTANCE), new Node(), new Ground());
+        allocateComponent(new Load(RESISTANCE), new Node(), new Ground());
 
         Assert.assertEquals(matrix.numColumns(), 1);
         Assert.assertEquals(matrix.get(0, 0), CONDUCTANCE);

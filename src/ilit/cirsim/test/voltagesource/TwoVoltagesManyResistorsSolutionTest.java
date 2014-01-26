@@ -5,16 +5,14 @@ import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.IdToMatrixIndexRelations;
-import ilit.cirsim.test.AbstractStampTest;
-import no.uib.cipr.matrix.DenseVector;
+import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
+public class TwoVoltagesManyResistorsSolutionTest extends AbstractSolutionTest
 {
     @AfterMethod
     public void tearDown() throws Exception
@@ -44,7 +42,7 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
             double cl, double cm
     )
     {
-        initEmptyCircuit();
+        initModules();
 
         /** Instantiate all components */
         Resistor Ra = new Load(ra);
@@ -86,16 +84,13 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractStampTest
         initComponent(Re, node5, g);
 
         /** Populate equations system */
-        placeLinearStamps();
+        placeStamps();
 
         /** Solve */
         solve();
 
-        int vli = IdToMatrixIndexRelations.instance.getIndex(VSL);
-        int vmi = IdToMatrixIndexRelations.instance.getIndex(VSM);
-        DenseVector X = equations.getXVector();
-        double sourceCurrentLeft  = Precision.round(X.get(vli), ROUNDING_SCALE);
-        double sourceCurrentMid   = Precision.round(X.get(vmi), ROUNDING_SCALE);
+        double sourceCurrentLeft  = Precision.round(equations.getSolution(VSL), ROUNDING_SCALE);
+        double sourceCurrentMid   = Precision.round(equations.getSolution(VSM), ROUNDING_SCALE);
 
         Assert.assertEquals(sourceCurrentLeft, cl);
         Assert.assertEquals(sourceCurrentMid, cm);

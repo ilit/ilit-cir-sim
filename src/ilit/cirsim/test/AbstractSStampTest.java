@@ -1,25 +1,25 @@
 package ilit.cirsim.test;
 
-import ilit.cirsim.simulator.LinearSolver;
-import ilit.cirsim.simulator.StampInjector;
-import no.uib.cipr.matrix.Matrix;
-import no.uib.cipr.matrix.sparse.SparseVector;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import ilit.cirsim.circuit.CircuitGraph;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.circuit.elements.util.UniqueIDManager;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
+import ilit.cirsim.simulator.LinearSolver;
 import ilit.cirsim.simulator.MnaEquationsSystem;
+import ilit.cirsim.simulator.StampInjector;
+import no.uib.cipr.matrix.Matrix;
+import no.uib.cipr.matrix.sparse.SparseVector;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 /**
  * Shared class for all tests involving:
  * ) matrix and side vector instantiation
  * ) stamp usage
  */
-public class AbstractStampTest
+public class AbstractSStampTest
 {
     protected static final int ROUNDING_SCALE = 5;
 
@@ -49,21 +49,18 @@ public class AbstractStampTest
         stampInjector = null;
     }
 
-    protected void initEmptyCircuit()
+    protected void initModules()
     {
         CircuitGraph circuitGraph = new CircuitGraph();
         circuit = new CircuitProxy(circuitGraph);
+        equations = new MnaEquationsSystem(circuit);
+        stampInjector = new StampInjector(circuit, equations);
+        linearSolver = new LinearSolver(equations);
     }
 
     protected void placeLinearStamps()
     {
-        equations = new MnaEquationsSystem(circuit);
-        equations.createEmptySystem();
-        matrix = equations.getMatrix();
-        sideVector = equations.getSideVector();
-        stampInjector = new StampInjector(circuit, equations);
         stampInjector.placeLinearStamps();
-        linearSolver = new LinearSolver(equations);
     }
 
     protected void initComponent(Component component, Node anode, Node cathode)

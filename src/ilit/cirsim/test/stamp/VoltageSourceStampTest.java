@@ -1,6 +1,7 @@
 package ilit.cirsim.test.stamp;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Node;
@@ -13,10 +14,16 @@ public class VoltageSourceStampTest extends AbstractSingleStampTest
     private static final int ANODE_INDEX = 2; /** minus */
     private static final double VOLTAGE = 100.0d;
 
+    @AfterMethod
+    public void tearDown() throws Exception
+    {
+        super.tearDown();
+    }
+
     @Test()
     public void dcVoltageTest()
     {
-        initComponent(new VoltageSource(VOLTAGE), new Node(), new Node());
+        allocateComponent(new VoltageSource(VOLTAGE), new Node(), new Node());
 
         Assert.assertEquals(matrix.numColumns(), 3);
 
@@ -37,7 +44,7 @@ public class VoltageSourceStampTest extends AbstractSingleStampTest
     @Test()
     public void groundedDcVoltageTest()
     {
-        initComponent(new VoltageSource(VOLTAGE), new Ground(), new Node());
+        allocateComponent(new VoltageSource(VOLTAGE), new Ground(), new Node());
 
         Assert.assertEquals(matrix.numColumns(), 2);
 
@@ -53,7 +60,7 @@ public class VoltageSourceStampTest extends AbstractSingleStampTest
     @Test()
     public void groundedDcVoltageTest2()
     {
-        initComponent(new VoltageSource(VOLTAGE), new Node(), new Ground());
+        allocateComponent(new VoltageSource(VOLTAGE), new Node(), new Ground());
 
         Assert.assertEquals(matrix.numColumns(), 2);
 

@@ -2,6 +2,8 @@ package ilit.cirsim.simulator;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import ilit.cirsim.circuit.elements.Node;
+import ilit.cirsim.circuit.elements.base.Component;
 import no.uib.cipr.matrix.DenseVector;
 import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
@@ -32,7 +34,8 @@ public class MnaEquationsSystem
         this.circuit = circuit;
     }
 
-    public void createEmptySystem()
+    /** Warning! Depends on circuit being filled! */
+    public void prepareSystemSize()
     {
         int initialMatrixSize = defineMatrixSize();
 
@@ -68,6 +71,18 @@ public class MnaEquationsSystem
             throw new Error("equationsSystem.getXVector() == null");
 
         return xVector;
+    }
+
+    public double getSolution(Node node)
+    {
+        int index = IdToMatrixIndexRelations.instance.getIndex(node);
+        return xVector.get(index);
+    }
+
+    public double getSolution(Component component)
+    {
+        int index = IdToMatrixIndexRelations.instance.getIndex(component);
+        return xVector.get(index);
     }
 
     private int defineMatrixSize()

@@ -34,24 +34,8 @@ public class StampInjector
         placeLinearGroupedStamps();
     }
 
-    /**
-     * Places all component stamps into matrix.
-     *
-     * The contribution of every element to the matrix equation is described by means
-     * of a template, which is called an element stamp.
-     */
-    public void placeNonlinearProbeStamps()
+    public void placeNonlinearStamps()
     {
-        /**
-         * Set all nonlinear components to return probing resistances stamps
-         * instead of working linear segments.
-         */
-        for (Component component : circuit.getG1NonlinearComponents())
-        {
-            Piecewise piecewiseComponent = (Piecewise) component;
-            piecewiseComponent.setProbeStamp();
-        }
-
         placeLinearStamps(circuit.getG1NonlinearComponents());
     }
 

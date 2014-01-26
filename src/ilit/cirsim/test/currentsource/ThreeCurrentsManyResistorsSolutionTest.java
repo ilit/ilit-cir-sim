@@ -2,9 +2,7 @@ package ilit.cirsim.test.currentsource;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.IdToMatrixIndexRelations;
-import ilit.cirsim.test.AbstractStampTest;
-import no.uib.cipr.matrix.DenseVector;
+import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
+public class ThreeCurrentsManyResistorsSolutionTest extends AbstractSolutionTest
 {
     private static final double RESISTANCE = 100.0d;
 
@@ -50,7 +48,7 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
             double node8voltage
             )
     {
-        initEmptyCircuit();
+        initModules();
 
         /** Instantiate all components */
         /** Create resistors */
@@ -103,15 +101,12 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractStampTest
         initResistor(0xd,10, 0); initResistor(0xe, 11,0);
 
         /** Populate equations system */
-        placeLinearStamps();
+        placeStamps();
 
         /** Solve */
         solve();
 
-        DenseVector X = equations.getXVector();
-
-        int node8Index = IdToMatrixIndexRelations.instance.getIndex(nodes.get(8));
-        double node8Voltage = Precision.round(X.get(node8Index), ROUNDING_SCALE);
+        double node8Voltage = Precision.round(equations.getSolution(nodes.get(8)), ROUNDING_SCALE);
 
         Assert.assertEquals(node8Voltage, node8voltage);
     }

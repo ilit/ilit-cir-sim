@@ -3,7 +3,7 @@ package ilit.cirsim.test.currentsource;
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
-import ilit.cirsim.test.AbstractStampTest;
+import ilit.cirsim.test.AbstractSolutionTest;
 import no.uib.cipr.matrix.DenseVector;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
@@ -11,7 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
+public class OneCurrentManyResistorsSolutionTest extends AbstractSolutionTest
 {
     @AfterMethod
     public void tearDown() throws Exception
@@ -40,7 +40,7 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
             double current, double checkVoltage
     )
     {
-        initEmptyCircuit();
+        initModules();
 
         /** Instantiate all components */
         Resistor resL1 = new Load(rl1);
@@ -67,7 +67,7 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
         initComponent(resMid, nodeR, nodeL);
 
         /** Populate equations system */
-        placeLinearStamps();
+        placeStamps();
 
 
         DenseVector X = equations.getXVector();
@@ -79,8 +79,7 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractStampTest
         /** Solve */
         solve();
 
-        int iPlusIndex = IdToMatrixIndexRelations.instance.getIndex(sourceCathode);
-        double sourceVoltage = X.get(iPlusIndex);
+        double sourceVoltage = equations.getSolution(sourceCathode);
         double approxSourceVoltage = Precision.round(sourceVoltage, ROUNDING_SCALE);
 
         Assert.assertEquals(approxSourceVoltage, checkVoltage);

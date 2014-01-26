@@ -11,23 +11,30 @@ public class SolverFacade
     private PiecewiseLinearSolver piecewiseLinearSolver;
     private CircuitProxy circuit;
     private StampInjector stampInjector;
+    private MnaEquationsSystem equations;
 
     @Inject
     public SolverFacade(LinearSolver linearEquationsSolver,
                         PiecewiseLinearSolver piecewiseLinearSolver,
                         CircuitProxy circuit,
-                        StampInjector stampInjector)
+                        StampInjector stampInjector,
+                        MnaEquationsSystem equations)
     {
         this.linearEquationsSolver = linearEquationsSolver;
         this.piecewiseLinearSolver = piecewiseLinearSolver;
         this.circuit = circuit;
         this.stampInjector = stampInjector;
+        this.equations = equations;
+    }
+
+    public void prepareSystem()
+    {
+        equations.prepareSystemSize();
+        stampInjector.placeLinearStamps();
     }
 
     public void solve()
     {
-        stampInjector.placeLinearStamps();
-
         if (circuit.isCircuitNonlinear())
         {
             piecewiseLinearSolver.solve();

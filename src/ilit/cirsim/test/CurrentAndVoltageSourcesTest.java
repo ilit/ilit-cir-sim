@@ -2,15 +2,13 @@ package ilit.cirsim.test;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.IdToMatrixIndexRelations;
-import no.uib.cipr.matrix.DenseVector;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class CurrentAndVoltageSourcesTest extends AbstractStampTest
+public class CurrentAndVoltageSourcesTest extends AbstractSolutionTest
 {
     @AfterMethod
     public void tearDown() throws Exception
@@ -39,7 +37,7 @@ public class CurrentAndVoltageSourcesTest extends AbstractStampTest
             double R, double I, double V, double checkCurrent
     )
     {
-        initEmptyCircuit();
+        initModules();
 
         /** Instantiate all components */
         Resistor resistor = new Load(R);
@@ -55,15 +53,13 @@ public class CurrentAndVoltageSourcesTest extends AbstractStampTest
         initComponent(resistor, gr, sourcesCathode);
 
         /** Populate equations system */
-        placeLinearStamps();
+        placeStamps();
 
         /** Solve */
         solve();
 
         /** Check */
-        int vIndex = IdToMatrixIndexRelations.instance.getIndex(voltageSource);
-        DenseVector X = equations.getXVector();
-        double vSourceCurrent = X.get(vIndex);
+        double vSourceCurrent = equations.getSolution(voltageSource);
         double approxVSourceCurrent = Precision.round(vSourceCurrent, ROUNDING_SCALE);
 
         Assert.assertEquals(approxVSourceCurrent, checkCurrent);

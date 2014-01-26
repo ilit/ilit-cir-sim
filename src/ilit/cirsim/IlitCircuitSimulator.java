@@ -21,7 +21,7 @@ public class IlitCircuitSimulator
     {
         /** Code below is used only for visualization for now */
         new SampleCircuitGenerator().generateSampleGraph(circuit);
-        equations.createEmptySystem();
+        equations.prepareSystemSize();
 
         solver.solve();
 
@@ -36,8 +36,7 @@ public class IlitCircuitSimulator
         System.out.println("");
         for (Component source : sources)
         {
-            int index = IdToMatrixIndexRelations.instance.getIndex(source);
-            double current = equations.getXVector().get(index);
+            double current = equations.getSolution(source);
 
             System.out.println("Current of " + source.getId() + " is " + current);
         }

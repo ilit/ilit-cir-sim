@@ -3,6 +3,8 @@ package ilit.cirsim.simulator;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
+import ilit.cirsim.circuit.elements.Piecewise;
+import ilit.cirsim.circuit.elements.base.Component;
 
 @Singleton
 public class PiecewiseLinearSolver extends LinearSolver
@@ -43,16 +45,34 @@ public class PiecewiseLinearSolver extends LinearSolver
          * which define which linear segment of piecewise model to return
          * to linear solver.
          */
-        stampInjector.placeNonlinearProbeStamps();
+        for (Component component : circuit.getG1NonlinearComponents())
+        {
+            Piecewise piecewiseComponent = (Piecewise) component;
+            piecewiseComponent.setProbeStamp();
+        }
+        stampInjector.placeNonlinearStamps();
+
+        /** Solve to test conditions (current direction in diodes) */
+        /** Linear solve */
+        super.solve();
+
+        /** Update linear model of piecewise component */
+        for (Component component : circuit.getG1NonlinearComponents())
+        {
+            Piecewise piecewise = (Piecewise) component;
+            piecewise.updateModel(equations);
+        }
+
+        /** Get rid of obsolete linear stamps of piecewise components */
+        equations.restoreFromBackUp();
+
+        stampInjector.placeNonlinearStamps();
 
         /** Linear solve */
         super.solve();
 
         /**
-         * Check conditions.
-         * Place linear pieces based on conditions.
-         * Solve.
-         * Check if conditions are still met.
+         * TODO Check if conditions are still met.
          */
     }
 }

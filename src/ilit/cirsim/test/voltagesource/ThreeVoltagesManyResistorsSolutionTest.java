@@ -5,9 +5,7 @@ import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.IdToMatrixIndexRelations;
-import ilit.cirsim.test.AbstractStampTest;
-import no.uib.cipr.matrix.DenseVector;
+import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -16,7 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
+public class ThreeVoltagesManyResistorsSolutionTest extends AbstractSolutionTest
 {
     private static final double RESISTANCE = 100.0d;
 
@@ -51,7 +49,7 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
             double n8v
             )
     {
-        initEmptyCircuit();
+        initModules();
 
         /** Instantiate all components */
         /** Create resistors */
@@ -104,26 +102,20 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractStampTest
         initResistor(0xd,10, 0); initResistor(0xe, 11,0);
 
         /** Populate equations system */
-        placeLinearStamps();
+        placeStamps();
 
         /** Solve */
         solve();
 
-        int v1i = IdToMatrixIndexRelations.instance.getIndex(v1);
-        int v2i = IdToMatrixIndexRelations.instance.getIndex(v2);
-        int v3i = IdToMatrixIndexRelations.instance.getIndex(v3);
-        DenseVector X = equations.getXVector();
-        double sourceCurrent1 = Precision.round(X.get(v1i), ROUNDING_SCALE);
-        double sourceCurrent2 = Precision.round(X.get(v2i), ROUNDING_SCALE);
-        double sourceCurrent3 = Precision.round(X.get(v3i), ROUNDING_SCALE);
+        double sourceCurrent1 = Precision.round(equations.getSolution(v1), ROUNDING_SCALE);
+        double sourceCurrent2 = Precision.round(equations.getSolution(v2), ROUNDING_SCALE);
+        double sourceCurrent3 = Precision.round(equations.getSolution(v3), ROUNDING_SCALE);
 
         Assert.assertEquals(sourceCurrent1, i1);
         Assert.assertEquals(sourceCurrent2, i2);
         Assert.assertEquals(sourceCurrent3, i3);
 
-        int node8Id = nodes.get(8).getId();
-        int node8Index = IdToMatrixIndexRelations.instance.getIndex(node8Id);
-        double node8Voltage = Precision.round(X.get(node8Index), ROUNDING_SCALE);
+        double node8Voltage = Precision.round(equations.getSolution(nodes.get(8)), ROUNDING_SCALE);
 
         Assert.assertEquals(node8Voltage, n8v);
     }
