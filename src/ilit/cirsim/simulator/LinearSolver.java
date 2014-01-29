@@ -6,18 +6,9 @@ import no.uib.cipr.matrix.DenseVector;
 import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.*;
 
-@Singleton
 public class LinearSolver
 {
-    protected final MnaEquationsSystem equations;
-
-    @Inject
-    public LinearSolver(MnaEquationsSystem equations)
-    {
-        this.equations = equations;
-    }
-
-    public void solve()
+    public void solve(MnaEquationsSystem equations)
     {
         CompRowMatrix A = new CompRowMatrix(equations.getMatrix(), true);
         SparseVector b = equations.getSideVector();

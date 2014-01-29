@@ -4,7 +4,7 @@ import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.simulator.PiecewiseLinearSolver;
-import ilit.cirsim.simulator.SolverFacade;
+import ilit.cirsim.simulator.SolverWrapper;
 import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
@@ -32,7 +32,7 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
                  * Resistance of top mid resistor, node1 voltage, node2 voltage.
                  */
                 { 200d, 307.7d, 307.7d }, /** Diodes equalize node 1,2 and 3 voltages */
-                {  50d, 250d, 250d },       /** Diodes stop backward current */
+                {  50d, 250d, 250d },     /** Diodes stop backward current */
                 {  20d, 249.9d, 142.9d },
         };
     }
@@ -90,9 +90,6 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
         initComponent(Da, node2, node1);
         initComponent(Db, node2, node3);
 
-        //initComponent(Da, node1, node2);
-        //initComponent(Db, node3, node2);
-
         Assert.assertEquals(0, IdToMatrixIndexRelations.instance.getIndex(node1));
         Assert.assertEquals(1, IdToMatrixIndexRelations.instance.getIndex(node2));
         Assert.assertEquals(2, IdToMatrixIndexRelations.instance.getIndex(node3));
@@ -105,11 +102,7 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
         Assert.assertEquals(4, IdToMatrixIndexRelations.instance.getIndex(voltageSource));
 
         /** Instantiate solver */
-        PiecewiseLinearSolver piecewiseLinearSolver =
-                new PiecewiseLinearSolver(equations, circuit, stampInjector);
-        SolverFacade solver = new SolverFacade(
-                linearSolver,
-                piecewiseLinearSolver,
+        SolverWrapper solver = new SolverWrapper(
                 circuit,
                 stampInjector,
                 equations);

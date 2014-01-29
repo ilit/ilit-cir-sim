@@ -46,7 +46,7 @@ public class AbstractSolutionTest
         circuit = new CircuitProxy(circuitGraph);
         equations = new MnaEquationsSystem(circuit);
         stampInjector = new StampInjector(circuit, equations);
-        linearSolver = new LinearSolver(equations);
+        linearSolver = new LinearSolver();
     }
 
     protected void placeStamps()
@@ -62,6 +62,6 @@ public class AbstractSolutionTest
 
     protected void solve()
     {
-        linearSolver.solve();
+        linearSolver.solve(equations);
     }
 }

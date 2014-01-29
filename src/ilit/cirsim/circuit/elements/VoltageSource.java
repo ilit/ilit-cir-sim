@@ -7,7 +7,7 @@ import ilit.cirsim.view.elements.VoltageSourceView;
 
 public class VoltageSource extends Component
 {
-    private final double voltage;
+    protected double voltage;
 
     public VoltageSource(double V)
     {
@@ -34,6 +34,11 @@ public class VoltageSource extends Component
     }
 
     public boolean isNonlinear()
+    {
+        return false;
+    }
+
+    public boolean isDynamic()
     {
         return false;
     }

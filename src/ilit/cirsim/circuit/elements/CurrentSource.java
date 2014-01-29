@@ -40,4 +40,9 @@ public class CurrentSource extends Component
     {
         return false;
     }
+
+    public boolean isDynamic()
+    {
+        return false;
+    }
 }

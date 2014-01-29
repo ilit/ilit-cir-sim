@@ -33,4 +33,9 @@ public abstract class Resistor extends Component
     {
         return false;
     }
+
+    public boolean isDynamic()
+    {
+        return false;
+    }
 }

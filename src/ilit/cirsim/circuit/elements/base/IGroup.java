@@ -15,4 +15,6 @@ public interface IGroup
     public boolean isGroupOne();
 
     public boolean isNonlinear();
+
+    public boolean isDynamic();
 }

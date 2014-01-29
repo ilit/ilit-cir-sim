@@ -1,5 +1,6 @@
 package ilit.cirsim.circuit.elements;
 
+import ilit.cirsim.circuit.elements.base.Piecewise;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 

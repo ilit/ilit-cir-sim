@@ -17,7 +17,7 @@ public class IlitCircuitSimulator
     public IlitCircuitSimulator(GraphVisualization graphGui,
                                 CircuitProxy circuit,
                                 MnaEquationsSystem equations,
-                                SolverFacade solver)
+                                SolverWrapper solver)
     {
         /** Code below is used only for visualization for now */
         new SampleCircuitGenerator().generateSampleGraph(circuit);

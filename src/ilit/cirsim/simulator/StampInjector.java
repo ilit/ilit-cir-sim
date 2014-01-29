@@ -3,7 +3,6 @@ package ilit.cirsim.simulator;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
-import ilit.cirsim.circuit.elements.Piecewise;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.simulator.stamps.IStampStrategy;
 
@@ -37,6 +36,11 @@ public class StampInjector
     public void placeNonlinearStamps()
     {
         placeLinearStamps(circuit.getG1NonlinearComponents());
+    }
+
+    public void placeDynamicStamps()
+    {
+        placeLinearStamps(circuit.getDynamicComponents());
     }
 
     private void placeLinearGroupedStamps()

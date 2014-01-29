@@ -28,6 +28,7 @@ public class CircuitProxy
     private final HashMap<Integer, Component> linearComponentsGroupOne = new HashMap<>();
     private final HashMap<Integer, Component> nonlinearComponentsGroupOne = new HashMap<>();
     private final HashMap<Integer, Component> componentsGroupTwo = new HashMap<>();
+    private final HashMap<Integer, Component> dynamicComponents = new HashMap<>();
 
     @Inject
     public CircuitProxy(CircuitGraph circuitGraph)
@@ -45,7 +46,9 @@ public class CircuitProxy
         saveNotGroundedNode(anode);
         saveNotGroundedNode(cathode);
 
-        if (component.isGroupOne())
+        if (component.isDynamic())
+            dynamicComponents.put(component.getId(), component);
+        else if (component.isGroupOne())
         {
             if (component.isNonlinear())
                 nonlinearComponentsGroupOne.put(component.getId(), component);
@@ -53,9 +56,7 @@ public class CircuitProxy
                 linearComponentsGroupOne.put(component.getId(), component);
         }
         else
-        {
             componentsGroupTwo.put(component.getId(), component);
-        }
 
         /**
          * Insert into graph.
@@ -93,8 +94,18 @@ public class CircuitProxy
         return componentsGroupTwo.values();
     }
 
+    public Collection<Component> getDynamicComponents()
+    {
+        return dynamicComponents.values();
+    }
+
     public boolean isCircuitNonlinear()
     {
         return nonlinearComponentsGroupOne.size() > 0;
+    }
+
+    public boolean isCircuitDynamic()
+    {
+        return dynamicComponents.size() > 0;
     }
 }

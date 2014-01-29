@@ -87,11 +87,7 @@ public class OneDiodeCircuitTest extends AbstractSolutionTest
         Assert.assertEquals(1, circuit.getG2LinearComponents().size());
 
         /** Instantiate solver */
-        PiecewiseLinearSolver piecewiseLinearSolver =
-                new PiecewiseLinearSolver(equations, circuit, stampInjector);
-        SolverFacade solver = new SolverFacade(
-                linearSolver,
-                piecewiseLinearSolver,
+        SolverWrapper solver = new SolverWrapper(
                 circuit,
                 stampInjector,
                 equations);

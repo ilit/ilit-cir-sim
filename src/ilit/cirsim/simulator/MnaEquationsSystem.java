@@ -108,19 +108,23 @@ public class MnaEquationsSystem
         return circuit.getG2LinearComponents().size();
     }
 
-    /**
-     * Used in Newton loop to have a clean system of only
-     * linear elements at each Newton loop iteration start
-     */
-    public void cloneBackUp()
+    public void cloneMatrixBackUp()
     {
         matrixBk = matrix.copy();
+    }
+
+    public void restoreMatrixFromBackUp()
+    {
+        matrix = matrixBk.copy();
+    }
+
+    public void cloneRhsBackUp()
+    {
         sideVectorBk = sideVector.copy();
     }
 
-    public void restoreFromBackUp()
+    public void restoreRhsFromBackUp()
     {
-        matrix = matrixBk.copy();
         sideVector = sideVectorBk.copy();
     }
 }
