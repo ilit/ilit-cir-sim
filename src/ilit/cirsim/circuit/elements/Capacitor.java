@@ -35,6 +35,10 @@ public class Capacitor extends VoltageSource implements IDynamic
 
         double lastCurrent = equations.getSolution(this);
 
-        voltage = lastVDiff + (TransientAnalysis.TIME_STEP / C(lastVDiff)) * lastCurrent;
+        /**
+         * Calculate voltage for next step solving
+         * using Forward Euler method.
+         */
+        voltage = lastVDiff + (TransientAnalysis.TIME_STEP / capacitance) * lastCurrent;
     }
 }
