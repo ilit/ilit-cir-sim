@@ -1,24 +1,29 @@
 package ilit.cirsim.simulator.stamps;
 
 import ilit.cirsim.circuit.elements.Node;
+import ilit.cirsim.circuit.elements.util.StampMemento;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Component;
 
-public class VoltageSourceStamp extends AbstractStamp
+public class VoltageSourceStamp extends Stamp
 {
     public static final VoltageSourceStamp instance = new VoltageSourceStamp();
 
     private Matrix matrix;
+    private StampMemento memento;
 
-    public void setStamp(MnaEquationsSystem equationsSystem, Component component)
+    public StampMemento setStamp(MnaEquationsSystem equationsSystem, Component component)
     {
         matrix = equationsSystem.getMatrix();
-        SparseVector sideVector = equationsSystem.getSideVector();
+        SparseVector rhs = equationsSystem.getSideVector();
+
+        memento = new StampMemento();
 
         VoltageSource voltageSource = (VoltageSource)component;
+
         double voltage = voltageSource.getVoltage();
 
         int componentsCurrentIndex = getIndex(voltageSource);
@@ -53,8 +58,10 @@ public class VoltageSourceStamp extends AbstractStamp
             nodeStamp(anodeIndex, componentsCurrentIndex, -1.0d);
         }
 
-        /** Side vector stamping - RHS */
-        sideVector.add(componentsCurrentIndex, voltage);
+        /** Side vector stamping - RHS(Right Hand Side) */
+        rhsAddSave(componentsCurrentIndex, voltage, rhs, memento);
+
+        return memento;
     }
 
     private void groundedStamp(Node liveNode, int componentsCurrentIndex, double val)
@@ -66,7 +73,7 @@ public class VoltageSourceStamp extends AbstractStamp
 
     private void nodeStamp(int nodeIndex, int componentIndex, double val)
     {
-        matrix.add(nodeIndex, componentIndex, val);
-        matrix.add(componentIndex, nodeIndex, val);
+        matrixAddSave(nodeIndex, componentIndex, val, matrix, memento);
+        matrixAddSave(componentIndex, nodeIndex, val, matrix, memento);
     }
 }

@@ -44,16 +44,14 @@ public class OneDiodeCircuitTest extends AbstractSolutionTest
 
         if (equations == null)
             throw new Error("equations == null");
-        if (linearSolver == null)
+        if (solver == null)
             throw new Error("linearSolver == null");
-        if (stampInjector == null)
-            throw new Error("stampInjector == null");
         if (circuit == null)
             throw new Error("circuit == null");
 
-        Assert.assertEquals(0, circuit.getG1LinearComponents().size());
-        Assert.assertEquals(0, circuit.getG1NonlinearComponents().size());
-        Assert.assertEquals(0, circuit.getG2LinearComponents().size());
+        Assert.assertEquals(0, circuit.getNonlinearComponents().size());
+        Assert.assertEquals(0, circuit.getRegularComponents().size());
+        Assert.assertEquals(0, circuit.getDynamicComponents().size());
 
         /** Instantiate all components */
         Resistor resistor = new Load(RESISTANCE);
@@ -82,15 +80,13 @@ public class OneDiodeCircuitTest extends AbstractSolutionTest
             initComponent(diode, node1, node2); /** First test: Normal flow */
         initComponent(resistor, node2, gr);
 
-        Assert.assertEquals(1, circuit.getG1NonlinearComponents().size());
-        Assert.assertEquals(1, circuit.getG1LinearComponents().size());
-        Assert.assertEquals(1, circuit.getG2LinearComponents().size());
+        Assert.assertEquals(1, circuit.getNonlinearComponents().size());
+        Assert.assertEquals(2, circuit.getRegularComponents().size());
 
         /** Instantiate solver */
-        SolverWrapper solver = new SolverWrapper(
-                circuit,
-                stampInjector,
-                equations);
+        PiecewiseLinearModeling piecewiseLinearModeling =
+                new PiecewiseLinearModeling(equations, circuit);
+        SolverWrapper solver = new SolverWrapper(circuit, equations, piecewiseLinearModeling);
         solver.prepareSystem();
 
         Assert.assertEquals(3, equations.getXVector().size());

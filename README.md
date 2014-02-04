@@ -32,12 +32,13 @@ Project can be used:
 Glossary:
 Most terms come from the book "Circuit Simulation - Farid N. Najm - 2010".
 * MNA - Modified Nodal Analysis - method to compose equations system of a circuit.
+* RHS - Right Hand Side - "b" in system of equations "Ax=b".
+* SideVector - same as above.
 * Stamp - particular element effect on system of equations. Modifies equations matrix and vector.
 * Element == Component.
 * Group1 - group of elements whose stamps does not contain current.
 * Group2 - current is included in stamp.
 * bearing - non-ground nodes.
-* SideVector - right hand side vector of the system of equations.
 * matrix - MNA matrix of the system of equations.
 
 Third party frameworks used:

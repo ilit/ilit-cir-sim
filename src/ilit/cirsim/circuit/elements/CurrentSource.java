@@ -1,12 +1,10 @@
 package ilit.cirsim.circuit.elements;
 
 import ilit.cirsim.circuit.elements.base.Component;
-import ilit.cirsim.circuit.elements.base.IGraphRenderable;
+import ilit.cirsim.simulator.MnaEquationsSystem;
 import ilit.cirsim.simulator.stamps.CurrentSourceStamp;
-import ilit.cirsim.simulator.stamps.IStampStrategy;
 import ilit.cirsim.simulator.stamps.VoltageSourceStamp;
 import ilit.cirsim.view.elements.CurrentSourceView;
-import ilit.cirsim.view.elements.VoltageSourceView;
 
 public class CurrentSource extends Component
 {
@@ -26,9 +24,9 @@ public class CurrentSource extends Component
         return current;
     }
 
-    public IStampStrategy getStamp()
+    public void placeStamp(MnaEquationsSystem equations)
     {
-        return CurrentSourceStamp.instance;
+        superPlaceStamp(CurrentSourceStamp.instance, equations, this);
     }
 
     public boolean isGroupOne()

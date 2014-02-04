@@ -1,13 +1,12 @@
 package ilit.cirsim.simulator.stamps;
 
 import ilit.cirsim.circuit.elements.CurrentSource;
-import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
+import ilit.cirsim.circuit.elements.util.StampMemento;
 import ilit.cirsim.simulator.MnaEquationsSystem;
-import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
 
-public class CurrentSourceStamp extends AbstractStamp
+public class CurrentSourceStamp extends Stamp
 {
     /**
      * In a device which provides power, the cathode is positive
@@ -16,26 +15,28 @@ public class CurrentSourceStamp extends AbstractStamp
 
     public static final CurrentSourceStamp instance = new CurrentSourceStamp();
 
-    private Matrix matrix;
-
-    public void setStamp(MnaEquationsSystem equationsSystem, Component component)
+    public StampMemento setStamp(MnaEquationsSystem equationsSystem, Component component)
     {
-        matrix = equationsSystem.getMatrix();
-        SparseVector sideVector = equationsSystem.getSideVector();
+        SparseVector rhs = equationsSystem.getSideVector();
+
+        StampMemento memento = new StampMemento();
 
         CurrentSource currentSource = (CurrentSource)component;
+
         double current = currentSource.getCurrent();
 
         /** Nodes stamping */
         if (currentSource.anode.isGround())
         {
             /** RHS[nplus] -= ElemValue[ElemIndex]; */
-            groundedStamp(currentSource.cathode, -current, sideVector);
+            int liveNodeIndex = getIndex(currentSource.cathode);
+            rhsAddSave(liveNodeIndex, -current, rhs, memento);
         }
         else if (currentSource.cathode.isGround())
         {
             /** RHS[nminus] += ElemValue[ElemIndex]; */
-            groundedStamp(currentSource.anode, current, sideVector);
+            int liveNodeIndex = getIndex(currentSource.anode);
+            rhsAddSave(liveNodeIndex, current, rhs, memento);
         }
         else
         {
@@ -46,15 +47,10 @@ public class CurrentSourceStamp extends AbstractStamp
              * RHS[nplus] -= ElemValue[ElemIndex];
              * RHS[nminus] += ElemValue[ElemIndex];
              */
-            sideVector.add(cathodeIndex, -current);
-            sideVector.add(anodeIndex, current);
+            rhsAddSave(cathodeIndex, -current, rhs, memento);
+            rhsAddSave(anodeIndex, current, rhs, memento);
         }
-    }
 
-    private void groundedStamp(Node liveNode, double val, SparseVector sideVector)
-    {
-        int liveNodeIndex = getIndex(liveNode);
-
-        sideVector.add(liveNodeIndex, val);
+        return memento;
     }
 }

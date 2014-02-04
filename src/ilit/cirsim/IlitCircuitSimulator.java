@@ -32,6 +32,7 @@ public class IlitCircuitSimulator
 
     private void outputSolution(CircuitProxy circuit, MnaEquationsSystem equations)
     {
+        /* TODO outputSolution
         Collection<Component> sources = circuit.getG2LinearComponents();
         System.out.println("");
         for (Component source : sources)
@@ -41,6 +42,7 @@ public class IlitCircuitSimulator
             System.out.println("Current of " + source.getId() + " is " + current);
         }
         System.out.println("");
+        */
     }
 
     /**

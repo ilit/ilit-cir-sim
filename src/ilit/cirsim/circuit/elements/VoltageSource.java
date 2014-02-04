@@ -1,7 +1,8 @@
 package ilit.cirsim.circuit.elements;
 
 import ilit.cirsim.circuit.elements.base.Component;
-import ilit.cirsim.simulator.stamps.IStampStrategy;
+import ilit.cirsim.simulator.MnaEquationsSystem;
+import ilit.cirsim.simulator.stamps.ResistorStamp;
 import ilit.cirsim.simulator.stamps.VoltageSourceStamp;
 import ilit.cirsim.view.elements.VoltageSourceView;
 
@@ -23,9 +24,9 @@ public class VoltageSource extends Component
         return voltage;
     }
 
-    public IStampStrategy getStamp()
+    public void placeStamp(MnaEquationsSystem equations)
     {
-        return VoltageSourceStamp.instance;
+        superPlaceStamp(VoltageSourceStamp.instance, equations, this);
     }
 
     public boolean isGroupOne()

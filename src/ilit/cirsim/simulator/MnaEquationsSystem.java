@@ -17,16 +17,14 @@ import ilit.cirsim.circuit.CircuitProxy;
 @Singleton
 public class MnaEquationsSystem
 {
+    private static final double GROUND_VOLTAGE = 0;
+
     /** Holds circuit topology\composition */
     private final CircuitProxy circuit;
 
     private Matrix matrix; /** Modified Nodal Analysis matrix */
     private SparseVector sideVector; /** And its back up */
     private DenseVector xVector;      /** X */
-
-    /** Back ups to have a clean linear system before each Newton loop iteration */
-    private Matrix matrixBk;
-    private SparseVector sideVectorBk;
 
     @Inject
     public MnaEquationsSystem(CircuitProxy circuit)
@@ -75,13 +73,18 @@ public class MnaEquationsSystem
 
     public double getSolution(Node node)
     {
+        if (node.isGround())
+            return GROUND_VOLTAGE;
+
         int index = IdToMatrixIndexRelations.instance.getIndex(node);
+
         return xVector.get(index);
     }
 
     public double getSolution(Component component)
     {
         int index = IdToMatrixIndexRelations.instance.getIndex(component);
+
         return xVector.get(index);
     }
 
@@ -105,26 +108,16 @@ public class MnaEquationsSystem
 
     private int currentVariables()
     {
-        return circuit.getG2LinearComponents().size();
-    }
+        int vars = 0;
+        for (Component component: circuit.getRegularComponents())
+            if (!component.isGroupOne())
+                vars++;
 
-    public void cloneMatrixBackUp()
-    {
-        matrixBk = matrix.copy();
-    }
+        /** Inductors are dynamic and group two */
+        for (Component component: circuit.getDynamicComponents())
+            if (!component.isGroupOne())
+                vars++;
 
-    public void restoreMatrixFromBackUp()
-    {
-        matrix = matrixBk.copy();
-    }
-
-    public void cloneRhsBackUp()
-    {
-        sideVectorBk = sideVector.copy();
-    }
-
-    public void restoreRhsFromBackUp()
-    {
-        sideVector = sideVectorBk.copy();
+        return vars;
     }
 }

@@ -12,19 +12,20 @@ import ilit.cirsim.circuit.elements.base.IDynamic;
  */
 public class DynamicModeling
 {
-    public void model(MnaEquationsSystem equations, CircuitProxy circuit, StampInjector stampInjector)
+    public void updateModels(MnaEquationsSystem equations, CircuitProxy circuit)
     {
         /** Replace dynamics with companions */
-
-        /** Remove obsolete dynamic stamps of previous time steps */
-        equations.restoreRhsFromBackUp();
-
         for (Component component : circuit.getDynamicComponents())
         {
-            IDynamic dynamicComponent = (IDynamic) component;
-            dynamicComponent.updateCompanionModel(equations);
-            equations.restoreRhsFromBackUp();
-            stampInjector.placeDynamicStamps();
+            if (component.isDynamic())
+            {
+                IDynamic dynamicComponent = (IDynamic) component;
+                dynamicComponent.updateCompanionModel(equations);
+                // TODO Revert part of stamp if stamp was placed before
+                //stampInjector.placeLinearStamps(circuit.getDynamicComponents());
+            }
+
+            // TODO Two mementos: one full memento stamp, one partial RHS only memento stamp
         }
     }
 }

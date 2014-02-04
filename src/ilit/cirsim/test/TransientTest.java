@@ -1,51 +1,54 @@
 package ilit.cirsim.test;
 
-import ilit.cirsim.circuit.CircuitProxy;
-import ilit.cirsim.circuit.elements.util.UniqueIDManager;
+import ilit.cirsim.circuit.elements.*;
+import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.*;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TransientTest
+public class TransientTest extends AbstractSolutionTest
 {
     private static final double INITIAL_TIME = 0;
-    private static final double FINAL_TIME = 10;
+    private static final double FINAL_TIME = 0.5;
 
-    //private final DynamicSolver dynamicSolver;
-
-    protected CircuitProxy circuit;
-    protected MnaEquationsSystem equations;
-    protected LinearSolver linearSolver;
-    protected StampInjector stampInjector;
-
-    @BeforeMethod
-    public void before()
-    {
-        //dynamicSolver = new DynamicSolver();
-    }
+    private SolverWrapper solver;
 
     @AfterMethod
     public void tearDown() throws Exception
     {
-        UniqueIDManager.instance.reset();
-        IdToMatrixIndexRelations.instance.reset();
-
-        circuit = null;
-        linearSolver = null;
-        equations = null;
-        stampInjector = null;
+        super.tearDown();
     }
 
-    //@Test
+    // TODO @Test
     public void oneCapacitorTest()
     {
-        // Init items
+        initModules();
+
+        /** Instantiate all components */
+        Resistor resistor = new Load(100);
+        VoltageSource voltageSource = new VoltageSource(100);
+        Capacitor capacitor = new Capacitor(10e-6);
+
+        Ground gr = new Ground();
+        Node node1 = new Node();
+        Node node2 = new Node();
+
+        /**
+         * Describe topology
+         *       +
+         * g--(V)-1-R-2-C--g
+         */
+        initComponent(voltageSource, gr, node1);
+        initComponent(resistor, node1, node2);
+        initComponent(capacitor, node2, gr);
+
+        placeStamps(); // TODO fix: Capacitor stamp is not placed due to being not in linear list
+
         for (double time = INITIAL_TIME;
              time <= TransientAnalysis.TIME_STEP;
              time += FINAL_TIME)
         {
-            //dynamicSolver.analize(INITIAL_TIME, TIME_STEP, FINAL_TIME);
+            solve();
         }
     }
 }

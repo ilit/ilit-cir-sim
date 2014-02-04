@@ -1,6 +1,7 @@
 package ilit.cirsim.circuit.elements.base;
 
-import ilit.cirsim.simulator.stamps.IStampStrategy;
+import ilit.cirsim.circuit.elements.util.StampMemento;
+import ilit.cirsim.simulator.MnaEquationsSystem;
 import ilit.cirsim.simulator.stamps.ResistorStamp;
 
 public abstract class Resistor extends Component
@@ -19,9 +20,9 @@ public abstract class Resistor extends Component
         return resistance;
     }
 
-    public IStampStrategy getStamp()
+    public void placeStamp(MnaEquationsSystem equations)
     {
-        return ResistorStamp.instance;
+        superPlaceStamp(ResistorStamp.instance, equations, this);
     }
 
     public boolean isGroupOne()

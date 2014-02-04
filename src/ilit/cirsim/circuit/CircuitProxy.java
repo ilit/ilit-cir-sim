@@ -22,18 +22,45 @@ public class CircuitProxy
     private final SparseMultigraph<Node, Component> circuitGraph;
 
     /**
-     * Maps are used only for circuit analysis.
+     * All components are grouped by three aspects:
+     * - Linear or nonlinear(piecewise) model.
+     * - Group one or group two. Group two can be only voltage source or its child - a capacitor.
+     * - Static or dynamic. The only dynamic components are capacitors and inductors.
+     *   Dynamic models implemented are all linear.
+     *
+     *   TODO Split component hashmap to many separate hashmaps if performance if degraded
      */
-    private final HashMap<Integer, Node> bearingNodes = new HashMap<>(); /** Not grounded nodes */
-    private final HashMap<Integer, Component> linearComponentsGroupOne = new HashMap<>();
-    private final HashMap<Integer, Component> nonlinearComponentsGroupOne = new HashMap<>();
-    private final HashMap<Integer, Component> componentsGroupTwo = new HashMap<>();
+    private final HashMap<Integer, Component> linearRegularComponents = new HashMap<>();
+    private final HashMap<Integer, Component> nonlinearComponents = new HashMap<>();
     private final HashMap<Integer, Component> dynamicComponents = new HashMap<>();
+
+    private final HashMap<Integer, Node> bearingNodes = new HashMap<>();
+    private boolean nonlinear;
+
+    /** Not grounded nodes */
 
     @Inject
     public CircuitProxy(CircuitGraph circuitGraph)
     {
         this.circuitGraph = circuitGraph.graph;
+    }
+
+    /**
+     * @return components that are linear and static
+     */
+    public Collection<Component> getRegularComponents()
+    {
+        return linearRegularComponents.values();
+    }
+
+    public Collection<Component> getNonlinearComponents()
+    {
+        return nonlinearComponents.values();
+    }
+
+    public Collection<Component> getDynamicComponents()
+    {
+        return dynamicComponents.values();
     }
 
     public void insertComponent(Component component, Node anode, Node cathode, boolean directional)
@@ -48,15 +75,10 @@ public class CircuitProxy
 
         if (component.isDynamic())
             dynamicComponents.put(component.getId(), component);
-        else if (component.isGroupOne())
-        {
-            if (component.isNonlinear())
-                nonlinearComponentsGroupOne.put(component.getId(), component);
-            else
-                linearComponentsGroupOne.put(component.getId(), component);
-        }
+        else if (component.isNonlinear())
+            nonlinearComponents.put(component.getId(), component);
         else
-            componentsGroupTwo.put(component.getId(), component);
+            linearRegularComponents.put(component.getId(), component);
 
         /**
          * Insert into graph.
@@ -79,33 +101,8 @@ public class CircuitProxy
             bearingNodes.put(node.getId(), node);
     }
 
-    public Collection<Component> getG1LinearComponents()
+    public boolean isNonlinear()
     {
-        return linearComponentsGroupOne.values();
-    }
-
-    public Collection<Component> getG1NonlinearComponents()
-    {
-        return nonlinearComponentsGroupOne.values();
-    }
-
-    public Collection<Component> getG2LinearComponents()
-    {
-        return componentsGroupTwo.values();
-    }
-
-    public Collection<Component> getDynamicComponents()
-    {
-        return dynamicComponents.values();
-    }
-
-    public boolean isCircuitNonlinear()
-    {
-        return nonlinearComponentsGroupOne.size() > 0;
-    }
-
-    public boolean isCircuitDynamic()
-    {
-        return dynamicComponents.size() > 0;
+        return nonlinearComponents.values().size() > 0;
     }
 }

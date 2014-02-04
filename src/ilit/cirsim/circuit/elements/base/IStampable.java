@@ -1,6 +1,6 @@
 package ilit.cirsim.circuit.elements.base;
 
-import ilit.cirsim.simulator.stamps.IStampStrategy;
+import ilit.cirsim.simulator.MnaEquationsSystem;
 
 /**
  * Each elements affects circuit.
@@ -9,5 +9,6 @@ import ilit.cirsim.simulator.stamps.IStampStrategy;
  */
 public interface IStampable
 {
-    public IStampStrategy getStamp();
+    public void placeStamp(MnaEquationsSystem equations);
+    public void removeStamp(MnaEquationsSystem equations);
 }

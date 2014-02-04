@@ -3,7 +3,7 @@ package ilit.cirsim.test.diode;
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
-import ilit.cirsim.simulator.PiecewiseLinearSolver;
+import ilit.cirsim.simulator.PiecewiseLinearModeling;
 import ilit.cirsim.simulator.SolverWrapper;
 import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
@@ -102,10 +102,12 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
         Assert.assertEquals(4, IdToMatrixIndexRelations.instance.getIndex(voltageSource));
 
         /** Instantiate solver */
+        PiecewiseLinearModeling piecewiseLinearModeling =
+                new PiecewiseLinearModeling(equations, circuit);
         SolverWrapper solver = new SolverWrapper(
                 circuit,
-                stampInjector,
-                equations);
+                equations,
+                piecewiseLinearModeling);
         solver.prepareSystem();
 
         int numberOfNodes = 4;
@@ -113,9 +115,8 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
         int expectedSize = numberOfNodes + numberOfGroupTwoElms;
         Assert.assertEquals(expectedSize, equations.getMatrix().numColumns());
 
-        Assert.assertEquals(2, circuit.getG1NonlinearComponents().size());
-        Assert.assertEquals(6, circuit.getG1LinearComponents().size());
-        Assert.assertEquals(1, circuit.getG2LinearComponents().size());
+        Assert.assertEquals(2, circuit.getNonlinearComponents().size());
+        Assert.assertEquals(7, circuit.getRegularComponents().size());
 
         /** Solve */
         solver.solve();
