@@ -42,7 +42,7 @@ public class TransientTest extends AbstractSolutionTest
         initComponent(resistor, node1, node2);
         initComponent(capacitor, node2, gr);
 
-        placeStamps(); // TODO fix: Capacitor stamp is not placed due to being not in linear list
+        equations.prepareSystemSize();
 
         for (double time = INITIAL_TIME;
              time <= TransientAnalysis.TIME_STEP;

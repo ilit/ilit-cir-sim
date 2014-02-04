@@ -52,8 +52,7 @@ public class CurrentAndVoltageSourcesTest extends AbstractSolutionTest
         initComponent(currentSource, gr, sourcesCathode);
         initComponent(resistor, gr, sourcesCathode);
 
-        /** Populate equations system */
-        placeStamps();
+        equations.prepareSystemSize();
 
         /** Solve */
         solve();

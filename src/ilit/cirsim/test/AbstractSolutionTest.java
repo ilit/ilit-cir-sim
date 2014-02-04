@@ -39,17 +39,8 @@ public class AbstractSolutionTest
         solver = new SolverWrapper(circuit, equations, null);
     }
 
-    protected void placeStamps()
-    {
-        equations.prepareSystemSize();
-    }
-
     protected void initComponent(Component component, Node anode, Node cathode)
     {
-        /** TODO diode is directional -> true
-         * V\I sources are directional -> true
-         * Is direction only graphical aspect?
-         */
         circuit.insertComponent(component, anode, cathode, false);
     }
 

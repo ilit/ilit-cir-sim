@@ -85,8 +85,7 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractSolutionTest
         initComponent(Rd, node2, node5);
         initComponent(Re, node5, g);
 
-        /** Populate equations system */
-        placeStamps();
+        equations.prepareSystemSize();
 
         /** Solve */
         solve();

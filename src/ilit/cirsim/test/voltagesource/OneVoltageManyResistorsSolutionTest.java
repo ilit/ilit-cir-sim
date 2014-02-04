@@ -74,9 +74,7 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractSolutionTest
 
         initComponent(resMid, nodeR, nodeL);
 
-        /** Populate equations system */
-        placeStamps();
-
+        equations.prepareSystemSize();
 
         DenseVector X = equations.getXVector();
         Assert.assertEquals(X.size(), 4);

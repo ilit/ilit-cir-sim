@@ -100,8 +100,7 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractSolutionTest
         initResistor(0xb, 7,10); initResistor(0xc, 8, 0);
         initResistor(0xd,10, 0); initResistor(0xe, 11,0);
 
-        /** Populate equations system */
-        placeStamps();
+        equations.prepareSystemSize();
 
         /** Solve */
         solve();

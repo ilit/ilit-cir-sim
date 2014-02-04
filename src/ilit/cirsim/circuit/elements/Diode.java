@@ -7,9 +7,9 @@ import ilit.cirsim.simulator.MnaEquationsSystem;
 public class Diode extends Resistor implements Piecewise
 {
     /** Resistance for testing current direction */
-    private static final double PROBE_RESISTANCE = 2.0;
+    private static final double PROBE_RESISTANCE = 10;
     /** Diode allows very high forward current */
-    private static final double FORWARD_RESISTANCE = 1e-3;
+    private static final double FORWARD_RESISTANCE = 1e-2;
     /** Diode allows very low backward current */
     private static final double REVERSE_RESISTANCE = 1e5;
 

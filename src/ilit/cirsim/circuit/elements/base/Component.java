@@ -78,9 +78,12 @@ public abstract class Component implements
         SparseVector rhs = equations.getSideVector();
         for (StampMementoTuple memento : stampMemento.getRhsLines())
             rhs.add(memento.index, -memento.value);
+
+        /** Memento content is fully restored to system and is now obsolete */
+        stampMemento = null;
     }
 
-    private boolean stampIsNotPlaced()
+    public boolean stampIsNotPlaced()
     {
         return stampMemento == null;
     }

@@ -40,7 +40,8 @@ public class SolverWrapper
 
         // TODO place only if not placed for transient loop
         for (Component component : circuit.getRegularComponents())
-            component.placeStamp(equations);
+            if (component.stampIsNotPlaced())
+                component.placeStamp(equations);
 
         if (circuit.isNonlinear())
         {

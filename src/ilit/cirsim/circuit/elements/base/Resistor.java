@@ -20,6 +20,12 @@ public abstract class Resistor extends Component
         return resistance;
     }
 
+    public void setResistance(double resistance)
+    {
+        this.resistance = resistance;
+        /** Don't forget to remove stamp */
+    }
+
     public void placeStamp(MnaEquationsSystem equations)
     {
         superPlaceStamp(ResistorStamp.instance, equations, this);
