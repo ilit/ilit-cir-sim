@@ -38,7 +38,6 @@ public class SolverWrapper
         // TODO dynamicModeling.updateModels(equations, circuit, stampInjector);
         // TODO dynamicModeling.placeStamps();
 
-        // TODO place only if not placed for transient loop
         for (Component component : circuit.getRegularComponents())
             if (component.stampIsNotPlaced())
                 component.placeStamp(equations);
@@ -46,6 +45,7 @@ public class SolverWrapper
         if (circuit.isNonlinear())
         {
             /** Update stamps of nonlinear components */
+            // TODO Do not use probes all the time in loop
             piecewiseLinearModeling.removeStamps();
             piecewiseLinearModeling.updateModels();
             piecewiseLinearModeling.placeStamps();
