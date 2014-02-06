@@ -13,10 +13,6 @@ import org.testng.annotations.Test;
 
 public class TransientDiodeTest extends AbstractSolutionTest
 {
-    private static final double INITIAL_TIME = 0;
-    private static final double FINAL_TIME = 3;
-    private static final double TIME_STEP = 1;
-
     @AfterMethod
     public void tearDown() throws Exception
     {
@@ -81,11 +77,6 @@ public class TransientDiodeTest extends AbstractSolutionTest
         Assert.assertEquals(IdToMatrixIndexRelations.instance.getIndex(node2), 2);
 
         Matrix matrix = equations.getMatrix();
-        double conductance11 = matrix.get(1, 1);
-        double conductance12 = matrix.get(1, 2);
-        double conductance21 = matrix.get(2, 1);
-        double conductance22 = matrix.get(2, 2);
-
         SparseVector rhs = equations.getSideVector();
 
         /** Set by voltage source stamp */

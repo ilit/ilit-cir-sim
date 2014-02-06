@@ -28,7 +28,7 @@ public class OneDiodeCircuitTest extends AbstractSolutionTest
                 /**
                  * Check current, Diode is against source
                  */
-                { -1d, false}, /** Diode does not affect forward current */
+                { -0.998d, false}, /** Diode does not affect forward current */
                 { 0d, true},   /** Diode stops backward current */
         };
     }

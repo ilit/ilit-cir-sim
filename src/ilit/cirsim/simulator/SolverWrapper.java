@@ -43,13 +43,7 @@ public class SolverWrapper
                 component.placeStamp(equations);
 
         if (circuit.isNonlinear())
-        {
-            /** Update stamps of nonlinear components */
-            // TODO Do not use probes all the time in tr loop
-            piecewiseLinearModeling.removeStamps();
-            piecewiseLinearModeling.updateModels();
-            piecewiseLinearModeling.placeStamps();
-        }
+            piecewiseLinearModeling.updatedAndPlaceStamps();
 
         /** At this point all linear or linearized stamps are placed */
         linearSolver.solve(equations);

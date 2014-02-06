@@ -6,16 +6,20 @@ import ilit.cirsim.simulator.MnaEquationsSystem;
 
 public class Diode extends Resistor implements Piecewise
 {
-    /** Resistance for testing current direction */
-    private static final double PROBE_RESISTANCE = 1;
     /** Diode allows very high forward current */
     public static final double FORWARD_RESISTANCE = 1e-2;
     /** Diode allows very low backward current */
     public static final double REVERSE_RESISTANCE = 1e5;
 
+    private boolean isModelDefined = false;
+    private static final boolean FORWARD_MODE = true;
+    private static final boolean REVERSE_MODE = false;
+    private boolean previousMode;
+    private boolean currentMode;
+
     public Diode()
     {
-        super(PROBE_RESISTANCE);
+        super(FORWARD_RESISTANCE);
     }
 
     public boolean isNonlinear()
@@ -23,28 +27,46 @@ public class Diode extends Resistor implements Piecewise
         return true;
     }
 
-    /** Switch linear model to probing model */
+    /** Switch linear model to probing model to define initial direction*/
     @Override
-    public void setProbeStamp()
+    public void setProbeModel()
     {
-        resistance = PROBE_RESISTANCE;
+        resistance = FORWARD_RESISTANCE;
+        previousMode = FORWARD_MODE;
+        currentMode = FORWARD_MODE;
     }
 
     /** Swap linear model depending on current direction */
     @Override
-    public void updateModel(MnaEquationsSystem equations)
+    public boolean updateModel(MnaEquationsSystem equations)
     {
+        boolean modelChanged;
+
         double anodeVoltage = equations.getSolution(anode);
         double cathodeVoltage = equations.getSolution(cathode);
         if (anodeVoltage > cathodeVoltage)
         {
-            /** Diode is in forward mode */
+            /** Diode is in forward(permitting) mode */
             resistance = FORWARD_RESISTANCE;
+            currentMode = FORWARD_MODE;
+            modelChanged = previousMode != currentMode;
         }
         else
         {
-            /** Diode is in reverse mode */
+            /** Diode is in reverse(blocking) mode */
             resistance = REVERSE_RESISTANCE;
+            currentMode = REVERSE_MODE;
+            modelChanged = previousMode != currentMode;
         }
+        previousMode = currentMode;
+        isModelDefined = true;
+
+        return modelChanged;
+    }
+
+    @Override
+    public boolean isModelDefined()
+    {
+        return isModelDefined;
     }
 }

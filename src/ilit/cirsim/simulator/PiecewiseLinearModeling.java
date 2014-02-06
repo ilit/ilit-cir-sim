@@ -21,37 +21,19 @@ public class PiecewiseLinearModeling
         this.circuit = circuit;
     }
 
-
-    public void removeStamps()
-    {
-        for (Component component : circuit.getNonlinearComponents())
-        {
-            component.removeStamp(equations);
-        }
-    }
-
-    public void updateModels()
+    public void updatedAndPlaceStamps()
     {
         /** Solve with probes to test conditions (define current direction in diodes) */
-        setProbeModels();
+        defineModelsForNewComponents();
 
-        placeStamps();
-
-        linearSolver.solve(equations);
-
-        /** Get rid of obsolete probe stamps */
-        removeStamps();
-
-        updateModels(equations, circuit); /** Based on X computed above */
+        /**
+         * Update models that are inconsistent with current circuit state
+         * or that have used probe models installed above.
+         */
+        updateModelsAndStamps();
     }
 
-    public void placeStamps()
-    {
-        for (Component component : circuit.getNonlinearComponents())
-            component.placeStamp(equations);
-    }
-
-    private void setProbeModels()
+    private void defineModelsForNewComponents()
     {
         /**
          * Install regular resistors instead of linear sections of nonlinear diodes
@@ -60,20 +42,34 @@ public class PiecewiseLinearModeling
          * which define which linear segment of piecewise model to return
          * to linear solver.
          */
+        int probesSet = 0;
         for (Component component : circuit.getNonlinearComponents())
         {
             Piecewise piecewiseComponent = (Piecewise) component;
-            piecewiseComponent.setProbeStamp();
+            if (!piecewiseComponent.isModelDefined())
+            {
+                piecewiseComponent.setProbeModel();
+                component.placeStamp(equations);
+                probesSet++;
+            }
         }
+
+        if (probesSet > 0)
+            linearSolver.solve(equations);
     }
 
-    private void updateModels(MnaEquationsSystem equations, CircuitProxy circuit)
+    private void updateModelsAndStamps()
     {
         /** Update linear model of piecewise component */
         for (Component component : circuit.getNonlinearComponents())
         {
             Piecewise piecewise = (Piecewise) component;
-            piecewise.updateModel(equations);
+            boolean modelChanged = piecewise.updateModel(equations);
+            if (modelChanged)
+            {
+                component.removeStamp(equations);
+                component.placeStamp(equations);
+            }
         }
     }
 }

@@ -7,7 +7,10 @@ import ilit.cirsim.simulator.MnaEquationsSystem;
  */
 public interface Piecewise
 {
-    void setProbeStamp();
+    void setProbeModel();
 
-    void updateModel(MnaEquationsSystem equations);
+    /** @return boolean - did model change? */
+    boolean updateModel(MnaEquationsSystem equations);
+
+    boolean isModelDefined();
 }
