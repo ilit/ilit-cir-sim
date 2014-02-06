@@ -25,7 +25,9 @@ public class PiecewiseLinearModeling
     public void removeStamps()
     {
         for (Component component : circuit.getNonlinearComponents())
+        {
             component.removeStamp(equations);
+        }
     }
 
     public void updateModels()

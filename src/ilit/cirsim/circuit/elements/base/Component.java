@@ -15,6 +15,7 @@ public abstract class Component implements
 {
     private static final String ERROR_VIEW_UNDEF = "View is null for component ";
     private static final String ERROR_NO_MEMENTO = "Stamp memento is null for component ";
+    private static final String DOUBLE_STAMP_ERROR = "Stamp is already placed for component ";
     /**
      * In a device which consumes power, the cathode is negative,
      * and in a device which provides power, the cathode is positive.
@@ -58,6 +59,9 @@ public abstract class Component implements
                                    Component component)
     /** Named super to keep interface obligations intact for children classes */
     {
+        if (stampIsPlaced())
+            throw new Error(DOUBLE_STAMP_ERROR + id);
+
         stampMemento = stamp.setStamp(equations, component);
 
         if (stampMemento == null)
@@ -67,7 +71,8 @@ public abstract class Component implements
     /** Removes stamp from equations by subtracting its impact */
     public void removeStamp(MnaEquationsSystem equations)
     {
-        if (stampIsNotPlaced())
+        /** Nothing to remove. Skip silently. */
+        if (!stampIsPlaced())
             return;
 
         Matrix matrix = equations.getMatrix();
@@ -83,8 +88,8 @@ public abstract class Component implements
         stampMemento = null;
     }
 
-    public boolean stampIsNotPlaced()
+    public boolean stampIsPlaced()
     {
-        return stampMemento == null;
+        return stampMemento != null;
     }
 }

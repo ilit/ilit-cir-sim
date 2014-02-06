@@ -5,19 +5,25 @@ package ilit.cirsim.circuit.elements.util;
  */
 public class UniqueIDManager
 {
-    public static final int GROUND_NODE_ID = 0;
+    /**
+     * 0 value is stored anyway after integer initiation.
+     * Keep different to distinguish ground from just initiated id while debugging.
+     */
+    public static final int GROUND_NODE_ID = -1;
 
     public static final UniqueIDManager instance = new UniqueIDManager();
 
-    private int lastUnassignedComponent = 1;
+    private int lastUnassignedId = 1;
 
     public int getNewID()
     {
-        return lastUnassignedComponent++;
+        int newId = lastUnassignedId++;
+
+        return newId;
     }
 
     public void reset()
     {
-        lastUnassignedComponent = 1;
+        lastUnassignedId = 1;
     }
 }

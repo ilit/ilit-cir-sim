@@ -24,6 +24,11 @@ public class VoltageSource extends Component
         return voltage;
     }
 
+    public void setVoltage(double voltage)
+    {
+        this.voltage = voltage;
+    }
+
     public void placeStamp(MnaEquationsSystem equations)
     {
         superPlaceStamp(VoltageSourceStamp.instance, equations, this);

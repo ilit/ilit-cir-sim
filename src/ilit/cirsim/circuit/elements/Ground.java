@@ -6,6 +6,7 @@ public class Ground extends Node
 {
     public Ground()
     {
+        super(UniqueIDManager.GROUND_NODE_ID);
         id = UniqueIDManager.GROUND_NODE_ID;
     }
 }

@@ -39,13 +39,13 @@ public class SolverWrapper
         // TODO dynamicModeling.placeStamps();
 
         for (Component component : circuit.getRegularComponents())
-            if (component.stampIsNotPlaced())
+            if (!component.stampIsPlaced())
                 component.placeStamp(equations);
 
         if (circuit.isNonlinear())
         {
             /** Update stamps of nonlinear components */
-            // TODO Do not use probes all the time in loop
+            // TODO Do not use probes all the time in tr loop
             piecewiseLinearModeling.removeStamps();
             piecewiseLinearModeling.updateModels();
             piecewiseLinearModeling.placeStamps();

@@ -20,6 +20,7 @@ public class AbstractSolutionTest
     protected CircuitProxy circuit;
     protected MnaEquationsSystem equations;
     protected SolverWrapper solver;
+    protected PiecewiseLinearModeling piecewiseLinearModeling;
 
     @AfterMethod
     public void tearDown() throws Exception
@@ -30,13 +31,15 @@ public class AbstractSolutionTest
         circuit = null;
         solver = null;
         equations = null;
+        piecewiseLinearModeling = null;
     }
 
     protected void initModules()
     {
         circuit = new CircuitProxy(new CircuitGraph());
         equations = new MnaEquationsSystem(circuit);
-        solver = new SolverWrapper(circuit, equations, null);
+        piecewiseLinearModeling = new PiecewiseLinearModeling(equations, circuit);
+        solver = new SolverWrapper(circuit, equations, piecewiseLinearModeling);
     }
 
     protected void initComponent(Component component, Node anode, Node cathode)

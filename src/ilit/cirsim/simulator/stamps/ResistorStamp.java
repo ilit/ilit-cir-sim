@@ -39,9 +39,9 @@ public class ResistorStamp extends Stamp
             int i1 = getIndex(component.anode);
             int i2 = getIndex(component.cathode);
 
-            matrixAddSave(i1, i1, conductance, matrix, memento);
+            matrixAddSave(i1, i1,  conductance, matrix, memento);
             matrixAddSave(i2, i1, -conductance, matrix, memento);
-            matrixAddSave(i2, i2, conductance, matrix, memento);
+            matrixAddSave(i2, i2,  conductance, matrix, memento);
             matrixAddSave(i1, i2, -conductance, matrix, memento);
         }
 
