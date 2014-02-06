@@ -67,6 +67,11 @@ public class PiecewiseLinearModeling
             boolean modelChanged = piecewise.updateModel(equations);
             if (modelChanged)
             {
+                /**
+                 * Obsolete stamp from previous model
+                 * does not meet current circuit conditions.
+                 * Remove obsolete stamp and place updated one.
+                 */
                 component.removeStamp(equations);
                 component.placeStamp(equations);
             }

@@ -47,6 +47,5 @@ public class SolverWrapper
 
         /** At this point all linear or linearized stamps are placed */
         linearSolver.solve(equations);
-        /** TODO Check if piecewise conditions are still met */
     }
 }

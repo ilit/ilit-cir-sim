@@ -4,6 +4,10 @@ import ilit.cirsim.circuit.elements.base.Piecewise;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 
+/**
+ * Diode model is piecewise linear model consisting of two linear segments.
+ * Segment chosen based on node voltage difference.
+ */
 public class Diode extends Resistor implements Piecewise
 {
     /** Diode allows very high forward current */
