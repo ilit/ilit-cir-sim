@@ -21,9 +21,12 @@ For now program:
 * Displays generated circuit onscreen by JUNG visualization function.
 * Outputs all sources currents as a circuit solution to debug console.
 
-Latest code can be not operational due to nonlinear solver early implementation.
-
 ![mult](http://i965.photobucket.com/albums/ae139/ilitvinov/sample1_zpsbe648fd6.png)
+
+Nonlinear components:
+ Diode model is piecewise linear model. Implemented in tests.
+Dynamic components:
+ Capacitor and Inductor models are linear. Implemented in tests.
 
 Project can be used:
 * As an example of JUNG framework usage.
