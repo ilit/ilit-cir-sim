@@ -2,13 +2,13 @@ package ilit.cirsim.simulator;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
 import no.uib.cipr.matrix.DenseVector;
 import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.FlexCompRowMatrix;
 import no.uib.cipr.matrix.sparse.SparseVector;
-import ilit.cirsim.circuit.CircuitProxy;
 
 /**
  * Modified Nodal Analysis equations system.

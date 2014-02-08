@@ -1,8 +1,10 @@
 package ilit.cirsim.test.currentsource;
 
-import ilit.cirsim.circuit.elements.*;
+import ilit.cirsim.circuit.elements.CurrentSource;
+import ilit.cirsim.circuit.elements.Ground;
+import ilit.cirsim.circuit.elements.Load;
+import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.test.AbstractSolutionTest;
 import no.uib.cipr.matrix.DenseVector;
 import org.apache.commons.math3.util.Precision;

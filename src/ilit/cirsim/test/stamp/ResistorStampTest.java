@@ -1,11 +1,11 @@
 package ilit.cirsim.test.stamp;
 
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
 public class ResistorStampTest extends AbstractSingleStampTest
 {

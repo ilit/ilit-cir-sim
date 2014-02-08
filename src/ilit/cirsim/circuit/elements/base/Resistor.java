@@ -1,6 +1,5 @@
 package ilit.cirsim.circuit.elements.base;
 
-import ilit.cirsim.circuit.elements.util.StampMemento;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import ilit.cirsim.simulator.stamps.ResistorStamp;
 

@@ -1,9 +1,6 @@
 package ilit.cirsim.simulator;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import no.uib.cipr.matrix.DenseVector;
-import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.*;
 
 public class LinearSolver

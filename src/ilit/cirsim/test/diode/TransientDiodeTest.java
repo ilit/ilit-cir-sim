@@ -3,7 +3,7 @@ package ilit.cirsim.test.diode;
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.circuit.elements.util.UniqueIDManager;
-import ilit.cirsim.simulator.*;
+import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.test.AbstractSolutionTest;
 import no.uib.cipr.matrix.Matrix;
 import no.uib.cipr.matrix.sparse.SparseVector;

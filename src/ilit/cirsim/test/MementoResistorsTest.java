@@ -1,8 +1,10 @@
 package ilit.cirsim.test;
 
-import ilit.cirsim.circuit.elements.*;
+import ilit.cirsim.circuit.elements.Ground;
+import ilit.cirsim.circuit.elements.Load;
+import ilit.cirsim.circuit.elements.Node;
+import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import no.uib.cipr.matrix.DenseVector;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;

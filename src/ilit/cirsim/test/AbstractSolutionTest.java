@@ -1,12 +1,15 @@
 package ilit.cirsim.test;
 
-import ilit.cirsim.simulator.*;
-import org.testng.annotations.AfterMethod;
 import ilit.cirsim.circuit.CircuitGraph;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.circuit.elements.util.UniqueIDManager;
+import ilit.cirsim.simulator.IdToMatrixIndexRelations;
+import ilit.cirsim.simulator.MnaEquationsSystem;
+import ilit.cirsim.simulator.PiecewiseLinearModeling;
+import ilit.cirsim.simulator.SolverWrapper;
+import org.testng.annotations.AfterMethod;
 
 /**
  * Shared class for all tests involving:

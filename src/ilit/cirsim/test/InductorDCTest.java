@@ -8,10 +8,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class CapacitorDCTest extends AbstractSolutionTest
+public class InductorDCTest extends AbstractSolutionTest
 {
-    private static final double TIME_STEP = 5e-5;
-    private static final double CAPACITANCE = 1e-5; /** 10 micro Farads */
+    private static final double TIME_STEP = 5e-4;
+    private static final double INDUCTANCE = 1;  /** 1 Henry */
     private static final double SOURCE_VOLTAGE = 5;
     private static final double RESISTANCE = 100;
 
@@ -22,7 +22,7 @@ public class CapacitorDCTest extends AbstractSolutionTest
     }
 
     @Test()
-    public void capTest(
+    public void inductorTest(
     )
     {
         initModules();
@@ -30,7 +30,7 @@ public class CapacitorDCTest extends AbstractSolutionTest
         /** Instantiate all components */
         Resistor resistor = new Load(RESISTANCE);
         VoltageSource voltageSource = new VoltageSource(SOURCE_VOLTAGE);
-        Capacitor capacitor = new Capacitor(CAPACITANCE);
+        Inductor inductor = new Inductor(INDUCTANCE);
 
         Ground gr = new Ground();
         Node node1 = new Node();
@@ -39,24 +39,24 @@ public class CapacitorDCTest extends AbstractSolutionTest
         /**
          * Topology:
          *     -   +    + -
-         * g---(Vdc)--1--R--2--C---g
+         * g---(Vdc)--1--R--2--L---g
          */
         initComponent(voltageSource, gr, node1);
         initComponent(resistor, node1, node2);
-        initComponent(capacitor, node2, gr);
+        initComponent(inductor, node2, gr);
 
         equations.prepareSystemSize();
         SparseVector rhs = equations.getSideVector();
-        Assert.assertEquals(rhs.size(), 4);
+        Assert.assertEquals(rhs.size(), 3);
 
         /** Solve and check */
         solve(TIME_STEP);
-        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.05);
+        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), 0.0);
         solve(TIME_STEP);
-        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.0475);
+        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.0025);
         solve(TIME_STEP);
-        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.04513);
-        /** Current decreases while capacitor charges */
+        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.00488);
+        /** Current increases while inductor magnetic flux increases */
     }
 
     private double getApproxVSourceCurrent(VoltageSource voltageSource)

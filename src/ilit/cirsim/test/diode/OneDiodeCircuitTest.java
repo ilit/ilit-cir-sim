@@ -2,7 +2,8 @@ package ilit.cirsim.test.diode;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.simulator.*;
+import ilit.cirsim.simulator.PiecewiseLinearModeling;
+import ilit.cirsim.simulator.SolverWrapper;
 import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;

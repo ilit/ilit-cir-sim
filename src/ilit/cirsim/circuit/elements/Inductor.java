@@ -3,18 +3,18 @@ package ilit.cirsim.circuit.elements;
 import ilit.cirsim.circuit.elements.base.IDynamic;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 
-/** Voltage source is companion model for Capacitor using Forward Euler method */
-public class Capacitor extends VoltageSource implements IDynamic
+/** Current source is companion model for Inductor using Forward Euler method */
+public class Inductor extends CurrentSource implements IDynamic
 {
-    private static final double INITIAL_VOLTAGE = 0;
+    private static final double INITIAL_CURRENT = 0;
 
-    private final double capacitance;
+    private final double inductance;
 
-    public Capacitor(double capacitance)
+    public Inductor(double inductance)
     {
-        super(INITIAL_VOLTAGE);
+        super(INITIAL_CURRENT);
 
-        this.capacitance = capacitance;
+        this.inductance = inductance;
     }
 
     public boolean isDynamic()
@@ -28,12 +28,10 @@ public class Capacitor extends VoltageSource implements IDynamic
         double cathodeVoltage = equations.getSolution(cathode);
         double lastVoltageDrop = cathodeVoltage - anodeVoltage;
 
-        double lastCurrent = equations.getSolution(this);
-
         /**
-         * Calculate voltage for next step
+         * Calculate current for next step
          * using Forward Euler method.
          */
-        voltage = lastVoltageDrop + (timeStep / capacitance) * lastCurrent;
+        current = current + (timeStep / inductance) * lastVoltageDrop;
     }
 }

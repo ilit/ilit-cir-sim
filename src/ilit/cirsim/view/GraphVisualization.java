@@ -9,11 +9,11 @@ import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.renderers.EdgeLabelRenderer;
-import org.apache.commons.collections15.Transformer;
 import ilit.cirsim.circuit.CircuitGraph;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.Wire;
 import ilit.cirsim.circuit.elements.base.Component;
+import org.apache.commons.collections15.Transformer;
 
 import javax.swing.*;
 import java.awt.*;

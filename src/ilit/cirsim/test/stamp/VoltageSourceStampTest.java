@@ -1,11 +1,11 @@
 package ilit.cirsim.test.stamp;
 
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.VoltageSource;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
 public class VoltageSourceStampTest extends AbstractSingleStampTest
 {

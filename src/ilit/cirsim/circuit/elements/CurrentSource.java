@@ -3,12 +3,11 @@ package ilit.cirsim.circuit.elements;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import ilit.cirsim.simulator.stamps.CurrentSourceStamp;
-import ilit.cirsim.simulator.stamps.VoltageSourceStamp;
 import ilit.cirsim.view.elements.CurrentSourceView;
 
 public class CurrentSource extends Component
 {
-    private final double current;
+    protected double current;
 
     public CurrentSource(double I)
     {

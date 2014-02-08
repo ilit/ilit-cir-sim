@@ -3,8 +3,8 @@ package ilit.cirsim.simulator;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
-import ilit.cirsim.circuit.elements.base.Piecewise;
 import ilit.cirsim.circuit.elements.base.Component;
+import ilit.cirsim.circuit.elements.base.Piecewise;
 
 @Singleton
 public class PiecewiseLinearModeling

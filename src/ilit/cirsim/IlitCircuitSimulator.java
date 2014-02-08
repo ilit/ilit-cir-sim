@@ -4,11 +4,9 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.SampleCircuitGenerator;
-import ilit.cirsim.circuit.elements.base.Component;
-import ilit.cirsim.simulator.*;
+import ilit.cirsim.simulator.MnaEquationsSystem;
+import ilit.cirsim.simulator.SolverWrapper;
 import ilit.cirsim.view.GraphVisualization;
-
-import java.util.Collection;
 
 @Singleton
 public class IlitCircuitSimulator
