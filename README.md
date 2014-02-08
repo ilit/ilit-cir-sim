@@ -38,10 +38,10 @@ Most terms come from the book "Circuit Simulation - Farid N. Najm - 2010".
 * RHS - Right Hand Side - "b" in system of equations "Ax=b".
 * SideVector - same as above.
 * Stamp - particular element effect on system of equations. Modifies equations matrix and vector.
-* Element == Component.
+* Element is the same as Component.
 * Group1 - group of elements whose stamps does not contain current.
 * Group2 - current is included in stamp.
-* bearing - non-ground nodes.
+* bearing node - non-ground node.
 * matrix - MNA matrix of the system of equations.
 
 Third party frameworks used:
