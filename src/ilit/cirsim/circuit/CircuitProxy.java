@@ -100,9 +100,4 @@ public class CircuitProxy
         if (!node.isGround())
             bearingNodes.put(node.getId(), node);
     }
-
-    public boolean isNonlinear()
-    {
-        return nonlinearComponents.values().size() > 0;
-    }
 }

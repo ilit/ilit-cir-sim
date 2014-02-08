@@ -97,6 +97,10 @@ public class MnaEquationsSystem
          * All elements whose currents are to be eliminated
          * will be referred to as being in group 1,
          * while all other elements will be referred to as group 2.
+         *
+         * Models I use:
+         * Group one: resistors\diodes and current sources\inductors.
+         * Group two: voltage sources\capacitors.
          */
         return nodeVariables() + currentVariables();
     }
@@ -109,11 +113,13 @@ public class MnaEquationsSystem
     private int currentVariables()
     {
         int vars = 0;
+
+        /** Voltage sources are group two components */
         for (Component component: circuit.getRegularComponents())
             if (!component.isGroupOne())
                 vars++;
 
-        /** Inductors are dynamic and group two */
+        /** Capacitors are group two components like voltage source */
         for (Component component: circuit.getDynamicComponents())
             if (!component.isGroupOne())
                 vars++;

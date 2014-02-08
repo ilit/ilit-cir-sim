@@ -9,10 +9,10 @@ import no.uib.cipr.matrix.sparse.SparseVector;
 public class CurrentSourceStamp extends Stamp
 {
     /**
+     * Using independent current source in group one.
      * In a device which provides power, the cathode is positive
      * and the anode is negative.
      */
-
     public static final CurrentSourceStamp instance = new CurrentSourceStamp();
 
     public StampMemento setStamp(MnaEquationsSystem equationsSystem, Component component)

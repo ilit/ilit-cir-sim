@@ -4,5 +4,5 @@ import ilit.cirsim.simulator.MnaEquationsSystem;
 
 public interface IDynamic
 {
-    public void updateCompanionModel(MnaEquationsSystem equations);
+    public void updateCompanionModel(MnaEquationsSystem equations, double timeStep);
 }

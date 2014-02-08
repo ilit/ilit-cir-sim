@@ -31,21 +31,25 @@ public class SolverWrapper
         equations.prepareSystemSize();
     }
 
+    /** DC analysis */
     public void solve()
     {
-        /** Update stamps of dynamic components */
-        // TODO dynamicModeling.removeStamps();
-        // TODO dynamicModeling.updateModels(equations, circuit, stampInjector);
-        // TODO dynamicModeling.placeStamps();
-
         for (Component component : circuit.getRegularComponents())
             if (!component.stampIsPlaced())
                 component.placeStamp(equations);
 
-        if (circuit.isNonlinear())
-            piecewiseLinearModeling.updatedAndPlaceStamps();
+        piecewiseLinearModeling.updatedAndPlaceStamps();
 
         /** At this point all linear or linearized stamps are placed */
         linearSolver.solve(equations);
+    }
+
+    /** Transient analysis */
+    public void solve(double timeStep)
+    {
+        /** Update stamps of dynamic components */
+        dynamicModeling.updatedAndPlaceStamps(equations, circuit, timeStep);
+
+        solve();
     }
 }

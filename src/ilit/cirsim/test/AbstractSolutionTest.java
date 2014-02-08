@@ -51,4 +51,9 @@ public class AbstractSolutionTest
     {
         solver.solve();
     }
+
+    protected void solve(double timeStep)
+    {
+        solver.solve(timeStep);
+    }
 }
