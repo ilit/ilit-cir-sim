@@ -52,6 +52,5 @@ Most terms come from the book "Circuit Simulation - Farid N. Najm - 2010".
 Third party frameworks used:
 * JUNG - Java Universal Network/Graph Framework - stores circuit graph and displays it.
 * matrix-toolkits-java - Java linear algebra library - matrix and vector optimized storage and operations.
-* Guice - dependency injection.
 * Apache Commons - DualHashBidiMap - bidirectional hashmap.
 * TestNG - unit testing.
