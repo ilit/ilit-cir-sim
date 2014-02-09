@@ -15,6 +15,8 @@ public class SolverWrapper
 
     private final LinearSolver linearSolver = new LinearSolver();
     private final DynamicModeling dynamicModeling = new DynamicModeling();
+    private final AlternatingSourcesModeling alternatingSourcesModeling = new AlternatingSourcesModeling();
+
 
     @Inject
     public SolverWrapper(CircuitProxy circuit,
@@ -47,6 +49,9 @@ public class SolverWrapper
     /** Transient analysis */
     public void solve(double timeStep)
     {
+        /** Update alternating voltage and current sources stamps */
+        alternatingSourcesModeling.updatedAndPlaceStamps(equations, circuit, timeStep);
+
         /** Update stamps of dynamic components */
         dynamicModeling.updatedAndPlaceStamps(equations, circuit, timeStep);
 

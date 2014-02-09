@@ -4,22 +4,22 @@ import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Resistor;
-import ilit.cirsim.circuit.elements.dynamic.Capacitor;
+import ilit.cirsim.circuit.elements.sources.AlternatingVoltageSource;
 import ilit.cirsim.circuit.elements.sources.VoltageSource;
 import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
 
-public class CapacitorPlot extends AbstractSolutionTest
+public class AlternatingVoltageSourcePlot extends AbstractSolutionTest
 {
-    private static final double TIME_STEP = 5e-5;
-    private static final double CAPACITANCE = 1e-5; /** 10 micro Farads */
-    private static final double SOURCE_VOLTAGE = 5;
+    private static final double TIME_STEP = 6e-4;
+    private static final double FREQUENCY = 40; /** 40Hz */
+    private static final double PEAK_VOLTAGE = 240;
     private static final double RESISTANCE = 100;
     private static final int NUMBER_OF_STEPS = 100;
 
-    private static final String WINDOWS_TITLE = "Capacitor plot";
+    private static final String WINDOWS_TITLE = "AC Voltage Source plot";
     private static final String LINE_LEGEND = "Voltage source current";
-    private static final String GRAPH_TITLE = "Current decreases while capacitor charges";
+    private static final String GRAPH_TITLE = "Current is sinusoidal as the voltage";
     private static final String X_TITLE = "Time";
     private static final String Y_TITLE = "Current";
 
@@ -27,32 +27,30 @@ public class CapacitorPlot extends AbstractSolutionTest
 
     public static void main(String[] args)
     {
-        CapacitorPlot capacitorPlot = new CapacitorPlot();
-        capacitorPlot.capTest();
+        AlternatingVoltageSourcePlot acVoltagePlot = new AlternatingVoltageSourcePlot();
+        acVoltagePlot.acVTest();
     }
 
-    public void capTest(
+    public void acVTest(
     )
     {
         initModules();
 
         /** Instantiate all components */
         Resistor resistor = new Load(RESISTANCE);
-        VoltageSource voltageSource = new VoltageSource(SOURCE_VOLTAGE);
-        Capacitor capacitor = new Capacitor(CAPACITANCE);
+        AlternatingVoltageSource voltageSource =
+                new AlternatingVoltageSource(PEAK_VOLTAGE, FREQUENCY);
 
         Ground gr = new Ground();
         Node node1 = new Node();
-        Node node2 = new Node();
 
         /**
          * Topology:
-         *     -   +    + -
-         * g---(Vdc)--1--R--2--C---g
+         *     -   +
+         * g---(Vdc)--1--R---g
          */
         initComponent(voltageSource, gr, node1);
-        initComponent(resistor, node1, node2);
-        initComponent(capacitor, node2, gr);
+        initComponent(resistor, node1, gr);
 
         equations.prepareSystemSize();
 

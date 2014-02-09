@@ -27,15 +27,14 @@ public class CircuitProxy
      * - Group one or group two. Group two can be only voltage source or its child - a capacitor.
      * - Static or dynamic. The only dynamic components are capacitors and inductors.
      *   Dynamic models implemented are all linear.
-     *
-     *   TODO Split component hashmap to many separate hashmaps if performance if degraded
+     * - Alternating voltage and current sources are also in separate group.
      */
     private final HashMap<Integer, Component> linearRegularComponents = new HashMap<>();
     private final HashMap<Integer, Component> nonlinearComponents = new HashMap<>();
     private final HashMap<Integer, Component> dynamicComponents = new HashMap<>();
+    private final HashMap<Integer, Component> alternatingSources = new HashMap<>();
 
     private final HashMap<Integer, Node> bearingNodes = new HashMap<>();
-    private boolean nonlinear;
 
     /** Not grounded nodes */
 
@@ -63,6 +62,11 @@ public class CircuitProxy
         return dynamicComponents.values();
     }
 
+    public Collection<Component> getAlternatingSources()
+    {
+        return alternatingSources.values();
+    }
+
     public void insertComponent(Component component, Node anode, Node cathode, boolean directional)
     {
         /** Tie nodes to this component */
@@ -77,6 +81,8 @@ public class CircuitProxy
             dynamicComponents.put(component.getId(), component);
         else if (component.isNonlinear())
             nonlinearComponents.put(component.getId(), component);
+        else if (component.isAlternatingSource())
+            alternatingSources.put(component.getId(), component);
         else
             linearRegularComponents.put(component.getId(), component);
 

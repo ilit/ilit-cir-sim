@@ -2,23 +2,22 @@ package ilit.cirsim.simulator;
 
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.base.Component;
+import ilit.cirsim.circuit.elements.base.IAlternatingSource;
 import ilit.cirsim.circuit.elements.base.IDynamic;
 
 /**
- * Replaces capacitors and inductors with linearized
- * ideal voltage and current sources each time step.
- * Simple companion model thanks to simple Forward Euler method.
+ * Replaces alternating voltage and current sources
+ * ideal DC voltage and current sources each time step.
  */
-public class DynamicModeling
+public class AlternatingSourcesModeling
 {
     public void updatedAndPlaceStamps(MnaEquationsSystem equations, CircuitProxy circuit,
                                       double timeStep)
     {
-        /** Replace dynamics with companions */
-        for (Component component : circuit.getDynamicComponents())
+        for (Component component : circuit.getAlternatingSources())
         {
-            IDynamic dynamicComponent = (IDynamic) component;
-            dynamicComponent.updateCompanionModel(equations, timeStep);
+            IAlternatingSource alternatingSource = (IAlternatingSource) component;
+            alternatingSource.updateModel(timeStep);
             /**
              * Obsolete stamp from previous model
              * does not meet current circuit conditions.

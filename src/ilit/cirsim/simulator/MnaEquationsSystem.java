@@ -119,6 +119,11 @@ public class MnaEquationsSystem
             if (!component.isGroupOne())
                 vars++;
 
+        /** Alternating voltage sources are group two components */
+        for (Component component: circuit.getAlternatingSources())
+            if (!component.isGroupOne())
+                vars++;
+
         /** Capacitors are group two components like voltage source */
         for (Component component: circuit.getDynamicComponents())
             if (!component.isGroupOne())
