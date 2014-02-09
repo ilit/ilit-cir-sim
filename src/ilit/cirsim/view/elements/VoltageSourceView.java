@@ -1,7 +1,7 @@
 package ilit.cirsim.view.elements;
 
-import ilit.cirsim.circuit.elements.sources.VoltageSource;
 import ilit.cirsim.circuit.elements.base.IGraphRenderable;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
 
 import java.awt.*;
 

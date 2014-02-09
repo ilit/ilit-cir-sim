@@ -1,7 +1,5 @@
 package ilit.cirsim.simulator;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
@@ -14,7 +12,6 @@ import no.uib.cipr.matrix.sparse.SparseVector;
  * Modified Nodal Analysis equations system.
  * Matrix and side vector.
  */
-@Singleton
 public class MnaEquationsSystem
 {
     private static final double GROUND_VOLTAGE = 0;
@@ -26,7 +23,6 @@ public class MnaEquationsSystem
     private SparseVector sideVector; /** And its back up */
     private DenseVector xVector;      /** X */
 
-    @Inject
     public MnaEquationsSystem(CircuitProxy circuit)
     {
         this.circuit = circuit;

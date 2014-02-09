@@ -1,6 +1,8 @@
 package ilit.cirsim.test.simple.diode;
 
-import ilit.cirsim.circuit.elements.*;
+import ilit.cirsim.circuit.elements.Ground;
+import ilit.cirsim.circuit.elements.Load;
+import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.circuit.elements.nonlinear.Diode;
 import ilit.cirsim.circuit.elements.sources.VoltageSource;

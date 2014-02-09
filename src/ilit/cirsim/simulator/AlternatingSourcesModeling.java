@@ -3,7 +3,6 @@ package ilit.cirsim.simulator;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.circuit.elements.base.IAlternatingSource;
-import ilit.cirsim.circuit.elements.base.IDynamic;
 
 /**
  * Replaces alternating voltage and current sources

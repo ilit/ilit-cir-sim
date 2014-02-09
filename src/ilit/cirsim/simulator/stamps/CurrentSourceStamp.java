@@ -1,7 +1,7 @@
 package ilit.cirsim.simulator.stamps;
 
-import ilit.cirsim.circuit.elements.sources.CurrentSource;
 import ilit.cirsim.circuit.elements.base.Component;
+import ilit.cirsim.circuit.elements.sources.CurrentSource;
 import ilit.cirsim.circuit.elements.util.StampMemento;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import no.uib.cipr.matrix.sparse.SparseVector;
