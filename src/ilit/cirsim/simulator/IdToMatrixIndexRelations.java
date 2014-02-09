@@ -44,7 +44,7 @@ public class IdToMatrixIndexRelations
         return getIndex(component.getId());
     }
 
-    public int getIndex(int id)
+    int getIndex(int id)
     {
         Integer index = indexVariableRelations.getKey(id);
         if (index == null)

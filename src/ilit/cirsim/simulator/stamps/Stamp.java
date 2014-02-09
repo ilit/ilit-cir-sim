@@ -14,25 +14,25 @@ import no.uib.cipr.matrix.sparse.SparseVector;
  */
 abstract public class Stamp
 {
-    protected int getIndex(Component component)
+    int getIndex(Component component)
     {
         return IdToMatrixIndexRelations.instance.getIndex(component);
     }
 
-    protected int getIndex(Node node)
+    int getIndex(Node node)
     {
         return IdToMatrixIndexRelations.instance.getIndex(node);
     }
 
-    protected void matrixAddSave(int i1, int i2, double value,
-                                 Matrix matrix, StampMemento memento)
+    void matrixAddSave(int i1, int i2, double value,
+                       Matrix matrix, StampMemento memento)
     {
         matrix.add(i1, i2, value);
         memento.matrixAdd(i1, i2, value);
     }
 
-    protected void rhsAddSave(int i, double value,
-                              SparseVector rhs, StampMemento memento)
+    void rhsAddSave(int i, double value,
+                    SparseVector rhs, StampMemento memento)
     {
         rhs.add(i, value);
         memento.rhsAdd(i, value);

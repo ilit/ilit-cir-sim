@@ -17,9 +17,7 @@ public class UniqueIDManager
 
     public int getNewID()
     {
-        int newId = lastUnassignedId++;
-
-        return newId;
+        return lastUnassignedId++;
     }
 
     public void reset()

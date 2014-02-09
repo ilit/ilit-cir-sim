@@ -23,7 +23,7 @@ public class AlternatingVoltageSourcePlot extends AbstractSolutionTest
     private static final String X_TITLE = "Time";
     private static final String Y_TITLE = "Current";
 
-    private Plot plot = new Plot(WINDOWS_TITLE, LINE_LEGEND, GRAPH_TITLE, X_TITLE, Y_TITLE);
+    private final Plot plot = new Plot(WINDOWS_TITLE, LINE_LEGEND, GRAPH_TITLE, X_TITLE, Y_TITLE);
 
     public static void main(String[] args)
     {
@@ -31,7 +31,7 @@ public class AlternatingVoltageSourcePlot extends AbstractSolutionTest
         acVoltagePlot.acVTest();
     }
 
-    public void acVTest(
+    void acVTest(
     )
     {
         initModules();

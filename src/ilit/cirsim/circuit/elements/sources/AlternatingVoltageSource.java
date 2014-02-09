@@ -7,9 +7,9 @@ public class AlternatingVoltageSource extends VoltageSource implements IAlternat
 {
     private static final double INITIAL_VOLTAGE = 0;
 
-    private double amplitude; /** peak voltage */
-    private double frequency; /** f */
-    private double period;    /** T */
+    private final double amplitude; /** peak voltage */
+    private final double frequency; /** f */
+    private final double period;    /** T */
     private double time;      /** t */
 
     public AlternatingVoltageSource(double amplitude, double frequency)

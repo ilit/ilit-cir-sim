@@ -9,13 +9,15 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
-public class Plot extends ApplicationFrame
+class Plot extends ApplicationFrame
 {
     private static final int CHART_WIDTH = 800;
     private static final int CHART_HEIGHT = 600;
 
-    private XYSeries series;
-    private String graphTitle, xTitle, yTitle;
+    private final XYSeries series;
+    private final String graphTitle;
+    private final String xTitle;
+    private final String yTitle;
 
     public Plot(String windowsTitle, String lineLegend, String graphTitle,
                 String xTitle, String yTitle)

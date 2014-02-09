@@ -30,7 +30,7 @@ public abstract class Component implements
     private final int id;
     protected IGraphRenderable view;
 
-    protected StampMemento stampMemento;
+    private StampMemento stampMemento;
 
     protected Component()
     {

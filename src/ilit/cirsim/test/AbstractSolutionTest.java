@@ -23,7 +23,7 @@ public class AbstractSolutionTest
     protected CircuitProxy circuit;
     protected MnaEquationsSystem equations;
     protected SolverWrapper solver;
-    protected PiecewiseLinearModeling piecewiseLinearModeling;
+    private PiecewiseLinearModeling piecewiseLinearModeling;
 
     @AfterMethod
     public void tearDown() throws Exception

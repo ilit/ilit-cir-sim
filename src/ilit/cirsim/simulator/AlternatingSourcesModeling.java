@@ -9,7 +9,7 @@ import ilit.cirsim.circuit.elements.base.IDynamic;
  * Replaces alternating voltage and current sources
  * ideal DC voltage and current sources each time step.
  */
-public class AlternatingSourcesModeling
+class AlternatingSourcesModeling
 {
     public void updatedAndPlaceStamps(MnaEquationsSystem equations, CircuitProxy circuit,
                                       double timeStep)

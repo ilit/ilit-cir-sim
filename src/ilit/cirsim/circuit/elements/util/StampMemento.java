@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class StampMemento
 {
-    ArrayList<StampMementoTriplet> matrixLines = new ArrayList<>(0);
-    ArrayList<StampMementoTuple> rhsLines = new ArrayList<>(0);
+    private final ArrayList<StampMementoTriplet> matrixLines = new ArrayList<>(0);
+    private final ArrayList<StampMementoTuple> rhsLines = new ArrayList<>(0);
 
     public void matrixAdd(int i1, int i2, double value)
     {

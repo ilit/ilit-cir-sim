@@ -9,7 +9,7 @@ import ilit.cirsim.circuit.elements.base.IDynamic;
  * ideal voltage and current sources each time step.
  * Simple companion model thanks to simple Forward Euler method.
  */
-public class DynamicModeling
+class DynamicModeling
 {
     public void updatedAndPlaceStamps(MnaEquationsSystem equations, CircuitProxy circuit,
                                       double timeStep)

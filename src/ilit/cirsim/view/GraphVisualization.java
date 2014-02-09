@@ -39,7 +39,7 @@ public class GraphVisualization
         ISOMLayout<Node, Component> layout = new ISOMLayout(circuitGraph.graph);
         layout.setSize(new Dimension(LAYOUT_WIDTH, LAYOUT_HEIGHT));
         layout.step(); layout.step(); layout.step(); layout.step(); layout.step(); layout.step(); layout.step();
-        BasicVisualizationServer<Node, Component> visualServer = new BasicVisualizationServer<Node, Component>(layout);
+        BasicVisualizationServer<Node, Component> visualServer = new BasicVisualizationServer<>(layout);
         visualServer.setPreferredSize(new Dimension(LAYOUT_WIDTH, LAYOUT_HEIGHT)); //Sets the viewing area size
 
         renderContext = visualServer.getRenderContext();

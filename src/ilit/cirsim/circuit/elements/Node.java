@@ -8,7 +8,7 @@ public class Node implements IIdentifiable
     private static final String GROUND_ID_ERROR =
             "Only ground node ID allowed to be manually passed to constructor";
 
-    protected int id;
+    int id;
 
     public Node()
     {
@@ -16,9 +16,9 @@ public class Node implements IIdentifiable
     }
 
     /** This constructor was made to allow Ground class omit default Node constructor */
-    public Node(int id)
+    Node(int id)
     {
-        if (id != UniqueIDManager.GROUND_NODE_ID)
+        if (UniqueIDManager.GROUND_NODE_ID != UniqueIDManager.GROUND_NODE_ID)
             throw new Error(GROUND_ID_ERROR);
     }
 

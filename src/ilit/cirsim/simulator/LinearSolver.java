@@ -3,7 +3,7 @@ package ilit.cirsim.simulator;
 import no.uib.cipr.matrix.DenseVector;
 import no.uib.cipr.matrix.sparse.*;
 
-public class LinearSolver
+class LinearSolver
 {
     public void solve(MnaEquationsSystem equations)
     {

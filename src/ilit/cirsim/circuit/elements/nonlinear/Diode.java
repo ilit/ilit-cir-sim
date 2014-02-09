@@ -11,9 +11,9 @@ import ilit.cirsim.simulator.MnaEquationsSystem;
 public class Diode extends Resistor implements Piecewise
 {
     /** Diode allows very high forward current */
-    public static final double FORWARD_RESISTANCE = 1e-2;
+    private static final double FORWARD_RESISTANCE = 1e-2;
     /** Diode allows very low backward current */
-    public static final double REVERSE_RESISTANCE = 1e5;
+    private static final double REVERSE_RESISTANCE = 1e5;
 
     private boolean isModelDefined = false;
     private static final boolean FORWARD_MODE = true;

@@ -12,10 +12,10 @@ import no.uib.cipr.matrix.sparse.SparseVector;
 
 public abstract class AbstractSingleStampTest
 {
-    protected CircuitProxy circuit;
-    protected MnaEquationsSystem equations;
-    protected Matrix matrix;
-    protected SparseVector sideVector;
+    private CircuitProxy circuit;
+    private MnaEquationsSystem equations;
+    Matrix matrix;
+    SparseVector sideVector;
 
     public void tearDown() throws Exception
     {
@@ -23,7 +23,7 @@ public abstract class AbstractSingleStampTest
         IdToMatrixIndexRelations.instance.reset();
     }
 
-    protected void allocateComponent(Component component, Node anode, Node cathode)
+    void allocateComponent(Component component, Node anode, Node cathode)
     {
         CircuitGraph circuitGraph = new CircuitGraph();
         circuit = new CircuitProxy(circuitGraph);

@@ -10,7 +10,7 @@ import ilit.cirsim.view.GraphVisualization;
 
 import java.util.Collection;
 
-public class IlitCircuitSimulator
+class IlitCircuitSimulator
 {
     public IlitCircuitSimulator()
     {
