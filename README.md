@@ -36,6 +36,7 @@ Nonlinear components:
  Diode model is piecewise linear model. Implemented in tests.
 Dynamic components:
  Capacitor and Inductor models are linear. Implemented in tests.
+ Alternating voltage source is also implemented in test.
 
 Glossary:
 Most terms come from the book "Circuit Simulation - Farid N. Najm - 2010".
