@@ -11,6 +11,6 @@ public class Main
 
     public static void main(String[] args)
     {
-        ilitCircuitSimulator = GuiceFactory.getSimInjector().getInstance(IlitCircuitSimulator.class);
+        //ilitCircuitSimulator = GuiceFactory.getSimInjector().getInstance(IlitCircuitSimulator.class);
     }
 }

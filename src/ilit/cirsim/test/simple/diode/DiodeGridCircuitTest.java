@@ -104,12 +104,7 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
         Assert.assertEquals(4, IdToMatrixIndexRelations.instance.getIndex(voltageSource));
 
         /** Instantiate solver */
-        PiecewiseLinearModeling piecewiseLinearModeling =
-                new PiecewiseLinearModeling(equations, circuit);
-        SolverWrapper solver = new SolverWrapper(
-                circuit,
-                equations,
-                piecewiseLinearModeling);
+        SolverWrapper solver = new SolverWrapper(circuit, equations);
         solver.prepareSystem();
 
         int numberOfNodes = 4;

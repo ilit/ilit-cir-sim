@@ -1,17 +1,13 @@
 package ilit.cirsim;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.SampleCircuitGenerator;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import ilit.cirsim.simulator.SolverWrapper;
 import ilit.cirsim.view.GraphVisualization;
 
-@Singleton
 public class IlitCircuitSimulator
 {
-    @Inject
     public IlitCircuitSimulator(GraphVisualization graphGui,
                                 CircuitProxy circuit,
                                 MnaEquationsSystem equations,
@@ -30,7 +26,7 @@ public class IlitCircuitSimulator
 
     private void outputSolution(CircuitProxy circuit, MnaEquationsSystem equations)
     {
-        /* TODO outputSolution
+        /*
         Collection<Component> sources = circuit.getG2LinearComponents();
         System.out.println("");
         for (Component source : sources)

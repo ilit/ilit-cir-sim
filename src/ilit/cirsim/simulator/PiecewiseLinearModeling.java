@@ -1,12 +1,9 @@
 package ilit.cirsim.simulator;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.circuit.elements.base.Piecewise;
 
-@Singleton
 public class PiecewiseLinearModeling
 {
     private final MnaEquationsSystem equations;
@@ -14,7 +11,6 @@ public class PiecewiseLinearModeling
 
     private final LinearSolver linearSolver = new LinearSolver();
 
-    @Inject
     public PiecewiseLinearModeling(MnaEquationsSystem equations, CircuitProxy circuit)
     {
         this.equations = equations;

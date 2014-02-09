@@ -42,7 +42,7 @@ public class AbstractSolutionTest
         circuit = new CircuitProxy(new CircuitGraph());
         equations = new MnaEquationsSystem(circuit);
         piecewiseLinearModeling = new PiecewiseLinearModeling(equations, circuit);
-        solver = new SolverWrapper(circuit, equations, piecewiseLinearModeling);
+        solver = new SolverWrapper(circuit, equations);
     }
 
     protected void initComponent(Component component, Node anode, Node cathode)

@@ -1,31 +1,24 @@
 package ilit.cirsim.simulator;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.base.Component;
 
-@Singleton
 public class SolverWrapper
 {
-    // TODO Get rid of dependency injection everywhere(?)
     private final CircuitProxy circuit;
     private final MnaEquationsSystem equations;
-    private final PiecewiseLinearModeling piecewiseLinearModeling;
 
     private final LinearSolver linearSolver = new LinearSolver();
     private final DynamicModeling dynamicModeling = new DynamicModeling();
     private final AlternatingSourcesModeling alternatingSourcesModeling = new AlternatingSourcesModeling();
+    private final PiecewiseLinearModeling piecewiseLinearModeling;
 
-
-    @Inject
     public SolverWrapper(CircuitProxy circuit,
-                         MnaEquationsSystem equations,
-                         PiecewiseLinearModeling piecewiseLinearModeling)
+                         MnaEquationsSystem equations)
     {
         this.circuit = circuit;
         this.equations = equations;
-        this.piecewiseLinearModeling = piecewiseLinearModeling;
+        this.piecewiseLinearModeling = new PiecewiseLinearModeling(equations, circuit);
     }
 
     public void prepareSystem()
