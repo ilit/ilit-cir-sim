@@ -1,8 +1,8 @@
-package ilit.cirsim.test.stamp;
+package ilit.cirsim.test.simple.stamp;
 
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Node;
-import ilit.cirsim.circuit.elements.VoltageSource;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;

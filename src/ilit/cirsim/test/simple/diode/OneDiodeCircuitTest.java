@@ -1,7 +1,9 @@
-package ilit.cirsim.test.diode;
+package ilit.cirsim.test.simple.diode;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
+import ilit.cirsim.circuit.elements.nonlinear.Diode;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
 import ilit.cirsim.simulator.PiecewiseLinearModeling;
 import ilit.cirsim.simulator.SolverWrapper;
 import ilit.cirsim.test.AbstractSolutionTest;

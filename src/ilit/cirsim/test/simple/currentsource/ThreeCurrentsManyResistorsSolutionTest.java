@@ -1,6 +1,6 @@
-package ilit.cirsim.test.currentsource;
+package ilit.cirsim.test.simple.currentsource;
 
-import ilit.cirsim.circuit.elements.CurrentSource;
+import ilit.cirsim.circuit.elements.sources.CurrentSource;
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;

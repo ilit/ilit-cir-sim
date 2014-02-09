@@ -1,17 +1,20 @@
-package ilit.cirsim.test;
+package ilit.cirsim.test.simple;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
+import ilit.cirsim.circuit.elements.dynamic.Capacitor;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
+import ilit.cirsim.test.AbstractSolutionTest;
 import no.uib.cipr.matrix.sparse.SparseVector;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class InductorDCTest extends AbstractSolutionTest
+public class CapacitorDCTest extends AbstractSolutionTest
 {
-    private static final double TIME_STEP = 5e-4;
-    private static final double INDUCTANCE = 1;  /** 1 Henry */
+    private static final double TIME_STEP = 5e-5;
+    private static final double CAPACITANCE = 1e-5; /** 10 micro Farads */
     private static final double SOURCE_VOLTAGE = 5;
     private static final double RESISTANCE = 100;
 
@@ -22,7 +25,7 @@ public class InductorDCTest extends AbstractSolutionTest
     }
 
     @Test()
-    public void inductorTest(
+    public void capTest(
     )
     {
         initModules();
@@ -30,7 +33,7 @@ public class InductorDCTest extends AbstractSolutionTest
         /** Instantiate all components */
         Resistor resistor = new Load(RESISTANCE);
         VoltageSource voltageSource = new VoltageSource(SOURCE_VOLTAGE);
-        Inductor inductor = new Inductor(INDUCTANCE);
+        Capacitor capacitor = new Capacitor(CAPACITANCE);
 
         Ground gr = new Ground();
         Node node1 = new Node();
@@ -39,24 +42,24 @@ public class InductorDCTest extends AbstractSolutionTest
         /**
          * Topology:
          *     -   +    + -
-         * g---(Vdc)--1--R--2--L---g
+         * g---(Vdc)--1--R--2--C---g
          */
         initComponent(voltageSource, gr, node1);
         initComponent(resistor, node1, node2);
-        initComponent(inductor, node2, gr);
+        initComponent(capacitor, node2, gr);
 
         equations.prepareSystemSize();
         SparseVector rhs = equations.getSideVector();
-        Assert.assertEquals(rhs.size(), 3);
+        Assert.assertEquals(rhs.size(), 4);
 
         /** Solve and check */
         solve(TIME_STEP);
-        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), 0.0);
+        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.05);
         solve(TIME_STEP);
-        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.0025);
+        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.0475);
         solve(TIME_STEP);
-        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.00488);
-        /** Current increases while inductor magnetic flux increases */
+        Assert.assertEquals(getApproxVSourceCurrent(voltageSource), -0.04513);
+        /** Current decreases while capacitor charges */
     }
 
     private double getApproxVSourceCurrent(VoltageSource voltageSource)

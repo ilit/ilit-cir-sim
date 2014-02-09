@@ -1,4 +1,4 @@
-package ilit.cirsim.test.stamp;
+package ilit.cirsim.test.simple.stamp;
 
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;

@@ -1,7 +1,10 @@
-package ilit.cirsim.test;
+package ilit.cirsim.test.simple;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Resistor;
+import ilit.cirsim.circuit.elements.sources.CurrentSource;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
+import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;

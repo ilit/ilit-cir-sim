@@ -2,6 +2,7 @@ package ilit.cirsim.circuit;
 
 import ilit.cirsim.circuit.elements.*;
 import ilit.cirsim.circuit.elements.base.Component;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.util.Precision;
 

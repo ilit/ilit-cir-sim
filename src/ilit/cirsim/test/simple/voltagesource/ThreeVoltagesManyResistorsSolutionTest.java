@@ -1,9 +1,9 @@
-package ilit.cirsim.test.voltagesource;
+package ilit.cirsim.test.simple.voltagesource;
 
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
-import ilit.cirsim.circuit.elements.VoltageSource;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.test.AbstractSolutionTest;
 import org.apache.commons.math3.util.Precision;

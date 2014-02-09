@@ -1,4 +1,4 @@
-package ilit.cirsim.circuit.elements;
+package ilit.cirsim.circuit.elements.nonlinear;
 
 import ilit.cirsim.circuit.elements.base.Piecewise;
 import ilit.cirsim.circuit.elements.base.Resistor;

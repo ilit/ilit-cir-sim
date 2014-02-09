@@ -1,9 +1,9 @@
-package ilit.cirsim.test.voltagesource;
+package ilit.cirsim.test.simple.currentsource;
 
+import ilit.cirsim.circuit.elements.sources.CurrentSource;
 import ilit.cirsim.circuit.elements.Ground;
 import ilit.cirsim.circuit.elements.Load;
 import ilit.cirsim.circuit.elements.Node;
-import ilit.cirsim.circuit.elements.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Resistor;
 import ilit.cirsim.test.AbstractSolutionTest;
 import no.uib.cipr.matrix.DenseVector;
@@ -13,7 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class OneVoltageManyResistorsSolutionTest extends AbstractSolutionTest
+public class OneCurrentManyResistorsSolutionTest extends AbstractSolutionTest
 {
     @AfterMethod
     public void tearDown() throws Exception
@@ -28,24 +28,18 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractSolutionTest
                  * Resistor Left; Resistor Right; Resistor middle;
                  * Source Voltage; Source Evaluated Current;
                  *
-                 * RL1,  RL2, Rmid,  RR1,  RR2, Voltage, Current
+                 * RL1,  RL2, Rmid,  RR1,  RR2, Current, Voltage at source
                  */
-                { 100d, 100d,  30d, 100d, 300d,  100d, -0.79032d },
-                { 100d, 100d, 100d, 100d, 100d,    5d,    -0.05d },
-                {  50d, 100d, 100d, 100d, 100d,    5d, -0.05909d },
-                {  50d, 150d,   1d, 100d, 100d,    5d, -0.05353d },
-                {  50d, 150d,   1d, 100d, 100d,  500d, -5.35311d }
+                { 100d, 100d,  30d, 100d, 300d,  -1d, 126.53061d },
+                { 100d, 100d, 100d, 100d, 100d,  -1d, 100d },
+                { 100d, 100d, 100d, 100d, 100d,  -2d, 200d },
         };
     }
-    /**
-     * Simulation reference current direction is from + to -.
-     * So normal positive current is negative in the X vector.
-     */
 
     @Test(dataProvider = "testValues")
     public void groundedDcVoltageAndResistorTest(
             double rl1, double rl2, double rm, double rr1, double rr2,
-            double voltage, double current
+            double current, double checkVoltage
     )
     {
         initModules();
@@ -56,7 +50,7 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractSolutionTest
         Resistor resMid = new Load(rm);
         Resistor resR1 = new Load(rr1);
         Resistor resR2 = new Load(rr2);
-        VoltageSource voltageSource = new VoltageSource(voltage);
+        CurrentSource currentSource = new CurrentSource(current);
 
         Ground gr = new Ground();
         Node sourceCathode = new Node();
@@ -64,7 +58,7 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractSolutionTest
         Node nodeR = new Node();
 
         /** Describe topology */
-        initComponent(voltageSource, gr, sourceCathode);
+        initComponent(currentSource, gr, sourceCathode);
 
         initComponent(resL1, sourceCathode, nodeL);
         initComponent(resR1, sourceCathode, nodeR);
@@ -77,18 +71,17 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractSolutionTest
         equations.prepareSystemSize();
 
         DenseVector X = equations.getXVector();
-        Assert.assertEquals(X.size(), 4);
+        Assert.assertEquals(X.size(), 3);
         Assert.assertEquals(X.get(0), 0d);
         Assert.assertEquals(X.get(1), 0d);
         Assert.assertEquals(X.get(2), 0d);
-        Assert.assertEquals(X.get(3), 0d);
 
         /** Solve */
         solve();
 
-        double sourceCurrent = equations.getSolution(voltageSource);
-        double approxSourceCurrent = Precision.round(sourceCurrent, ROUNDING_SCALE);
+        double sourceVoltage = equations.getSolution(sourceCathode);
+        double approxSourceVoltage = Precision.round(sourceVoltage, ROUNDING_SCALE);
 
-        Assert.assertEquals(approxSourceCurrent, current);
+        Assert.assertEquals(approxSourceVoltage, checkVoltage);
     }
 }

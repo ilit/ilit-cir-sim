@@ -1,4 +1,4 @@
-package ilit.cirsim.circuit.elements;
+package ilit.cirsim.circuit.elements.sources;
 
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.simulator.MnaEquationsSystem;

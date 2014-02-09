@@ -92,4 +92,10 @@ public abstract class Component implements
     {
         return stampMemento != null;
     }
+
+    /** Is this component an alternating voltage or current source? */
+    public boolean isAlternatingSource()
+    {
+        return false;
+    }
 }

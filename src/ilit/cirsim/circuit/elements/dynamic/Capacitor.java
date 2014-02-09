@@ -1,6 +1,7 @@
-package ilit.cirsim.circuit.elements;
+package ilit.cirsim.circuit.elements.dynamic;
 
 import ilit.cirsim.circuit.elements.base.IDynamic;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 
 /** Voltage source is companion model for Capacitor using Forward Euler method */

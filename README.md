@@ -8,6 +8,15 @@ I'm writing simplest circuit simulator for
 * To share educational efforts with community. This can be helpful to anyone learning subject of circuit simulation.
 * To impress my possible employer.
 
+Project can be used:
+* As an example of JUNG framework usage.
+* To learn circuit simulation code flow with object oriented approach.
+
+Start code survey at cirsim.simulator.SolverWrapper.java and tests.
+
+Program does not contain any variation of Newton method. Because the only nonlinear element here is Diode and it has piecewise linear model that requires just a simple update to accommodate current circuit conditions.
+Program is using Forward Euler method - first-order numerical procedure for solving ordinary differential equations of Capacitors and Inductors.
+
 Primary source of theory is "Circuit Simulation - Farid N. Najm - 2010".
 Secondary is "Electronic Circuit and System - Lawrence Pillage".
 
@@ -27,10 +36,6 @@ Nonlinear components:
  Diode model is piecewise linear model. Implemented in tests.
 Dynamic components:
  Capacitor and Inductor models are linear. Implemented in tests.
-
-Project can be used:
-* As an example of JUNG framework usage.
-* To learn circuit simulation code flow with object oriented approach.
 
 Glossary:
 Most terms come from the book "Circuit Simulation - Farid N. Najm - 2010".

@@ -1,7 +1,7 @@
 package ilit.cirsim.simulator.stamps;
 
 import ilit.cirsim.circuit.elements.Node;
-import ilit.cirsim.circuit.elements.VoltageSource;
+import ilit.cirsim.circuit.elements.sources.VoltageSource;
 import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.circuit.elements.util.StampMemento;
 import ilit.cirsim.simulator.MnaEquationsSystem;

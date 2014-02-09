@@ -1,6 +1,7 @@
-package ilit.cirsim.circuit.elements;
+package ilit.cirsim.circuit.elements.dynamic;
 
 import ilit.cirsim.circuit.elements.base.IDynamic;
+import ilit.cirsim.circuit.elements.sources.CurrentSource;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 
 /** Current source is companion model for Inductor using Forward Euler method */

@@ -1,4 +1,4 @@
-package ilit.cirsim.test.stamp;
+package ilit.cirsim.test.simple.stamp;
 
 import ilit.cirsim.circuit.CircuitGraph;
 import ilit.cirsim.circuit.CircuitProxy;
