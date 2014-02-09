@@ -1,7 +1,5 @@
 package ilit.cirsim.view;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import edu.uci.ics.jung.algorithms.layout.ISOMLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.Context;
@@ -23,7 +21,6 @@ import java.awt.geom.Line2D;
 /**
  * Modifies default JUNG graph visualization.
  */
-@Singleton
 public class GraphVisualization
 {
     private static final int LAYOUT_WIDTH = 550;
@@ -32,7 +29,6 @@ public class GraphVisualization
     private RenderContext<Node, Component> renderContext;
     private final CircuitGraph circuitGraph;
 
-    @Inject
     public GraphVisualization(CircuitGraph circuitGraph)
     {
         this.circuitGraph = circuitGraph;

@@ -1,20 +1,29 @@
 package ilit.cirsim;
 
+import ilit.cirsim.circuit.CircuitGraph;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.SampleCircuitGenerator;
+import ilit.cirsim.circuit.elements.base.Component;
 import ilit.cirsim.simulator.MnaEquationsSystem;
 import ilit.cirsim.simulator.SolverWrapper;
 import ilit.cirsim.view.GraphVisualization;
 
+import java.util.Collection;
+
 public class IlitCircuitSimulator
 {
-    public IlitCircuitSimulator(GraphVisualization graphGui,
-                                CircuitProxy circuit,
-                                MnaEquationsSystem equations,
-                                SolverWrapper solver)
+    public IlitCircuitSimulator()
     {
-        /** Code below is used only for visualization for now */
+        CircuitGraph circuitGraph = new CircuitGraph();
+
+        GraphVisualization graphGui = new GraphVisualization(circuitGraph);
+        CircuitProxy circuit = new CircuitProxy(circuitGraph);
+
+        MnaEquationsSystem equations = new MnaEquationsSystem(circuit);
+        SolverWrapper solver = new SolverWrapper(circuit, equations);
+
         new SampleCircuitGenerator().generateSampleGraph(circuit);
+
         equations.prepareSystemSize();
 
         solver.solve();
@@ -26,17 +35,17 @@ public class IlitCircuitSimulator
 
     private void outputSolution(CircuitProxy circuit, MnaEquationsSystem equations)
     {
-        /*
-        Collection<Component> sources = circuit.getG2LinearComponents();
+        Collection<Component> components = circuit.getRegularComponents();
         System.out.println("");
-        for (Component source : sources)
+        for (Component component : components)
         {
-            double current = equations.getSolution(source);
-
-            System.out.println("Current of " + source.getId() + " is " + current);
+            if (!component.isGroupOne())
+            {
+                double current = equations.getSolution(component);
+                System.out.println("Current of " + component.getId() + " is " + current);
+            }
         }
         System.out.println("");
-        */
     }
 
     /**
