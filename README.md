@@ -20,8 +20,6 @@ Program is using Forward Euler method - first-order numerical procedure for solv
 Primary source of theory is "Circuit Simulation - Farid N. Najm - 2010".
 Secondary is "Electronic Circuit and System - Lawrence Pillage".
 
-Project is in active progress.
-
 For now program:
 * Generates random simple circuit consisting of resistors(loads) and some voltage source.
     Wires are resistors too with resistance of 1 Ohm.
@@ -34,6 +32,7 @@ For now program:
 
 Nonlinear components:
  Diode model is piecewise linear model. Implemented in tests.
+
 Dynamic components:
  Capacitor and Inductor models are linear. Implemented in tests.
  Alternating voltage source is also implemented in test.
