@@ -31,8 +31,7 @@ public class CapacitorPlot extends AbstractSolutionTest
         capacitorPlot.capTest();
     }
 
-    void capTest(
-    )
+    void capTest()
     {
         initModules();
 

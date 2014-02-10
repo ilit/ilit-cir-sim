@@ -31,8 +31,7 @@ public class AlternatingVoltageSourcePlot extends AbstractSolutionTest
         acVoltagePlot.acVTest();
     }
 
-    void acVTest(
-    )
+    void acVTest()
     {
         initModules();
 
