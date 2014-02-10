@@ -14,10 +14,10 @@ import org.apache.commons.math3.util.Precision;
 public class RectifierPlot extends AbstractSolutionTest
 {
     private static final double TIME_STEP = 1e-5;
-    private static final double CAPACITANCE = 2e-3; /** 1 milli Farads */
-    private static final double SOURCE_VOLTAGE = 5; /** 5V */
+    private static final double CAPACITANCE = 2e-3;    /** 2mF */
+    private static final double SOURCE_VOLTAGE = 5;    /** 5V */
     private static final double SOURCE_FREQUENCY = 40; /** 40Hz */
-    private static final double RESISTANCE = 430;
+    private static final double RESISTANCE = 430;      /** 430Ohm */
     private static final int NUMBER_OF_STEPS = 10000;
 
     private static final String SRC_WINDOWS_TITLE = "Rectifier plot";
