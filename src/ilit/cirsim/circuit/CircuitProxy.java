@@ -1,7 +1,5 @@
 package ilit.cirsim.circuit;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import ilit.cirsim.circuit.elements.Node;
@@ -13,7 +11,6 @@ import java.util.HashMap;
 /**
  * Circuit topology and device composition.
  */
-@Singleton
 public class CircuitProxy
 {
     /**
@@ -38,7 +35,6 @@ public class CircuitProxy
 
     /** Not grounded nodes */
 
-    @Inject
     public CircuitProxy(CircuitGraph circuitGraph)
     {
         this.circuitGraph = circuitGraph.graph;
