@@ -108,7 +108,7 @@ public class ThreeCurrentsManyResistorsSolutionTest extends AbstractSolutionTest
         /** Solve */
         solve();
 
-        double node8Voltage = Precision.round(equations.getSolution(nodes.get(8)), ROUNDING_SCALE);
+        double node8Voltage = Precision.round(equations.getSolutionNodeVoltage(nodes.get(8)), ROUNDING_SCALE);
 
         Assert.assertEquals(node8Voltage, node8voltage);
     }

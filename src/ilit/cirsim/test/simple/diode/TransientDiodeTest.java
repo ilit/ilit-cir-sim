@@ -95,13 +95,13 @@ public class TransientDiodeTest extends AbstractSolutionTest
         Assert.assertEquals(matrix.get(0, 2), 0.0);
 
         /** Source current */
-        double sourceCurrent = equations.getSolution(voltageSource);
+        double sourceCurrent = equations.getSolutionCurrent(voltageSource);
         double approxSourceCurrent = Precision.round(sourceCurrent, ROUNDING_SCALE);
         Assert.assertEquals(approxSourceCurrent, -1.9802);
         /** Node 1 voltage */
-        Assert.assertEquals(equations.getSolution(node1), 2.0);
+        Assert.assertEquals(equations.getSolutionNodeVoltage(node1), 2.0);
         /** Node 2 voltage */
-        double node2Voltage = equations.getSolution(node2);
+        double node2Voltage = equations.getSolutionNodeVoltage(node2);
         double approxNode2Voltage = Precision.round(node2Voltage, ROUNDING_SCALE);
         Assert.assertEquals(approxNode2Voltage, 1.9802);
 
@@ -115,7 +115,7 @@ public class TransientDiodeTest extends AbstractSolutionTest
 
         solve();
         /** Source current */
-        sourceCurrent = equations.getSolution(voltageSource);
+        sourceCurrent = equations.getSolutionCurrent(voltageSource);
         approxSourceCurrent = Precision.round(sourceCurrent, ROUNDING_SCALE);
         Assert.assertEquals(approxSourceCurrent, -0.9901);
 
@@ -129,7 +129,7 @@ public class TransientDiodeTest extends AbstractSolutionTest
 
         solve();
         /** Source current */
-        sourceCurrent = equations.getSolution(voltageSource);
+        sourceCurrent = equations.getSolutionCurrent(voltageSource);
         approxSourceCurrent = Precision.round(sourceCurrent, ROUNDING_SCALE);
         Assert.assertEquals(approxSourceCurrent, 0.0);
 
@@ -144,7 +144,7 @@ public class TransientDiodeTest extends AbstractSolutionTest
 
         solve();
         /** Source current */
-        sourceCurrent = equations.getSolution(voltageSource);
+        sourceCurrent = equations.getSolutionCurrent(voltageSource);
         approxSourceCurrent = Precision.round(sourceCurrent, ROUNDING_SCALE);
         /** Almost no current when diode is in blocking state */
         Assert.assertEquals(approxSourceCurrent, 1.0e-5);

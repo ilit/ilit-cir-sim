@@ -93,7 +93,7 @@ public class TwoCurrentsManyResistorsSolutionTest extends AbstractSolutionTest
         /** Solve */
         solve();
 
-        double node5voltage = Precision.round(equations.getSolution(node5), ROUNDING_SCALE);
+        double node5voltage = Precision.round(equations.getSolutionNodeVoltage(node5), ROUNDING_SCALE);
 
         Assert.assertEquals(node5voltage, node5voltageCheck);
     }

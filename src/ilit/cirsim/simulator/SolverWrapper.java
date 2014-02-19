@@ -45,7 +45,7 @@ public class SolverWrapper
         /** Update alternating voltage and current sources stamps */
         alternatingSourcesModeling.updatedAndPlaceStamps(equations, circuit, timeStep);
 
-        /** Update stamps of dynamic components */
+        /** Update stamps of single dynamic components and transformers */
         dynamicModeling.updatedAndPlaceStamps(equations, circuit, timeStep);
 
         solve();

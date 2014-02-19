@@ -46,8 +46,8 @@ public class Diode extends Resistor implements Piecewise
     {
         boolean modelChanged;
 
-        double anodeVoltage = equations.getSolution(anode);
-        double cathodeVoltage = equations.getSolution(cathode);
+        double anodeVoltage = equations.getSolutionNodeVoltage(anode);
+        double cathodeVoltage = equations.getSolutionNodeVoltage(cathode);
         if (anodeVoltage > cathodeVoltage)
         {
             /** Diode is in forward(permitting) mode */

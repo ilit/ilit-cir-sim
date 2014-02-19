@@ -79,7 +79,7 @@ public class OneCurrentManyResistorsSolutionTest extends AbstractSolutionTest
         /** Solve */
         solve();
 
-        double sourceVoltage = equations.getSolution(sourceCathode);
+        double sourceVoltage = equations.getSolutionNodeVoltage(sourceCathode);
         double approxSourceVoltage = Precision.round(sourceVoltage, ROUNDING_SCALE);
 
         Assert.assertEquals(approxSourceVoltage, checkVoltage);

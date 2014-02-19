@@ -7,7 +7,7 @@ import ilit.cirsim.view.elements.CurrentSourceView;
 
 public class CurrentSource extends Component
 {
-    protected double current;
+    public double current;
 
     public CurrentSource(double I)
     {
@@ -16,11 +16,6 @@ public class CurrentSource extends Component
         current = I;
 
         view = new CurrentSourceView(this);
-    }
-
-    public double getCurrent()
-    {
-        return current;
     }
 
     public void placeStamp(MnaEquationsSystem equations)

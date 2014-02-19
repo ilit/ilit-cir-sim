@@ -41,7 +41,7 @@ class IlitCircuitSimulator
         {
             if (!component.isGroupOne())
             {
-                double current = equations.getSolution(component);
+                double current = equations.getSolutionCurrent(component);
                 System.out.println("Current of " + component.getId() + " is " + current);
             }
         }

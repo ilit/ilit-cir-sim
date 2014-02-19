@@ -63,7 +63,7 @@ public class CurrentAndVoltageSourcesTest extends AbstractSolutionTest
         solve();
 
         /** Check */
-        double vSourceCurrent = equations.getSolution(voltageSource);
+        double vSourceCurrent = equations.getSolutionCurrent(voltageSource);
         double approxVSourceCurrent = Precision.round(vSourceCurrent, ROUNDING_SCALE);
 
         Assert.assertEquals(approxVSourceCurrent, checkCurrent);

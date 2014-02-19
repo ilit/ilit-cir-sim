@@ -4,7 +4,9 @@ import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
+import ilit.cirsim.circuit.elements.dynamic.Transformer;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -30,6 +32,7 @@ public class CircuitProxy
     private final HashMap<Integer, Component> nonlinearComponents = new HashMap<>();
     private final HashMap<Integer, Component> dynamicComponents = new HashMap<>();
     private final HashMap<Integer, Component> alternatingSources = new HashMap<>();
+    private final ArrayList<Transformer> transformers = new ArrayList<>();
 
     private final HashMap<Integer, Node> bearingNodes = new HashMap<>();
 
@@ -63,6 +66,11 @@ public class CircuitProxy
         return alternatingSources.values();
     }
 
+    public ArrayList<Transformer> getTransformers()
+    {
+        return transformers;
+    }
+
     public void insertComponent(Component component, Node anode, Node cathode, boolean directional)
     {
         /** Tie nodes to this component */
@@ -90,6 +98,20 @@ public class CircuitProxy
             circuitGraph.addEdge(component, anode, cathode, EdgeType.DIRECTED);
         else
             circuitGraph.addEdge(component, anode, cathode, EdgeType.UNDIRECTED);
+    }
+
+    public void insertTransformer(Transformer transformer, Node n0, Node n1, Node n2, Node n3)
+    {
+        /** Tie nodes to this component */
+        transformer.primaryCoil.anode = n0;
+        transformer.primaryCoil.cathode = n2;
+        transformer.secondaryCoil.anode = n1;
+        transformer.secondaryCoil.cathode = n3;
+
+        insertComponent(transformer.primaryCoil, n0, n2, false);
+        insertComponent(transformer.secondaryCoil, n1, n3, false);
+
+        transformers.add(transformer);
     }
 
     public int bearingNodesAmount() /** non-ground */

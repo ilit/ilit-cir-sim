@@ -88,8 +88,8 @@ public class TwoVoltagesManyResistorsSolutionTest extends AbstractSolutionTest
         /** Solve */
         solve();
 
-        double sourceCurrentLeft  = Precision.round(equations.getSolution(VSL), ROUNDING_SCALE);
-        double sourceCurrentMid   = Precision.round(equations.getSolution(VSM), ROUNDING_SCALE);
+        double sourceCurrentLeft  = Precision.round(equations.getSolutionCurrent(VSL), ROUNDING_SCALE);
+        double sourceCurrentMid   = Precision.round(equations.getSolutionCurrent(VSM), ROUNDING_SCALE);
 
         Assert.assertEquals(sourceCurrentLeft, cl);
         Assert.assertEquals(sourceCurrentMid, cm);

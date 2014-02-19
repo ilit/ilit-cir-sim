@@ -99,7 +99,7 @@ public class OneDiodeCircuitTest extends AbstractSolutionTest
         solver.solve();
 
         /** Check */
-        double vSourceCurrent = equations.getSolution(voltageSource);
+        double vSourceCurrent = equations.getSolutionCurrent(voltageSource);
         double approxVSourceCurrent = Precision.round(vSourceCurrent, ROUNDING_SCALE);
 
         Assert.assertEquals(approxVSourceCurrent, checkCurrent);

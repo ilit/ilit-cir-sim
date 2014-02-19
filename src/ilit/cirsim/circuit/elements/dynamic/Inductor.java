@@ -25,8 +25,8 @@ public class Inductor extends CurrentSource implements IDynamic
 
     public void updateCompanionModel(MnaEquationsSystem equations, double timeStep)
     {
-        double anodeVoltage = equations.getSolution(anode);
-        double cathodeVoltage = equations.getSolution(cathode);
+        double anodeVoltage = equations.getSolutionNodeVoltage(anode);
+        double cathodeVoltage = equations.getSolutionNodeVoltage(cathode);
         double lastVoltageDrop = cathodeVoltage - anodeVoltage;
 
         /**

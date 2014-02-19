@@ -23,7 +23,7 @@ public class CurrentSourceStamp extends Stamp
 
         CurrentSource currentSource = (CurrentSource)component;
 
-        double current = currentSource.getCurrent();
+        double current = currentSource.current;
 
         /** Nodes stamping */
         if (currentSource.anode.isGround())

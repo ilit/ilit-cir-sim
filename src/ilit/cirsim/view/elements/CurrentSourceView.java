@@ -17,7 +17,7 @@ public class CurrentSourceView implements IGraphRenderable
     @Override
     public String getGraphLabel()
     {
-        return currentSource.getCurrent() + "I";
+        return currentSource.current + "I";
     }
 
     @Override

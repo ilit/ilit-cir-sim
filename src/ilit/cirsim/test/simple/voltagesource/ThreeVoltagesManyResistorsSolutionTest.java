@@ -106,15 +106,15 @@ public class ThreeVoltagesManyResistorsSolutionTest extends AbstractSolutionTest
         /** Solve */
         solve();
 
-        double sourceCurrent1 = Precision.round(equations.getSolution(v1), ROUNDING_SCALE);
-        double sourceCurrent2 = Precision.round(equations.getSolution(v2), ROUNDING_SCALE);
-        double sourceCurrent3 = Precision.round(equations.getSolution(v3), ROUNDING_SCALE);
+        double sourceCurrent1 = Precision.round(equations.getSolutionCurrent(v1), ROUNDING_SCALE);
+        double sourceCurrent2 = Precision.round(equations.getSolutionCurrent(v2), ROUNDING_SCALE);
+        double sourceCurrent3 = Precision.round(equations.getSolutionCurrent(v3), ROUNDING_SCALE);
 
         Assert.assertEquals(sourceCurrent1, i1);
         Assert.assertEquals(sourceCurrent2, i2);
         Assert.assertEquals(sourceCurrent3, i3);
 
-        double node8Voltage = Precision.round(equations.getSolution(nodes.get(8)), ROUNDING_SCALE);
+        double node8Voltage = Precision.round(equations.getSolutionNodeVoltage(nodes.get(8)), ROUNDING_SCALE);
 
         Assert.assertEquals(node8Voltage, n8v);
     }

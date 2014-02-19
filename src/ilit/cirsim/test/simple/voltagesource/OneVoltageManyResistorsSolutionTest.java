@@ -86,7 +86,7 @@ public class OneVoltageManyResistorsSolutionTest extends AbstractSolutionTest
         /** Solve */
         solve();
 
-        double sourceCurrent = equations.getSolution(voltageSource);
+        double sourceCurrent = equations.getSolutionCurrent(voltageSource);
         double approxSourceCurrent = Precision.round(sourceCurrent, ROUNDING_SCALE);
 
         Assert.assertEquals(approxSourceCurrent, current);

@@ -4,6 +4,7 @@ import ilit.cirsim.circuit.CircuitGraph;
 import ilit.cirsim.circuit.CircuitProxy;
 import ilit.cirsim.circuit.elements.Node;
 import ilit.cirsim.circuit.elements.base.Component;
+import ilit.cirsim.circuit.elements.dynamic.Transformer;
 import ilit.cirsim.circuit.elements.util.UniqueIDManager;
 import ilit.cirsim.simulator.IdToMatrixIndexRelations;
 import ilit.cirsim.simulator.MnaEquationsSystem;
@@ -48,6 +49,11 @@ public class AbstractSolutionTest
     protected void initComponent(Component component, Node anode, Node cathode)
     {
         circuit.insertComponent(component, anode, cathode, false);
+    }
+
+    protected void initTransformer(Transformer transformer, Node n0, Node n1, Node n2, Node n3)
+    {
+        circuit.insertTransformer(transformer, n0, n1, n2, n3);
     }
 
     protected void solve()

@@ -67,7 +67,7 @@ public class MnaEquationsSystem
         return xVector;
     }
 
-    public double getSolution(Node node)
+    public double getSolutionNodeVoltage(Node node)
     {
         if (node.isGround())
             return GROUND_VOLTAGE;
@@ -77,11 +77,20 @@ public class MnaEquationsSystem
         return xVector.get(index);
     }
 
-    public double getSolution(Component component)
+    public double getSolutionCurrent(Component component)
     {
+        if (component.isGroupOne())
+            throw new Error("This component is not represented by current in equations");
+
         int index = IdToMatrixIndexRelations.instance.getIndex(component);
 
         return xVector.get(index);
+    }
+
+    // TODO replace getSolutionNodeVoltage with this in tests
+    public double getSolutionVoltageDrop(Component component)
+    {
+        return getSolutionNodeVoltage(component.cathode) - getSolutionNodeVoltage(component.anode);
     }
 
     private int defineMatrixSize()

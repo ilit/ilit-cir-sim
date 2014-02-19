@@ -25,11 +25,11 @@ public class Capacitor extends VoltageSource implements IDynamic
 
     public void updateCompanionModel(MnaEquationsSystem equations, double timeStep)
     {
-        double anodeVoltage = equations.getSolution(anode);
-        double cathodeVoltage = equations.getSolution(cathode);
+        double anodeVoltage = equations.getSolutionNodeVoltage(anode);
+        double cathodeVoltage = equations.getSolutionNodeVoltage(cathode);
         double lastVoltageDrop = cathodeVoltage - anodeVoltage;
 
-        double lastCurrent = equations.getSolution(this);
+        double lastCurrent = equations.getSolutionCurrent(this);
 
         /**
          * Calculate voltage for next step

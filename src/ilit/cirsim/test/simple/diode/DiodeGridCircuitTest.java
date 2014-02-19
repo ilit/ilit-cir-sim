@@ -120,8 +120,8 @@ public class DiodeGridCircuitTest extends AbstractSolutionTest
         solver.solve();
 
         /** Check */
-        double node1V = equations.getSolution(node1);
-        double node2V = equations.getSolution(node2);
+        double node1V = equations.getSolutionNodeVoltage(node1);
+        double node2V = equations.getSolutionNodeVoltage(node2);
         node1V = Precision.round(node1V, ROUNDING_SCALE);
         node2V = Precision.round(node2V, ROUNDING_SCALE);
         Assert.assertEquals(checkNode1V, node1V);

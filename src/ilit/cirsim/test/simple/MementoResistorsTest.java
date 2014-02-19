@@ -78,7 +78,7 @@ public class MementoResistorsTest extends AbstractSolutionTest
 
     private double getSolution(VoltageSource voltageSource)
     {
-        double sourceCurrent = equations.getSolution(voltageSource);
+        double sourceCurrent = equations.getSolutionCurrent(voltageSource);
         return Precision.round(sourceCurrent, ROUNDING_SCALE);
     }
 }

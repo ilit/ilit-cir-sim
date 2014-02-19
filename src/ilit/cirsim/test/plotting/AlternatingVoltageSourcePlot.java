@@ -65,7 +65,7 @@ public class AlternatingVoltageSourcePlot extends AbstractSolutionTest
 
     private double getApproxVSourceCurrent(VoltageSource voltageSource)
     {
-        double vSourceCurrent = equations.getSolution(voltageSource);
+        double vSourceCurrent = equations.getSolutionCurrent(voltageSource);
         return Precision.round(vSourceCurrent, ROUNDING_SCALE);
     }
 }
