@@ -29,10 +29,8 @@ public class Transformer implements IDynamic
 
     public void updateCompanionModel(MnaEquationsSystem equations, double timeStep)
     {
-        double primaryVoltage   = equations.getSolutionNodeVoltage(primaryCoil.cathode)
-                                - equations.getSolutionNodeVoltage(primaryCoil.anode);
-        double secondaryVoltage = equations.getSolutionNodeVoltage(secondaryCoil.cathode)
-                                - equations.getSolutionNodeVoltage(secondaryCoil.anode);
+        double primaryVoltage   = equations.getSolutionVoltageDrop(primaryCoil);
+        double secondaryVoltage = equations.getSolutionVoltageDrop(secondaryCoil);
 
         double l1 = primaryInductance;
         double l2 = primaryInductance * coilRatio * coilRatio;
@@ -45,6 +43,7 @@ public class Transformer implements IDynamic
         double a3 = -m * deti;
         double a4 = l1 * deti;
 
+        // TODO something is a little bit wrong. Coil ratio works only in one direction
         primaryCoil.current   += a1 * timeStep * primaryVoltage + a2 * timeStep * secondaryVoltage;
         secondaryCoil.current += a3 * timeStep * primaryVoltage + a4 * timeStep * secondaryVoltage;
     }

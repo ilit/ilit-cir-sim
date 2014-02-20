@@ -16,7 +16,7 @@ public class TransformerPlot extends AbstractSolutionTest
     private static final int NUMBER_OF_STEPS = 1000;
 
     private static final double PRIMARY_INDUCTANCE = 100; /** Henry */
-    private static final double COIL_RATIO = 0.5;
+    private static final double COIL_RATIO = 20;
 
     private static final double SOURCE_VOLTAGE = 240;     /** Volts */
     private static final double SOURCE_FREQUENCY = 40;    /** Hz */
@@ -30,10 +30,10 @@ public class TransformerPlot extends AbstractSolutionTest
     private static final String SOURCE_GRAPH_TITLE = "Voltage source current";
     private static final String SOURCE_Y_TITLE = "Current";
 
-    private static final String COIL_VOLTAGE_LINE_LEGEND = "Voltage";
-    private static final String PRIM_COIL_GRAPH_TITLE = "Voltage on primary coil";
-    private static final String SEC_COIL_GRAPH_TITLE = "Voltage on secondary coil";
-    private static final String COIL_VOLTAGE_Y_TITLE = "Voltage";
+    private static final String VOLTAGE_LINE_LEGEND = "Voltage drop";
+    private static final String PRIM_R_GRAPH_TITLE = "Primary resistor voltage drop";
+    private static final String SEC_R_GRAPH_TITLE = "Secondary resistor voltage drop";
+    private static final String R_VOLTAGE_Y_TITLE = "Voltage drop";
 
     private final Plot currentPlot =
         new Plot(WINDOWS_TITLE,
@@ -43,15 +43,15 @@ public class TransformerPlot extends AbstractSolutionTest
 
     private final Plot primaryVoltagePlot =
         new Plot(WINDOWS_TITLE,
-                COIL_VOLTAGE_LINE_LEGEND,
-                PRIM_COIL_GRAPH_TITLE,
-                X_TITLE, COIL_VOLTAGE_Y_TITLE);
+                VOLTAGE_LINE_LEGEND,
+                PRIM_R_GRAPH_TITLE,
+                X_TITLE, R_VOLTAGE_Y_TITLE);
 
     private final Plot secondaryVoltagePlot =
             new Plot(WINDOWS_TITLE,
-                    COIL_VOLTAGE_LINE_LEGEND,
-                    SEC_COIL_GRAPH_TITLE,
-                    X_TITLE, COIL_VOLTAGE_Y_TITLE);
+                    VOLTAGE_LINE_LEGEND,
+                    SEC_R_GRAPH_TITLE,
+                    X_TITLE, R_VOLTAGE_Y_TITLE);
 
     public static void main(String[] args)
     {
@@ -101,8 +101,8 @@ public class TransformerPlot extends AbstractSolutionTest
         {
             solve(TIME_STEP);
             currentPlot.add(step, -getApproxVSourceCurrent(voltageSource));
-            primaryVoltagePlot.add(step, equations.getSolutionVoltageDrop(transformer.primaryCoil));
-            secondaryVoltagePlot.add(step, equations.getSolutionVoltageDrop(transformer.secondaryCoil));
+            primaryVoltagePlot.add(step, equations.getSolutionVoltageDrop(Ra));
+            secondaryVoltagePlot.add(step, equations.getSolutionVoltageDrop(Rb));
         }
         currentPlot.start();
         primaryVoltagePlot.start();
