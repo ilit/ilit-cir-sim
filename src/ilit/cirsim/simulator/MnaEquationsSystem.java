@@ -87,7 +87,6 @@ public class MnaEquationsSystem
         return xVector.get(index);
     }
 
-    // TODO replace getSolutionNodeVoltage with this in tests
     public double getSolutionVoltageDrop(Component component)
     {
         return getSolutionNodeVoltage(component.cathode) - getSolutionNodeVoltage(component.anode);

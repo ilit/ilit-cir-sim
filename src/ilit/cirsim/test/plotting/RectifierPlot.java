@@ -99,9 +99,7 @@ public class RectifierPlot extends AbstractSolutionTest
 
     private double getLoadVoltage(Resistor resistor)
     {
-        double cathodeVoltage = equations.getSolutionNodeVoltage(resistor.cathode);
-        double anodeVoltage = equations.getSolutionNodeVoltage(resistor.anode);
-        return Precision.round(cathodeVoltage - anodeVoltage, ROUNDING_SCALE);
+        return Precision.round(equations.getSolutionVoltageDrop(resistor), ROUNDING_SCALE);
     }
 
     private double getApproxVSourceCurrent(VoltageSource voltageSource)

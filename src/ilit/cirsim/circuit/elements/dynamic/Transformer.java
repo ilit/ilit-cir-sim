@@ -32,6 +32,10 @@ public class Transformer implements IDynamic
         double primaryVoltage   = equations.getSolutionVoltageDrop(primaryCoil);
         double secondaryVoltage = equations.getSolutionVoltageDrop(secondaryCoil);
 
+        /**
+         * Perfect transformer model with Forward Euler.
+         * Guided by Paul Falstad.
+         */
         double l1 = primaryInductance;
         double l2 = primaryInductance * coilRatio * coilRatio;
         double m = COUPLING_COEFFICIENT * Math.sqrt(l1 * l2);
@@ -43,7 +47,6 @@ public class Transformer implements IDynamic
         double a3 = -m * deti;
         double a4 = l1 * deti;
 
-        // TODO something is a little bit wrong. Coil ratio works only in one direction
         primaryCoil.current   += a1 * timeStep * primaryVoltage + a2 * timeStep * secondaryVoltage;
         secondaryCoil.current += a3 * timeStep * primaryVoltage + a4 * timeStep * secondaryVoltage;
     }
